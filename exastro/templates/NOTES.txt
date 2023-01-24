@@ -1,4 +1,7 @@
+Exastro install completion!
+
 1. Get the application URL by running these commands:
+
 {{- $valuesPlatFormAuth := (get .Values "platform-auth") }}
 {{- if $valuesPlatFormAuth.ingress.enabled }}
 {{- range $valuesPlatFormAuth.ingress.hosts }}
@@ -22,5 +25,13 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME
 {{ end }}
+
 2. Get the ENCRYPT_KEY by running these commands:
-  kubectl get secret secret-auth-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
+
+  [exastro it automation ENCRYPT_KEY]
+  kubectl get secret ita-secret-auth-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
+
+  [exastro platform ENCRYPT_KEY]
+  kubectl get secret platform-secret-auth-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
+
+  Please save the output ENCRYPT_KEY carefully.
