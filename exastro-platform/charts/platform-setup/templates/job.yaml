@@ -190,11 +190,11 @@ spec:
       volumes:
         - name: mysql-server-initdb
           configMap:
-            name: createdb-sql
+            name: platform-createdb-sql
             items:
             - key: {{ .Values.volumeMounts.mountPath.createDB.subPath }}
               path: {{ .Values.volumeMounts.mountPath.createDB.subPath }}
               mode: 0644
         - name: mysql-server-conf
           configMap:
-            name: mysqld-conf
+            name: platform-mysqld-conf

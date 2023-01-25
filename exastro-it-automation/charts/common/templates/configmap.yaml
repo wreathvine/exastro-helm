@@ -15,7 +15,7 @@
 */}}
 
 {{/* Custom Exastro IT Automation config templates */}}
-{{- define "common.configmap.tpl" -}}
+{{- define "ita-common.configmap.tpl" -}}
 {{- $top := index . 0 -}}
 {{- $define := index . 1 -}}
 ---
@@ -30,8 +30,10 @@ data: {{- toYaml $define.config | nindent 2 -}}
 
 {{/* Print Exastro IT Automation common configMaps */}}
 {{- $top := . -}}
-{{- range $define := .Values.global -}}
+{{- range $name, $define := .Values.global -}}
 {{-   if and $define.enabled $define.config -}}
-{{-     include "common.configmap.tpl" (list $top $define) | nindent 0 -}}
+{{-     if or (eq $name "itaGlobalDefinition") (eq $name "gitlabDefinition") (eq $name "itaDatabaseDefinition") (eq $name "authDatabaseDefinition") (eq $name "databaseDefinition") -}}
+{{-       include "ita-common.configmap.tpl" (list $top $define) | nindent 0 -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}

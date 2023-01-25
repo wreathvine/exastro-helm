@@ -29,7 +29,7 @@ Exastro install completion!
 2. Get the ENCRYPT_KEY by running these commands:
 
   [exastro it automation ENCRYPT_KEY]
-  kubectl get secret ita-secret-auth-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
+  kubectl get secret ita-secret-ita-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
 
   [exastro platform ENCRYPT_KEY]
   kubectl get secret platform-secret-auth-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
