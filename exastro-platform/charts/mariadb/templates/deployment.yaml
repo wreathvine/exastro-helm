@@ -69,6 +69,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: TZ
+            valueFrom:
+              configMapKeyRef:
+                name: platform-params-auth-global
+                key: TZ
+          - name: MARIADB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: platform-secret-mariadb
+                key: MARIADB_ROOT_PASSWORD
           volumeMounts:
             - name: volume-{{ template "mariadb.name" . }}-storage
               mountPath: {{ .Values.persistence.mountPath.dataDir }}

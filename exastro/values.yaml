@@ -139,145 +139,147 @@ global:
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
 
-ita-api-admin:
-  replicaCount: 1
-  image:
-    repository: "exastro/exastro-it-automation-api-admin"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+exastro-it-automation:
+  ita-api-admin:
+    replicaCount: 1
+    image:
+      repository: "exastro/exastro-it-automation-api-admin"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-api-organization:
-  replicaCount: 1
-  image:
-    repository: "exastro/exastro-it-automation-api-organization"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-api-organization:
+    replicaCount: 1
+    image:
+      repository: "exastro/exastro-it-automation-api-organization"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-by-ansible-execute:
-  replicaCount: 1
-  image:
-    repository: "exastro/exastro-it-automation-by-ansible-execute"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
-  extraEnv:
-    EXECUTE_INTERVAL: "10"
-    ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
-    ANSIBLE_AGENT_IMAGE_TAG: "2.0.2"
-  serviceAccount:
-    create: false
-    name: "ita-by-ansible-execute-sa"
+  ita-by-ansible-execute:
+    replicaCount: 1
+    image:
+      repository: "exastro/exastro-it-automation-by-ansible-execute"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
+      ANSIBLE_AGENT_IMAGE_TAG: "2.0.2"
+    serviceAccount:
+      create: false
+      name: "ita-by-ansible-execute-sa"
 
-ita-by-ansible-legacy-role-vars-listup:
-  replicaCount: 1
-  extraEnv:
-    EXECUTE_INTERVAL: "10"
-  image:
-    repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-by-ansible-legacy-role-vars-listup:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+    image:
+      repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-by-ansible-towermaster-sync:
-  replicaCount: 1
-  extraEnv:
-    EXECUTE_INTERVAL: "10"
-  image:
-    repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-by-ansible-towermaster-sync:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+    image:
+      repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-by-conductor-synchronize:
-  replicaCount: 1
-  extraEnv:
-    EXECUTE_INTERVAL: "10"
-  image:
-    repository: "exastro/exastro-it-automation-by-conductor-synchronize"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-by-conductor-synchronize:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+    image:
+      repository: "exastro/exastro-it-automation-by-conductor-synchronize"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-by-menu-create:
-  replicaCount: 1
-  extraEnv:
-    EXECUTE_INTERVAL: "10"
-  image:
-    repository: "exastro/exastro-it-automation-by-menu-create"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-by-menu-create:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+    image:
+      repository: "exastro/exastro-it-automation-by-menu-create"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-ita-database-setup-job:
-  image:
-    repository: ""
-    tag: ""
-    pullPolicy: IfNotPresent
+  ita-database-setup-job:
+    image:
+      repository: ""
+      tag: ""
+      pullPolicy: IfNotPresent
 
-ita-web-server:
-  replicaCount: 1
-  image:
-    repository: "exastro/exastro-it-automation-web-server"
-    tag: "2.0.2"
-    pullPolicy: IfNotPresent
+  ita-web-server:
+    replicaCount: 1
+    image:
+      repository: "exastro/exastro-it-automation-web-server"
+      tag: "2.0.2"
+      pullPolicy: IfNotPresent
 
-platform-api:
-  image:
-    repository: "exastro/exastro-platform-api"
-    tag: "1.2.0"
+exastro-platform:
+  platform-api:
+    image:
+      repository: "exastro/exastro-platform-api"
+      tag: "1.3.beta.932f7d.20230126-113339"
 
-platform-auth:
-  ingress:
-    enabled: true
-    hosts:
-      - host: exastro-suite.example.local
-        paths:
-          - path: /
-            pathType: Prefix
-            backend: "http"
-      - host: exastro-suite-mng.example.local
-        paths:
-          - path: /
-            pathType: Prefix
-            backend: "httpMng"
-  service:
-    type: ClusterIP
-    # http:
-    #   nodePort: 30080
-    # httpMng:
-    #   nodePort: 30081
-  image:
-    repository: "exastro/exastro-platform-auth"
-    tag: "1.2.0"
+  platform-auth:
+    ingress:
+      enabled: true
+      hosts:
+        - host: exastro-suite.example.local
+          paths:
+            - path: /
+              pathType: Prefix
+              backend: "http"
+        - host: exastro-suite-mng.example.local
+          paths:
+            - path: /
+              pathType: Prefix
+              backend: "httpMng"
+    service:
+      type: ClusterIP
+      # http:
+      #   nodePort: 30080
+      # httpMng:
+      #   nodePort: 30081
+    image:
+      repository: "exastro/exastro-platform-auth"
+      tag: "1.3.beta.932f7d.20230126-113340"
 
-platform-setup:
+  platform-setup:
+    keycloak:
+      image:
+        repository: "exastro/exastro-platform-job"
+        tag: "1.3.beta.932f7d.20230126-113341"
+
+  platform-web:
+    image:
+      repository: "exastro/exastro-platform-web"
+      tag: "1.3.beta.932f7d.20230126-113448"
+
+  mariadb:
+    image:
+      repository: "mariadb"
+      tag: "10.9"
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "1m"
+      limits:
+        memory: "2Gi"
+        cpu: "4"
+
   keycloak:
     image:
-      repository: "exastro/exastro-platform-job"
-      tag: "1.2.0"
-
-platform-web:
-  image:
-    repository: "exastro/exastro-platform-web"
-    tag: "1.2.0"
-
-mariadb:
-  image:
-    repository: "mariadb"
-    tag: "10.9"
-    pullPolicy: IfNotPresent
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "1m"
-    limits:
-      memory: "2Gi"
-      cpu: "4"
-
-keycloak:
-  image:
-    repository: "exastro/keycloak"
-    tag: "1.2.0"
-    pullPolicy: IfNotPresent
-  resources:
-    requests:
-      memory: "256Mi"
-      cpu: "1m"
-    limits:
-      memory: "2Gi"
-      cpu: "4"
+      repository: "exastro/keycloak"
+      tag: "1.3.beta.932f7d.20230126-113339"
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "1m"
+      limits:
+        memory: "2Gi"
+        cpu: "4"

@@ -1,8 +1,15 @@
 Exastro install completion!
 
-1. Get the application URL by running these commands:
+1. Execute the following command and wait until the pod becomes "Running" or "Completed":
 
-{{- $valuesPlatFormAuth := (get .Values "platform-auth") }}
+  kubectl get po -n {{ .Release.Namespace }}
+
+  NOTE: You can also append "-w" to the command or wait until the state changes with "watch command"
+
+2. Run the following command to get the application URL and go to the URL or go to the displayed URL:
+
+{{- $valuesPlatform := (get .Values "exastro-platform") }}
+{{- $valuesPlatFormAuth := (get $valuesPlatform "platform-auth") }}
 {{- if $valuesPlatFormAuth.ingress.enabled }}
 {{- range $valuesPlatFormAuth.ingress.hosts }}
   {{- $host := .host }}
@@ -11,22 +18,22 @@ Exastro install completion!
   {{- end }}
 {{- end }}
 {{- else if contains "NodePort" $valuesPlatFormAuth.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "platform-auth.name" . }})
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "exastro-platform.platform-auth.name" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 {{- else if contains "LoadBalancer" $valuesPlatFormAuth.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "platform-auth.name" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "platform-auth.name" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "exastro-platform.platform-auth.name" . }}'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "exastro-platform.platform-auth.name" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
   echo http://$SERVICE_IP:{{ $valuesPlatFormAuth.service.http.port }}
 {{- else if contains "ClusterIP" $valuesPlatFormAuth.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "platform-auth.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "exastro-platform.platform-auth.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
   export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME
 {{ end }}
 
-2. Get the ENCRYPT_KEY by running these commands:
+3. Get the ENCRYPT_KEY by running these commands:
 
   [exastro it automation ENCRYPT_KEY]
   kubectl get secret ita-secret-ita-global -n {{ .Release.Namespace }} -o jsonpath='{.data.ENCRYPT_KEY}' | base64 -d
