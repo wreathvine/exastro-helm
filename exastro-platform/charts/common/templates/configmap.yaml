@@ -15,9 +15,10 @@
 */}}
 
 {{/* Custom Exastro Platform config templates */}}
-{{- define "common.configmap.tpl" -}}
+{{- define "platform-common.configmap.tpl" -}}
 {{- $top := index . 0 -}}
 {{- $define := index . 1 -}}
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -30,8 +31,10 @@ data: {{- toYaml $define.config | nindent 2 -}}
 
 {{/* Print Exastro Platform common configMaps */}}
 {{- $top := . -}}
-{{- range $define := .Values.global -}}
+{{- range $name, $define := .Values.global -}}
 {{-   if and $define.enabled $define.config -}}
-{{-     include "common.configmap.tpl" (list $top $define) | nindent 0 -}}
+{{-     if or (eq $name "authGlobalDefinition") (eq $name "keycloakDefinition") (eq $name "itaDefinition") (eq $name "authDatabaseDefinition") (eq $name "databaseDefinition") -}}
+{{-       include "platform-common.configmap.tpl" (list $top $define) | nindent 0 -}}
+{{-     end -}}
 {{-   end -}}
 {{- end -}}

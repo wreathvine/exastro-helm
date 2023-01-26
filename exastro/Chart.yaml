@@ -35,7 +35,7 @@ version: 1.0.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "2.0.3"
+appVersion: "2.0.0"
 
 keywords:
 - exastro
@@ -43,20 +43,22 @@ keywords:
 - exastro-it-automation
 home: https://exastro-suite.github.io/
 icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
-sources:
-- https://github.com/exastro-suite/exastro-it-automation
-- https://github.com/exastro-suite/exastro-platform
+# sources:
+# - https://github.com/exastro-suite/exastro-it-automation
+# - https://github.com/exastro-suite/exastro-platform
 dependencies:
+  - name: exastro-it-automation
+    version: 1.0.7
+    # repository: https://exastro-suite.github.io/exastro-it-automation/charts
+    # repository: https://github.com/exastro/exastro-helm/exastro-it-automation/charts
+    repository: file://../exastro-it-automation
+    condition: exastro-it-automation.enabled
   - name: exastro-platform
     version: 1.2.0
-    repository: https://exastro-suite.github.io/exastro-platform/charts
+    # repository: https://exastro-suite.github.io/exastro-platform/charts
     # repository: https://github.com/exastro/exastro-helm/exastro-platform/charts
-    # repository: file://../exastro-platform
-  - name: exastro-it-automation
-    version: 1.0.6
-    repository: https://exastro-suite.github.io/exastro-it-automation/charts
-    # repository: https://github.com/exastro/exastro-helm/exastro-it-automation/charts
-    # repository: file://../exastro-it-automation
+    repository: file://../exastro-platform
+    condition: exastro-platform.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com

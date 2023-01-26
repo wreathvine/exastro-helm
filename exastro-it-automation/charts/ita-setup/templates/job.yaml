@@ -140,11 +140,11 @@ spec:
           {{- end }}
         - name: mysql-server-initdb
           configMap:
-            name: createdb-sql
+            name: ita-createdb-sql
             items:
             - key: {{ .Values.volumeMounts.mountPath.createDB.subPath }}
               path: {{ .Values.volumeMounts.mountPath.createDB.subPath }}
               mode: 0644
         - name: mysql-server-conf
           configMap:
-            name: mysqld-conf
+            name: ita-mysqld-conf

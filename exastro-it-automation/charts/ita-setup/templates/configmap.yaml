@@ -25,7 +25,7 @@ data: {{ toYaml .Values.extraEnv | nindent 2 }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysqld-conf
+  name: ita-mysqld-conf
   namespace: {{ .Release.Namespace }}
   labels: {{ include "ita-setup.labels" . | nindent 4 }}
 data:
@@ -34,7 +34,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: createdb-sql
+  name: ita-createdb-sql
   namespace: {{ .Release.Namespace }}
   labels: {{ include "ita-setup.labels" . | nindent 4 }}
 data:
