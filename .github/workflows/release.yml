@@ -34,6 +34,6 @@ jobs:
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: exastro/
+          charts_dir: exastro/.
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
