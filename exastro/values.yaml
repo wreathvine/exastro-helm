@@ -144,7 +144,7 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-api-admin"
-      tag: "beta.7dbebf.20230124-120133"
+      tag: "beta.3b2607.20230126-183122"
       pullPolicy: IfNotPresent
     extraEnv:
       PLATFORM_API_HOST: "platform-api"
@@ -154,7 +154,7 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-api-organization"
-      tag: "beta.7dbebf.20230124-120133"
+      tag: "beta.3b2607.20230126-183120"
       pullPolicy: IfNotPresent
     extraEnv:
       PLATFORM_API_HOST: "platform-api"
@@ -164,12 +164,12 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-by-ansible-execute"
-      tag: "beta.7dbebf.20230124-120134"
+      tag: "beta.3b2607.20230126-183123"
       pullPolicy: IfNotPresent
     extraEnv:
       EXECUTE_INTERVAL: "10"
       ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
-      ANSIBLE_AGENT_IMAGE_TAG: "beta.7dbebf.20230124-120134"
+      ANSIBLE_AGENT_IMAGE_TAG: "beta.3b2607.20230126-183119"
     serviceAccount:
       create: false
       name: "ita-by-ansible-execute-sa"
@@ -180,7 +180,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
-      tag: "beta.7dbebf.20230124-120134"
+      tag: "beta.3b2607.20230126-183124"
       pullPolicy: IfNotPresent
 
   ita-by-ansible-towermaster-sync:
@@ -189,7 +189,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
-      tag: "beta.7dbebf.20230124-120133"
+      tag: "beta.3b2607.20230126-183118"
       pullPolicy: IfNotPresent
 
   ita-by-conductor-synchronize:
@@ -198,7 +198,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-conductor-synchronize"
-      tag: "beta.7dbebf.20230124-120134"
+      tag: "beta.3b2607.20230126-183125"
       pullPolicy: IfNotPresent
 
   ita-by-menu-create:
@@ -207,7 +207,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-menu-create"
-      tag: "beta.7dbebf.20230124-120134"
+      tag: "beta.3b2607.20230126-183242"
       pullPolicy: IfNotPresent
 
   ita-database-setup-job:
@@ -220,7 +220,7 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-web-server"
-      tag: "beta.7dbebf.20230124-120133"
+      tag: "beta.3b2607.20230126-183127"
       pullPolicy: IfNotPresent
 
 exastro-platform:

@@ -14,7 +14,7 @@
 
 apiVersion: v2
 name: exastro
-description: Exastro is an Open Source Framework for digitizing and centrally managing the system configuration.
+description: A Helm chart for Exastro. Exastro is an Open Source Framework for digitizing and centrally managing the system configuration.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -29,13 +29,13 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.0
+version: 1.0.0-beta1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "2.0.0"
+appVersion: "2.0.0-beta1"
 
 keywords:
 - exastro
@@ -48,15 +48,11 @@ sources:
 - https://github.com/exastro-suite/exastro-platform
 dependencies:
   - name: exastro-it-automation
-    version: 1.0.7
-    # repository: https://exastro-suite.github.io/exastro-it-automation/charts
-    # repository: https://github.com/exastro/exastro-helm/exastro-it-automation/charts
+    version: 1.0.7-beta1
     repository: file://../exastro-it-automation
     condition: exastro-it-automation.enabled
   - name: exastro-platform
-    version: 1.2.0
-    # repository: https://exastro-suite.github.io/exastro-platform/charts
-    # repository: https://github.com/exastro/exastro-helm/exastro-platform/charts
+    version: 1.2.0-beta1
     repository: file://../exastro-platform
     condition: exastro-platform.enabled
 maintainers:
