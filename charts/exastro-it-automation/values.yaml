@@ -54,26 +54,26 @@ ita-api-admin:
   replicaCount: 1
   image:
     repository: "exastro/exastro-it-automation-api-admin"
-    tag: "beta.3b2607.20230126-183122"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-api-organization:
   replicaCount: 1
   image:
     repository: "exastro/exastro-it-automation-api-organization"
-    tag: "beta.3b2607.20230126-183120"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-by-ansible-execute:
   replicaCount: 1
   image:
     repository: "exastro/exastro-it-automation-by-ansible-execute"
-    tag: "beta.3b2607.20230126-183123"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
   extraEnv:
     EXECUTE_INTERVAL: "10"
     ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
-    ANSIBLE_AGENT_IMAGE_TAG: "beta.3b2607.20230126-183119"
+    ANSIBLE_AGENT_IMAGE_TAG: "2.0.3-beta1"
   serviceAccount:
     create: false
     name: "ita-by-ansible-execute-sa"
@@ -84,7 +84,7 @@ ita-by-ansible-legacy-role-vars-listup:
     EXECUTE_INTERVAL: "10"
   image:
     repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
-    tag: "beta.3b2607.20230126-183124"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-by-ansible-towermaster-sync:
@@ -93,7 +93,7 @@ ita-by-ansible-towermaster-sync:
     EXECUTE_INTERVAL: "10"
   image:
     repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
-    tag: "beta.3b2607.20230126-183118"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-by-conductor-synchronize:
@@ -102,7 +102,7 @@ ita-by-conductor-synchronize:
     EXECUTE_INTERVAL: "10"
   image:
     repository: "exastro/exastro-it-automation-by-conductor-synchronize"
-    tag: "beta.3b2607.20230126-183125"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-by-menu-create:
@@ -111,7 +111,7 @@ ita-by-menu-create:
     EXECUTE_INTERVAL: "10"
   image:
     repository: "exastro/exastro-it-automation-by-menu-create"
-    tag: "beta.3b2607.20230126-183242"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
 
 ita-database-setup-job:
@@ -124,5 +124,5 @@ ita-web-server:
   replicaCount: 1
   image:
     repository: "exastro/exastro-it-automation-web-server"
-    tag: "beta.3b2607.20230126-183127"
+    tag: "2.0.3-beta1"
     pullPolicy: IfNotPresent
