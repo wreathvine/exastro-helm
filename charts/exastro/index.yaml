@@ -3,7 +3,7 @@ entries:
   exastro:
   - apiVersion: v2
     appVersion: 2.0.0-beta1
-    created: "2023-01-27T15:41:44.240919053+09:00"
+    created: "2023-01-27T15:53:32.00771572+09:00"
     dependencies:
     - condition: exastro-it-automation.enabled
       name: exastro-it-automation
@@ -15,7 +15,7 @@ entries:
       version: 1.2.0-beta1
     description: A Helm chart for Exastro. Exastro is an Open Source Framework for
       digitizing and centrally managing the system configuration.
-    digest: 45d3f11e946d3cfba8de3b501d30e3233e6786888a67b75f40dfaaefe87aa3f7
+    digest: ff128b2fdbe6b5ab18849fed4d13919ea7e07e46f38720b8cfc1d1119a342486
     home: https://exastro-suite.github.io/
     icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
     keywords:
@@ -37,10 +37,10 @@ entries:
   exastro-it-automation:
   - apiVersion: v2
     appVersion: 2.0.3-beta1
-    created: "2023-01-27T15:41:44.26436975+09:00"
+    created: "2023-01-27T15:53:32.032263178+09:00"
     description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
       an Open Source Framework for digitizing and centrally managing the system configuration.
-    digest: b2a55af0dc0ebf1ba8c4fa6df528f40c8442652da23f332b858818080d6f411d
+    digest: 2c845abaebe09eb7932867305fbfd03ff9017dba18e60c5c79f5fe4982f0b576
     home: https://exastro-suite.github.io/
     icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
     keywords:
@@ -59,10 +59,10 @@ entries:
   exastro-platform:
   - apiVersion: v2
     appVersion: 1.2.0-beta1
-    created: "2023-01-27T15:41:44.278283353+09:00"
+    created: "2023-01-27T15:53:32.078855619+09:00"
     description: A Helm chart for Exastro Platform. Exastro Platform is common framework
       for Exastro suite applications.
-    digest: eeac94815f5cb27c364376682b1cdf0d6d01cb5b06c0d3293bbb739a1576d852
+    digest: 563ec076d60f463c9e474eaa583bae1e6a04a9a5d8d730ede8e5c341adc037fa
     home: https://exastro-suite.github.io/
     icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
     keywords:
@@ -78,4 +78,4 @@ entries:
     urls:
     - charts/exastro-platform-1.2.0-beta1.tgz
     version: 1.2.0-beta1
-generated: "2023-01-27T15:41:44.160756664+09:00"
+generated: "2023-01-27T15:53:31.946857741+09:00"
