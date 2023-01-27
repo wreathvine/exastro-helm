@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  exastro-platform:
+  - apiVersion: v2
+    appVersion: 1.2.0-beta1
+    created: "2023-01-27T15:52:36.60396078+09:00"
+    description: A Helm chart for Exastro Platform. Exastro Platform is common framework
+      for Exastro suite applications.
+    digest: f930b7888ff22fc6283db5bd23830451572753f1a8dc1b380af3738c1c301e9e
+    home: https://exastro-suite.github.io/
+    icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-platform
+    sources:
+    - https://github.com/exastro-suite/exastro-platform
+    type: application
+    urls:
+    - exastro-platform-1.2.0-beta1.tgz
+    version: 1.2.0-beta1
+generated: "2023-01-27T15:52:36.584983016+09:00"
