@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  exastro-it-automation:
+  - apiVersion: v2
+    appVersion: 2.0.3-beta1
+    created: "2023-01-27T15:52:23.354341132+09:00"
+    description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
+      an Open Source Framework for digitizing and centrally managing the system configuration.
+    digest: efa77904f48004ea84b7b0efdce0aab3ab97aa6ed16cf61842cf87bb4f66f2a8
+    home: https://exastro-suite.github.io/
+    icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-it-automation
+    sources:
+    - https://github.com/exastro-suite/exastro-it-automation
+    type: application
+    urls:
+    - exastro-it-automation-1.0.7-beta1.tgz
+    version: 1.0.7-beta1
+generated: "2023-01-27T15:52:23.324022628+09:00"
