@@ -3,7 +3,40 @@ entries:
   exastro:
   - apiVersion: v2
     appVersion: 2.0.0-beta1
-    created: "2023-01-27T15:53:32.00771572+09:00"
+    created: "2023-01-27T16:02:41.978264112+09:00"
+    dependencies:
+    - condition: exastro-it-automation.enabled
+      name: exastro-it-automation
+      repository: file://../exastro-it-automation
+      version: 1.0.7
+    - condition: exastro-platform.enabled
+      name: exastro-platform
+      repository: file://../exastro-platform
+      version: 1.2.0
+    description: A Helm chart for Exastro. Exastro is an Open Source Framework for
+      digitizing and centrally managing the system configuration.
+    digest: 5d1baf6640dd80a66f8d4c17f308906b7bc0c0eaf74f8cc16f263ebd67e1cb69
+    home: https://exastro-suite.github.io/
+    icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro
+    sources:
+    - https://github.com/exastro-suite/exastro-helm
+    - https://github.com/exastro-suite/exastro-it-automation
+    - https://github.com/exastro-suite/exastro-platform
+    type: application
+    urls:
+    - exastro-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 2.0.0-beta1
+    created: "2023-01-27T16:02:41.934964534+09:00"
     dependencies:
     - condition: exastro-it-automation.enabled
       name: exastro-it-automation
@@ -37,10 +70,10 @@ entries:
   exastro-it-automation:
   - apiVersion: v2
     appVersion: 2.0.3-beta1
-    created: "2023-01-27T15:53:32.032263178+09:00"
+    created: "2023-01-27T16:02:42.010835591+09:00"
     description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
       an Open Source Framework for digitizing and centrally managing the system configuration.
-    digest: 2c845abaebe09eb7932867305fbfd03ff9017dba18e60c5c79f5fe4982f0b576
+    digest: ee1f767bc64e7dc10644e18d277ac4266aeaca3e850db013faf760cf8fedb240
     home: https://exastro-suite.github.io/
     icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
     keywords:
@@ -54,15 +87,15 @@ entries:
     - https://github.com/exastro-suite/exastro-it-automation
     type: application
     urls:
-    - charts/exastro-it-automation-1.0.7-beta1.tgz
-    version: 1.0.7-beta1
+    - charts/exastro-it-automation-1.0.7.tgz
+    version: 1.0.7
   exastro-platform:
   - apiVersion: v2
     appVersion: 1.2.0-beta1
-    created: "2023-01-27T15:53:32.078855619+09:00"
+    created: "2023-01-27T16:02:42.037207313+09:00"
     description: A Helm chart for Exastro Platform. Exastro Platform is common framework
       for Exastro suite applications.
-    digest: 563ec076d60f463c9e474eaa583bae1e6a04a9a5d8d730ede8e5c341adc037fa
+    digest: 82fad94142f8bc727c9ed71c502dce1fe9725e506d6e4ae9a74ea88081569810
     home: https://exastro-suite.github.io/
     icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
     keywords:
@@ -76,6 +109,6 @@ entries:
     - https://github.com/exastro-suite/exastro-platform
     type: application
     urls:
-    - charts/exastro-platform-1.2.0-beta1.tgz
-    version: 1.2.0-beta1
-generated: "2023-01-27T15:53:31.946857741+09:00"
+    - charts/exastro-platform-1.2.0.tgz
+    version: 1.2.0
+generated: "2023-01-27T16:02:41.899261433+09:00"
