@@ -5,7 +5,9 @@ on:
     branches:
       - main
     paths:
-      - '**'
+      - 'exastro/**'
+      - 'exastro-it-automation/**'
+      - 'exastro-platform/**'
       - .github/workflows/release.yml
 
 jobs:
