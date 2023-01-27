@@ -14,7 +14,7 @@
 
 apiVersion: v2
 name: exastro-it-automation
-description: Exastro IT Automation is an Open Source Framework for digitizing and centrally managing the system configuration.
+description: A Helm chart for Exastro IT Automation. Exastro IT Automation is an Open Source Framework for digitizing and centrally managing the system configuration.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -29,13 +29,13 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.7
+version: 1.0.7-beta1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "2.0.3"
+appVersion: "2.0.3-beta1"
 
 #dependencies:
 #- name: mariadb
