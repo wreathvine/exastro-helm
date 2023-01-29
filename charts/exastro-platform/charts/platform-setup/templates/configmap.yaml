@@ -46,7 +46,7 @@ data:
       FLUSH PRIVILEGES;
       {{- end -}}
 
-      {{- with .Values.global.authDatabaseDefinition }}
+      {{- with .Values.global.pfDatabaseDefinition }}
       CREATE DATABASE IF NOT EXISTS `{{ .config.DB_DATABASE }}` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
       CREATE USER IF NOT EXISTS '{{ .secret.DB_USER }}'@'%' IDENTIFIED BY '{{ .secret.DB_PASSWORD }}';
       GRANT ALL PRIVILEGES ON `{{ .config.DB_DATABASE }}` . * TO '{{ .secret.DB_USER }}'@'%';

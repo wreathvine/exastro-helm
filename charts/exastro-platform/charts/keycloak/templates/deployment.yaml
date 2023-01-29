@@ -58,7 +58,7 @@ spec:
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: platform-params-auth-database
+                  name: platform-params-pf-database
                   key: DB_HOST
             - name: DB_DATABASE
               valueFrom:
@@ -86,7 +86,7 @@ spec:
           - name: TZ
             valueFrom:
               configMapKeyRef:
-                name: platform-params-auth-global
+                name: platform-params-pf-global
                 key: TZ
           - name: KEYCLOAK_ADMIN
             valueFrom:
@@ -101,12 +101,12 @@ spec:
           - name: KC_DB
             valueFrom:
               configMapKeyRef:
-                name: platform-params-auth-database
+                name: platform-params-pf-database
                 key: DB_VENDOR
           - name: KC_DB_URL_HOST
             valueFrom:
               configMapKeyRef:
-                name: platform-params-auth-database
+                name: platform-params-pf-database
                 key: DB_HOST
           - name: KC_DB_URL_DATABASE
             valueFrom:

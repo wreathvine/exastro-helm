@@ -70,11 +70,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Image name
 */}}
 {{- define "platform-setup.database.repository" -}}
-{{- $registry := .Values.global.authGlobalDefinition.image.registry -}}
-{{- $organization := .Values.global.authGlobalDefinition.image.organization -}}
-{{- $package := .Values.global.authGlobalDefinition.image.package -}}
+{{- $registry := .Values.global.pfGlobalDefinition.image.registry -}}
+{{- $organization := .Values.global.pfGlobalDefinition.image.organization -}}
+{{- $package := .Values.global.pfGlobalDefinition.image.package -}}
 {{- $tool := replace "platform-" "" .Chart.Name -}}
-{{- if .Values.global.authGlobalDefinition.image.registry -}}
+{{- if .Values.global.pfGlobalDefinition.image.registry -}}
 {{ .Values.database.image.repository | default (printf "%s/%s/%s-%s" $registry $organization $package $tool) }}
 {{- else -}}
 {{ .Values.database.image.repository | default (printf "%s/%s-%s" $organization $package $tool) }}
@@ -82,11 +82,11 @@ Image name
 {{- end }}
 
 {{- define "platform-setup.keycloak.repository" -}}
-{{- $registry := .Values.global.authGlobalDefinition.image.registry -}}
-{{- $organization := .Values.global.authGlobalDefinition.image.organization -}}
-{{- $package := .Values.global.authGlobalDefinition.image.package -}}
+{{- $registry := .Values.global.pfGlobalDefinition.image.registry -}}
+{{- $organization := .Values.global.pfGlobalDefinition.image.organization -}}
+{{- $package := .Values.global.pfGlobalDefinition.image.package -}}
 {{- $tool := replace "platform-" "" .Chart.Name -}}
-{{- if .Values.global.authGlobalDefinition.image.registry -}}
+{{- if .Values.global.pfGlobalDefinition.image.registry -}}
 {{ .Values.keycloak.image.repository | default (printf "%s/%s/%s-%s" $registry $organization $package $tool) }}
 {{- else -}}
 {{ .Values.keycloak.image.repository | default (printf "%s/%s-%s" $organization $package $tool) }}

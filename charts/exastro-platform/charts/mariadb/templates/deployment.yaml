@@ -73,7 +73,7 @@ spec:
           - name: TZ
             valueFrom:
               configMapKeyRef:
-                name: platform-params-auth-global
+                name: platform-params-pf-global
                 key: TZ
           - name: MARIADB_ROOT_PASSWORD
             valueFrom:
