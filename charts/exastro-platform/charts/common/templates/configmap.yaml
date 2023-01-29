@@ -33,7 +33,7 @@ data: {{- toYaml $define.config | nindent 2 -}}
 {{- $top := . -}}
 {{- range $name, $define := .Values.global -}}
 {{-   if and $define.enabled $define.config -}}
-{{-     if or (eq $name "authGlobalDefinition") (eq $name "keycloakDefinition") (eq $name "itaDefinition") (eq $name "authDatabaseDefinition") (eq $name "databaseDefinition") -}}
+{{-     if or (eq $name "pfGlobalDefinition") (eq $name "keycloakDefinition") (eq $name "itaDefinition") (eq $name "pfDatabaseDefinition") (eq $name "databaseDefinition") -}}
 {{-       include "platform-common.configmap.tpl" (list $top $define) | nindent 0 -}}
 {{-     end -}}
 {{-   end -}}
