@@ -23,3 +23,5 @@
 .vscode/
 # Test values.yaml
 test*.yaml
+
+exastro-[0-9]*.tgz
