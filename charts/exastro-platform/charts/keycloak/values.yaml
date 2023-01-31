@@ -76,6 +76,8 @@ global:
       DB_USER: ""
       DB_PASSWORD: ""
 
+enabled: true
+
 replicaCount: 1
 
 initContainerImage:

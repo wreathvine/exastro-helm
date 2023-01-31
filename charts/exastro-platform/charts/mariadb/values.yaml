@@ -19,6 +19,8 @@ global:
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
 
+enabled: true
+
 replicaCount: 1
 
 completionCount: 1
