@@ -3,7 +3,8 @@ name: Chart Publish
 on:
   push:
     branches:
-      - main, test
+      - main
+      - test
 
 permissions:
   contents: read
