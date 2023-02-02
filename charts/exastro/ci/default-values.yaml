@@ -5,14 +5,15 @@ global:
   gitlabDefinition:
     secret:
       GITLAB_ROOT_TOKEN: "gitlab-token"
+  itaGlobalDefinition:
+    persistence:
+      enabled: false
   itaDatabaseDefinition:
     secret:
       DB_ADMIN_USER: "root"
       DB_ADMIN_PASSWORD: "password"
       DB_USER: "ita_db_user"
       DB_PASSWORD: "password"
-    persistence:
-      enabled: false
   keycloakDefinition:
     secret:
       KEYCLOAK_USER: "keycloak"
