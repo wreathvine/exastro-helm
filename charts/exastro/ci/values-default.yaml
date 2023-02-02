@@ -1,0 +1,28 @@
+# Default values for Exastro.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  gitlabDefinition:
+    secret:
+      GITLAB_ROOT_TOKEN: "gitlab-token"
+  itaDatabaseDefinition:
+    secret:
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "password"
+      DB_USER: "ita_db_user"
+      DB_PASSWORD: "password"
+  keycloakDefinition:
+    secret:
+      KEYCLOAK_USER: "keycloak"
+      KEYCLOAK_PASSWORD: "password"
+      KEYCLOAK_DB_USER: "keycloak_db_user"
+      KEYCLOAK_DB_PASSWORD: "password"
+  pfDatabaseDefinition:
+    secret:
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "password"
+      DB_USER: "platform_db_user"
+      DB_PASSWORD: "password"
+  databaseDefinition:
+    secret:
+      MARIADB_ROOT_PASSWORD: "password"
