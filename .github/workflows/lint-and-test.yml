@@ -61,9 +61,9 @@ jobs:
           contains(steps.list-changed.outputs.changed_charts, 'exastro-platform') ||
           contains(steps.list-changed.outputs.changed_charts, 'exastro-it-automation')
         run: |
-          helm repo add exastro-dev https://exastro-dev.github.io/charts/
+          helm repo add exastro-dev https://eiji-nakahashi.github.io/charts/
           helm dependency build charts/exastro/
-          helm template charts/exastro/ | kubectl apply -f -
+          helm template charts/exastro/ -f ./.github/configs/values-default.yaml | kubectl apply -f -
 
       - name: Run chart-testing (install)
         run: ct install --config ./.github/configs/ct-install.yaml
