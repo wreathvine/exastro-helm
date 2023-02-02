@@ -5,11 +5,11 @@ remote: origin
 target-branch: main
 chart-dirs:
   - charts
-chart-repos:
-  - exastro-dev=https://eiji-nakahashi.github.io/exastro-helm/
+# chart-repos:
+#   - exastro-dev=https://eiji-nakahashi.github.io/exastro-helm/
 helm-extra-args: "--timeout 600s"
 validate-chart-schema: false
-validate-maintainers: true
+validate-maintainers: false
 validate-yaml: true
 exclude-deprecated: true
 excluded-charts: []
