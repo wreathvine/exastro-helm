@@ -11,6 +11,8 @@ global:
       DB_ADMIN_PASSWORD: "password"
       DB_USER: "ita_db_user"
       DB_PASSWORD: "password"
+    persistence:
+      enabled: false
   keycloakDefinition:
     secret:
       KEYCLOAK_USER: "keycloak"
@@ -23,6 +25,10 @@ global:
       DB_ADMIN_PASSWORD: "password"
       DB_USER: "platform_db_user"
       DB_PASSWORD: "password"
+    persistence:
+      enabled: false
   databaseDefinition:
     secret:
       MARIADB_ROOT_PASSWORD: "password"
+    persistence:
+      enabled: false
