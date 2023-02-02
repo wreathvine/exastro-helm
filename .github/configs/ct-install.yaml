@@ -6,7 +6,7 @@ target-branch: main
 chart-dirs:
   - charts
 chart-repos:
-  - exastro-dev=https://eiji-nakahashi.github.io/charts/
+  - exastro-dev=https://eiji-nakahashi.github.io/exastro-helm/
 helm-extra-args: "--timeout 600s"
 validate-chart-schema: false
 validate-maintainers: true

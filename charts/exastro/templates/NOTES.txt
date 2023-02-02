@@ -34,7 +34,7 @@ Exastro install completion!
   *************************
   * Administrator Console *
   *************************
-  http{{ if $valuesPlatFormAuth.ingress.tls }}s{{ end }}://{{ $host }}{{ .path }}/auth/
+  http{{ if $valuesPlatFormAuth.ingress.tls }}s{{ end }}://{{ $host }}{{ .path }}auth/
   {{- end }}
   {{- printf "\n" -}}
   {{- end }}
