@@ -25,25 +25,25 @@ global:
   itaDatabaseDefinition:
     secret:
       DB_ADMIN_USER: "root"
-      DB_ADMIN_PASSWORD: "password"
+      DB_ADMIN_PASSWORD: "root_password"
       DB_USER: "ita_db_user"
-      DB_PASSWORD: "password"
+      DB_PASSWORD: "ita_db_password"
   keycloakDefinition:
     secret:
       KEYCLOAK_USER: "keycloak"
-      KEYCLOAK_PASSWORD: "password"
+      KEYCLOAK_PASSWORD: "keycloak_password"
       KEYCLOAK_DB_USER: "keycloak_db_user"
-      KEYCLOAK_DB_PASSWORD: "password"
+      KEYCLOAK_DB_PASSWORD: "keycloak_db_password"
   pfDatabaseDefinition:
     secret:
       DB_ADMIN_USER: "root"
-      DB_ADMIN_PASSWORD: "password"
+      DB_ADMIN_PASSWORD: "root_password"
       DB_USER: "platform_db_user"
-      DB_PASSWORD: "password"
+      DB_PASSWORD: "platform_db_password"
     persistence:
       enabled: false
   databaseDefinition:
     secret:
-      MARIADB_ROOT_PASSWORD: "password"
+      MARIADB_ROOT_PASSWORD: "root_password"
     persistence:
       enabled: false
