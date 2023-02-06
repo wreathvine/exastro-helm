@@ -16,7 +16,7 @@ apiVersion: v2
 name: exastro
 description: A Helm chart for Exastro. Exastro is an Open Source Framework for digitizing and centrally managing the system configuration.
 
-# A chart can be either an 'application' or a 'library' chart.
+# A chart can be either an 'application' or a 'library' chart..
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
 # to be deployed.
