@@ -1,0 +1,141 @@
+{{/*
+#   Copyright 2023 NEC Corporation
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+*/}}
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ template "platform-migration.name" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  {{- with .Values.imagePullSecrets }}
+  imagePullSecrets:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  serviceAccountName: {{ include "platform-migration.serviceAccountName" . }}
+  securityContext:
+    {{- toYaml .Values.podSecurityContext | nindent 4 }}
+  initContainers:
+    - name: {{ template "platform-migration.name" . }}-db-main
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      image: "{{ template "platform-migration.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+      command: ["sh", "-c"]
+      args:
+        - |
+          {{- .Values.command.initializeDBMain | nindent 14 }}
+      env:
+        {{- range $define := .Values.global -}}
+        {{-   range $config, $value := $define.config -}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: platform-params-{{ $define.name }}
+              key: {{ $config }}
+        {{-     end -}}
+        {{-   end -}}
+        {{-   range $secret, $value := $define.secret -}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        - name: {{ $secret }}
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-{{ $define.name }}
+              key: {{ $secret }}
+        {{-     end }}
+        {{-   end }}
+        {{- end -}}
+        {{ range $config, $value := .Values.extraEnv }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: params-{{ template "platform-migration.name" $ }}
+              key: {{ $config }}
+        {{- end }}
+      volumeMounts:
+        - name: volume-{{ template "platform-migration.name" . }}-pid
+          mountPath: {{ .Values.persistence.mountPath.pid.path }}
+          subPath: {{ .Values.persistence.mountPath.pid.subPath }}
+        - name: volume-{{ template "platform-migration.name" . }}-socket
+          mountPath: {{ .Values.persistence.mountPath.socket.path }}
+          subPath: {{ .Values.persistence.mountPath.socket.subPath }}
+      resources:
+        {{- toYaml .Values.resources | nindent 8 }}
+  containers:
+    - name: {{ template "platform-migration.name" . }}
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      image: "{{ template "platform-migration.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+      command: ["sh", "-c"]
+      args:
+        - |
+          {{- .Values.command.migrationMain | nindent 14 }}
+      env:
+        {{- range $define := .Values.global -}}
+        {{-   range $config, $value := $define.config -}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: platform-params-{{ $define.name }}
+              key: {{ $config }}
+        {{-     end -}}
+        {{-   end -}}
+        {{-   range $secret, $value := $define.secret -}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        - name: {{ $secret }}
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-{{ $define.name }}
+              key: {{ $secret }}
+        {{-     end }}
+        {{-   end }}
+        {{- end -}}
+        {{ range $config, $value := .Values.extraEnv }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: params-{{ template "platform-migration.name" $ }}
+              key: {{ $config }}
+        {{- end }}
+      volumeMounts:
+        - name: volume-{{ template "platform-migration.name" . }}-pid
+          mountPath: {{ .Values.persistence.mountPath.pid.path }}
+          subPath: {{ .Values.persistence.mountPath.pid.subPath }}
+        - name: volume-{{ template "platform-migration.name" . }}-socket
+          mountPath: {{ .Values.persistence.mountPath.socket.path }}
+          subPath: {{ .Values.persistence.mountPath.socket.subPath }}
+      resources:
+        {{- toYaml .Values.resources | nindent 8 }}
+  restartPolicy: OnFailure
+  volumes:
+    - name: volume-{{ template "platform-migration.name" . }}-pid
+      emptyDir: {}
+    - name: volume-{{ template "platform-migration.name" . }}-socket
+      emptyDir: {}
+  {{- with .Values.nodeSelector }}
+  nodeSelector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.affinity }}
+  affinity:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.tolerations }}
+  tolerations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
