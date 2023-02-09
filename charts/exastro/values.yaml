@@ -257,13 +257,7 @@ exastro-platform:
   platform-migration:
     image:
       repository: "exastro/exastro-migration"
-      tag: "1.3.0-beta1"
-
-  platform-setup:
-    keycloak:
-      image:
-        repository: "exastro/exastro-platform-job"
-        tag: "1.3.0-beta1"
+      tag: "alpha.07bd0a.20230208-171006"
 
   platform-web:
     image:
