@@ -51,6 +51,17 @@ home: https://exastro-suite.github.io/
 icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
 - https://github.com/exastro-suite/exastro-it-automation
+dependencies:
+- name: common
+- name: ita-api-admin
+- name: ita-api-organization
+- name: ita-by-ansible-execute
+- name: ita-by-ansible-legacy-role-vars-listup
+- name: ita-by-ansible-towermaster-sync
+- name: ita-by-conductor-synchronize
+- name: ita-by-menu-create
+- name: ita-setup
+- name: ita-web-server
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com
