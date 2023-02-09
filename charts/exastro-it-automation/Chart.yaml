@@ -53,15 +53,35 @@ sources:
 - https://github.com/exastro-suite/exastro-it-automation
 dependencies:
 - name: common
+  version: ^1.x
+  condition: common.enabled
 - name: ita-api-admin
+  version: ^1.x
+  condition: ita-api-admin.enabled
 - name: ita-api-organization
+  version: ^1.x
+  condition: ita-api-organization.enabled
 - name: ita-by-ansible-execute
+  version: ^1.x
+  condition: ita-by-ansible-execute.enabled
 - name: ita-by-ansible-legacy-role-vars-listup
+  version: ^1.x
+  condition: ita-by-ansible-legacy-role-vars-listup.enabled
 - name: ita-by-ansible-towermaster-sync
+  version: ^1.x
+  condition: ita-by-ansible-towermaster-sync.enabled
 - name: ita-by-conductor-synchronize
+  version: ^1.x
+  condition: ita-by-conductor-synchronize.enabled
 - name: ita-by-menu-create
+  version: ^1.x
+  condition: ita-by-menu-create.enabled
 - name: ita-setup
+  version: ^1.x
+  condition: ita-setup.enabled
 - name: ita-web-server
+  version: ^1.x
+  condition: ita-web-server.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com
