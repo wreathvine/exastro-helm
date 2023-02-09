@@ -257,7 +257,7 @@ exastro-platform:
   platform-migration:
     image:
       repository: "exastro/exastro-platform-migration"
-      tag: "alpha.07bd0a.20230208-171006"
+      tag: "alpha.171c15.20230209-154230"
 
   platform-web:
     image:
