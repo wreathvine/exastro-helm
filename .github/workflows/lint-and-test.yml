@@ -78,7 +78,7 @@ jobs:
           contains(steps.list-changed.outputs.changed_charts, 'exastro-platform') ||
           contains(steps.list-changed.outputs.changed_charts, 'exastro-it-automation')
         run: |
-          helm repo add exastro-dev https://exastro-suite.github.io/charts/
+          helm repo add exastro-dev https://exastro-suite.github.io/exastro-helm/
           helm dependency build charts/exastro/
           helm template charts/exastro/ -f charts/exastro/ci/values-default.yaml | kubectl apply -f -
 
