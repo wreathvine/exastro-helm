@@ -80,7 +80,7 @@ jobs:
         run: |
           helm repo add exastro-dev https://exastro-suite.github.io/exastro-helm/
           helm dependency build charts/exastro/
-          helm template charts/exastro/ -f charts/exastro/ci/values-default.yaml | kubectl apply -f -
+          helm template charts/exastro/ -f charts/exastro/ci/default-values.yaml | kubectl apply -f -
 
       - name: Run chart-testing (install)
         run: ct install --config ./.github/configs/ct-install.yaml
