@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -143,3 +143,30 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+database:
+  initContainerImage:
+    repository: mariadb
+    tag: "10.9"
+    pullPolicy: IfNotPresent
+
+  imagePullSecrets: []
+
+  databaseCheck: |-
+    #!/bin/bash
+    i=1
+    echo "HOST: ${DB_HOST}"
+    until mysqladmin ping --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} --silent; do
+      echo `date`": Can not connect to Database."
+      sleep $i
+      i=$(( i * 2 ))
+    done
+    echo `date`": Completely connect to Database."
+    exit 0
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
