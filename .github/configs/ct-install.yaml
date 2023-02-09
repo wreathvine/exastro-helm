@@ -19,7 +19,7 @@
 remote: origin
 target-branch: main
 chart-dirs:
-  - charts
+  - charts/exastro
 helm-extra-args: "--timeout 600s"
 validate-chart-schema: false
 validate-maintainers: false
