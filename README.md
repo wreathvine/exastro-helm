@@ -1,6 +1,8 @@
 # exastro-helm
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ![version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+[![Chart Publish](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml/badge.svg)](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml)
+
 
 exastro helm is a collection of charts maintained by the exastro community.
 The charts can be added using following command:
