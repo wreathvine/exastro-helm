@@ -227,9 +227,15 @@ exastro-platform:
   platform-api:
     image:
       repository: "exastro/exastro-platform-api"
-      tag: "1.3.0-beta1"
+      tag: "alpha.16f1e0.20230210-133505"
 
   platform-auth:
+
+    extraEnv:
+      # Please set the URL to access
+      EXTERNAL_URL: ""
+      EXTERNAL_URL_MNG: ""
+
     ingress:
       enabled: true
       hosts:
@@ -251,17 +257,17 @@ exastro-platform:
       #   nodePort: 30081
     image:
       repository: "exastro/exastro-platform-auth"
-      tag: "1.3.0-beta1"
+      tag: "alpha.16f1e0.20230210-133504"
 
   platform-migration:
     image:
       repository: "exastro/exastro-platform-migration"
-      tag: "alpha.a276f9.20230209-175152"
+      tag: "alpha.16f1e0.20230210-133505"
 
   platform-web:
     image:
       repository: "exastro/exastro-platform-web"
-      tag: "1.3.0-beta1"
+      tag: "alpha.16f1e0.20230210-133505"
 
   mariadb:
     enabled: true
@@ -281,7 +287,7 @@ exastro-platform:
     enabled: true
     image:
       repository: "exastro/keycloak"
-      tag: "1.3.0-beta1"
+      tag: "alpha.16f1e0.20230210-133506"
       pullPolicy: IfNotPresent
     resources:
       requests:
