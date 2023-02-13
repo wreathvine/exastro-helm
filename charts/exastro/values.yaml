@@ -227,7 +227,7 @@ exastro-platform:
   platform-api:
     image:
       repository: "exastro/exastro-platform-api"
-      tag: "alpha.16f1e0.20230210-133505"
+      tag: "1.4.0-beta1"
 
   platform-auth:
 
@@ -257,17 +257,17 @@ exastro-platform:
       #   nodePort: 30081
     image:
       repository: "exastro/exastro-platform-auth"
-      tag: "alpha.16f1e0.20230210-133504"
+      tag: "1.4.0-beta1"
 
   platform-migration:
     image:
       repository: "exastro/exastro-platform-migration"
-      tag: "alpha.16f1e0.20230210-133505"
+      tag: "1.4.0-beta1"
 
   platform-web:
     image:
       repository: "exastro/exastro-platform-web"
-      tag: "alpha.16f1e0.20230210-133505"
+      tag: "1.4.0-beta1"
 
   mariadb:
     enabled: true
@@ -287,7 +287,7 @@ exastro-platform:
     enabled: true
     image:
       repository: "exastro/keycloak"
-      tag: "alpha.16f1e0.20230210-133506"
+      tag: "1.4.0-beta1"
       pullPolicy: IfNotPresent
     resources:
       requests:
