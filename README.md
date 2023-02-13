@@ -18,6 +18,7 @@ helm repo add exastro https://exastro-suite.github.io/exastro-helm/
 
 ## Component version
 
-|           |Exastro helm   |Exastro Platform|Exastro IT Automation|
-| :-------: | :-------: | :-------: | :-------: |
-|  version  |    1.0    |    1.3    |   2.0.3   |
+| Exastro helm Version   | Exastro Platform App Version | Exastro IT Automation App Version |
+| :-------: | :-------: | :-------: |
+|    **0.11.0**    |    1.3.0-beta1    |   2.0.3-beta1   |
+|    **0.12.4**    |    1.4.0-beta1    |   2.0.3-beta1   |
