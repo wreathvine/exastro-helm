@@ -29,13 +29,13 @@ type: library
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.3.0
+version: 1.4.3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.2.0-beta1"
+appVersion: "1.4.0-beta1"
 
 keywords:
 - exastro
@@ -44,6 +44,28 @@ home: https://exastro-suite.github.io/
 icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
 - https://github.com/exastro-suite/exastro-platform
+dependencies:
+- name: common
+  version: ^1.x
+  condition: common.enabled
+- name: keycloak
+  version: ^1.x
+  condition: keycloak.enabled
+- name: mariadb
+  version: ^1.x
+  condition: mariadb.enabled
+- name: platform-api
+  version: ^1.x
+  condition: platform-api.enabled
+- name: platform-auth
+  version: ^1.x
+  condition: platform-auth.enabled
+- name: platform-migration
+  version: ^1.x
+  condition: platform-migration.enabled
+- name: platform-web
+  version: ^1.x
+  condition: platform-web.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com

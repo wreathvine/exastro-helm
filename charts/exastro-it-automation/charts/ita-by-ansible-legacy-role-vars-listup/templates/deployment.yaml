@@ -44,6 +44,44 @@ spec:
       serviceAccountName: {{ include "ita-by-ansible-legacy-role-vars-listup.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: database-alive-check
+          securityContext:
+            {{- toYaml .Values.database.securityContext | nindent 12 }}
+          image: "{{ .Values.database.initContainerImage.repository }}:{{ .Values.database.initContainerImage.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.database.initContainerImage.pullPolicy }}
+          command: ["sh", "-c"]
+          args:
+            - |
+              {{- .Values.database.databaseCheck | nindent 14 }}
+          env:
+            {{- range $define := .Values.global -}}
+            {{-   range $config, $value := $define.config }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") }}
+            - name: {{ $config }}
+              valueFrom:
+                configMapKeyRef:
+                  name: ita-params-{{ $define.name }}
+                  key: {{ $config }}
+            {{-     end -}}
+            {{-   end -}}
+            {{-   range $secret, $value := $define.secret }}
+            {{-     if or (eq $define.name "ita-database") }}
+            - name: {{ $secret }}
+              valueFrom:
+                secretKeyRef:
+                  name: ita-secret-{{ $define.name }}
+                  key: {{ $secret }}
+            {{-     end }}
+            {{-   end }}
+            {{- end -}}
+            {{ range $config, $value := .Values.extraEnv }}
+            - name: {{ $config }}
+              valueFrom:
+                configMapKeyRef:
+                  name: params-{{ template "ita-setup.name" $ }}
+                  key: {{ $config }}
+            {{- end }}
       containers:
         - name: {{ template "ita-by-ansible-legacy-role-vars-listup.name" . }}
           securityContext:

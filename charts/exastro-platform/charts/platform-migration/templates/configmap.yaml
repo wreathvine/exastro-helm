@@ -1,4 +1,4 @@
-
+{{/*
 #   Copyright 2023 NEC Corporation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,18 +12,12 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+*/}}
 
-## Reference: https://github.com/helm/chart-testing/blob/master/doc/ct_lint-and-install.md
-# Don't add the 'debug' attribute, otherwise the workflow won't work anymore
-# Only Used for the CT Install Stage
-remote: origin
-target-branch: main
-chart-dirs:
-  - charts
-charts: "charts/exastro"
-helm-extra-args: "--timeout 600s"
-validate-chart-schema: false
-validate-maintainers: false
-validate-yaml: true
-exclude-deprecated: true
-excluded-charts: []
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: params-{{ template "platform-migration.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{ include "platform-migration.labels" . | nindent 4 }}
+data: {{ toYaml .Values.extraEnv | nindent 2 }}
