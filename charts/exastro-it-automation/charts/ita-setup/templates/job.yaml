@@ -46,7 +46,7 @@ spec:
           securityContext:
             {{- toYaml .Values.database.securityContext | nindent 12 }}
           image: "{{ .Values.database.initContainerImage.repository }}:{{ .Values.database.initContainerImage.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.database.initContainerImage.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |

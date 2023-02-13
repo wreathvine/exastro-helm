@@ -1,4 +1,4 @@
-# Default values for platform-setup.
+# Default values for platform-migration.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
@@ -76,12 +76,15 @@ global:
       DB_USER: ""
       DB_PASSWORD: ""
 
-extraEnv:
-  LOG_LEVEL: "INFO"
-  TIMEOUT: "10"
+replicaCount: 1
 
-completionCount: 1
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
 
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -94,103 +97,55 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+persistence:
+  mountPath:
+    storage: /storage
+    homeDir: /home/app_user
+    pid:
+      path: /var/run_app_user/httpd/pid
+      subPath: httpd-pid
+    socket:
+      path: /var/run_app_user/httpd/socket
+      subPath: httpd-socket
+    tmp: /tmp
+
 podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
 
-volumeMounts:
-  mountPath:
-    createDB:
-      path: /createdb.sql
-      subPath: createdb.sql
-    conf:
-      path: /etc/mysql/conf.d
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  runAsNonRoot: true
 
-database:
-  initContainerImage:
-    repository: mariadb
-    tag: "10.9"
-    pullPolicy: IfNotPresent
+resources: {}
+  # requests:
+  #   memory: "64Mi"
+  #   cpu: "250m"
+  # limits:
+  #   memory: "64Mi"
+  #   cpu: "250m"
 
-  image:
-    repository: mariadb
-    tag: "10.9"
-    pullPolicy: IfNotPresent
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
-  imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
+nodeSelector: {}
 
-  livenessCheck: |-
-    #!/bin/bash
-    i=1
-    echo "HOST: ${DB_HOST}"
-    until mysqladmin ping --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} --silent; do
-      echo `date`": Can not connect to Database."
-      sleep $i
-      i=$(( i * 2 ))
-    done
-    echo `date`": Completely connect to Database."
-    exit 0
+tolerations: []
 
-  initializeDatabase: |-
-    mysql --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} < /createdb.sql
+affinity: {}
 
-  databaseConfig:
-    name: mysqld-conf
-    customCnf: |-
-      [mysqld]
-      character-set-server=utf8mb4
-      collation-server=utf8mb4_bin
-      secure_file_priv=/tmp
-      [client]
-      default-character-set=utf8mb4
+command:
 
-  securityContext:
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    runAsNonRoot: true
+  initializeDBMain: |-
+    python3 /app/initialize_db_main.py
 
-keycloak:
-  extraEnv:
-    LOG_LEVEL: "INFO"
-    TIMEOUT: "10"
-
-  initContainerImage:
-    repository: busybox
-    tag: ""
-    pullPolicy: IfNotPresent
-
-  image:
-    repository: ""
-    tag: ""
-    pullPolicy: IfNotPresent
-
-  imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
-
-  livenessCheck: |-
-    #!/bin/bash
-    i=1
-    echo "HOST: ${API_KEYCLOAK_PROTOCOL}://${API_KEYCLOAK_HOST}:${API_KEYCLOAK_PORT}"
-    until wget --spider -T ${TIMEOUT} ${API_KEYCLOAK_PROTOCOL}://${API_KEYCLOAK_HOST}:${API_KEYCLOAK_PORT}/auth/health; do
-      echo `date`": Can not connect to KeyCloak."
-      sleep $i
-      i=$(( i * 2 ))
-    done
-    echo `date`": Completely connect to KeyCloak."
-    exit 0
-
-  initializeKeycloak: |-
-    python3 /app/platform_init.py
-
-  securityContext:
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    runAsNonRoot: true
+  migrationMain: |-
+    python3 /app/migration_main.py

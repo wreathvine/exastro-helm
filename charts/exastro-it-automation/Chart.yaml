@@ -29,7 +29,7 @@ type: library
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.0.7
+version: 1.1.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -37,12 +37,12 @@ version: 1.0.7
 # It is recommended to use it with quotes.
 appVersion: "2.0.3-beta1"
 
-#dependencies:
-#- name: mariadb
-#  condition: global.mariadb.enabled
-#- name: ingress
-#  condition: global.ingress.enabled
-#- name: ita-api-admin
+# dependencies:
+# - name: mariadb
+#   condition: global.mariadb.enabled
+# - name: ingress
+#   condition: global.ingress.enabled
+# - name: ita-api-admin
 
 keywords:
 - exastro
@@ -51,6 +51,37 @@ home: https://exastro-suite.github.io/
 icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
 - https://github.com/exastro-suite/exastro-it-automation
+dependencies:
+- name: common
+  version: ^1.x
+  condition: common.enabled
+- name: ita-api-admin
+  version: ^1.x
+  condition: ita-api-admin.enabled
+- name: ita-api-organization
+  version: ^1.x
+  condition: ita-api-organization.enabled
+- name: ita-by-ansible-execute
+  version: ^1.x
+  condition: ita-by-ansible-execute.enabled
+- name: ita-by-ansible-legacy-role-vars-listup
+  version: ^1.x
+  condition: ita-by-ansible-legacy-role-vars-listup.enabled
+- name: ita-by-ansible-towermaster-sync
+  version: ^1.x
+  condition: ita-by-ansible-towermaster-sync.enabled
+- name: ita-by-conductor-synchronize
+  version: ^1.x
+  condition: ita-by-conductor-synchronize.enabled
+- name: ita-by-menu-create
+  version: ^1.x
+  condition: ita-by-menu-create.enabled
+- name: ita-setup
+  version: ^1.x
+  condition: ita-setup.enabled
+- name: ita-web-server
+  version: ^1.x
+  condition: ita-web-server.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com

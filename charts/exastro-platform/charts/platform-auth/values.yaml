@@ -83,6 +83,10 @@ extraEnv:
   LISTEN_PORT: "8000"
   LISTEN_PORT_PF_MNG: "8001"
 
+  # Please set the URL to access
+  EXTERNAL_URL: ""
+  EXTERNAL_URL_MNG: ""
+
 replicaCount: 1
 
 initContainerImage:
@@ -133,6 +137,7 @@ securityContext:
   runAsUser: 1000
   runAsGroup: 1000
   runAsNonRoot: true
+
 
 service:
   type: ClusterIP
