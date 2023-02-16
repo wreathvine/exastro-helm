@@ -20,7 +20,15 @@ metadata:
   name: params-{{ template "ita-by-ansible-execute.name" . }}
   namespace: {{ .Release.Namespace }}
   labels: {{ include "ita-by-ansible-execute.labels" . | nindent 4 }}
-data: {{ toYaml .Values.extraEnv | nindent 2 }}
+data:
+{{- $chart := .Chart -}}
+{{- range $name, $value := .Values.extraEnv -}}
+{{-  if and (eq $name "ANSIBLE_AGENT_IMAGE_TAG") -}}
+{{    $name | nindent 2 -}}: {{ $value | default $chart.AppVersion | quote }}
+{{-  else -}}
+{{    $name | nindent 2 -}}: {{ $value | quote }}
+{{-  end -}}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -28,7 +36,7 @@ metadata:
   name: ansible-agent-create
   namespace: {{ .Release.Namespace }}
   labels: {{ include "ita-by-ansible-execute.labels" . | nindent 4 }}
-data: 
+data:
     k8s_pod.yml: |-
       apiVersion: v1
       kind: Pod
@@ -44,9 +52,14 @@ data:
             "{{`{{ str_shell_command }}`}}",
           ]
           env:
+          {{- $chart := .Chart }}
           {{ range $name, $value := .Values.extraEnv -}}
           - name: {{ $name }}
-            value: "{{ $value }}"
+          {{-  if and (eq $name "ANSIBLE_AGENT_IMAGE_TAG") -}}
+          {{- `value: ` | nindent 12 }}{{ $value | default $chart.AppVersion | quote -}}
+          {{-  else -}}
+          {{- `value: ` | nindent 12 }}{{ $value | quote -}}
+          {{-  end }}
           {{ end -}}
           - name: EXEC_DIR
             value: {{`{{ container_mount_path_driver }}`}}
