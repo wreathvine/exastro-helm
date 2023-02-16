@@ -230,12 +230,10 @@ exastro-platform:
       tag: "1.4.0"
 
   platform-auth:
-
     extraEnv:
       # Please set the URL to access
       EXTERNAL_URL: ""
       EXTERNAL_URL_MNG: ""
-
     ingress:
       enabled: true
       hosts:
