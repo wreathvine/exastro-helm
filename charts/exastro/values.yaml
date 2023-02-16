@@ -144,7 +144,7 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-api-admin"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
       PLATFORM_API_HOST: "platform-api"
@@ -154,7 +154,7 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-api-organization"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
       PLATFORM_API_HOST: "platform-api"
@@ -164,12 +164,12 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-by-ansible-execute"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
       EXECUTE_INTERVAL: "10"
       ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
-      ANSIBLE_AGENT_IMAGE_TAG: "2.0.3"
+      ANSIBLE_AGENT_IMAGE_TAG: ""
     serviceAccount:
       create: false
       name: "ita-by-ansible-execute-sa"
@@ -180,7 +180,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-ansible-towermaster-sync:
@@ -189,7 +189,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-conductor-synchronize:
@@ -198,7 +198,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-conductor-synchronize"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-menu-create:
@@ -207,7 +207,7 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
     image:
       repository: "exastro/exastro-it-automation-by-menu-create"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-database-setup-job:
@@ -220,14 +220,14 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "exastro/exastro-it-automation-web-server"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
 exastro-platform:
   platform-api:
     image:
       repository: "exastro/exastro-platform-api"
-      tag: "1.4.0"
+      tag: ""
 
   platform-auth:
     extraEnv:
@@ -255,17 +255,17 @@ exastro-platform:
       #   nodePort: 30081
     image:
       repository: "exastro/exastro-platform-auth"
-      tag: "1.4.0"
+      tag: ""
 
   platform-migration:
     image:
       repository: "exastro/exastro-platform-migration"
-      tag: "1.4.0"
+      tag: ""
 
   platform-web:
     image:
       repository: "exastro/exastro-platform-web"
-      tag: "1.4.0"
+      tag: ""
 
   mariadb:
     enabled: true
@@ -285,7 +285,7 @@ exastro-platform:
     enabled: true
     image:
       repository: "exastro/keycloak"
-      tag: "1.4.0"
+      tag: ""
       pullPolicy: IfNotPresent
     resources:
       requests:

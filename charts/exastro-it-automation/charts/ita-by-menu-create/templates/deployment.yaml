@@ -74,13 +74,6 @@ spec:
                   key: {{ $secret }}
             {{-     end }}
             {{-   end }}
-            {{- end -}}
-            {{ range $config, $value := .Values.extraEnv }}
-            - name: {{ $config }}
-              valueFrom:
-                configMapKeyRef:
-                  name: params-{{ template "ita-setup.name" $ }}
-                  key: {{ $config }}
             {{- end }}
       containers:
         - name: {{ template "ita-by-menu-create.name" . }}
