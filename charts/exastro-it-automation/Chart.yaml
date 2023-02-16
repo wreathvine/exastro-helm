@@ -29,13 +29,13 @@ type: library
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.2.0
+version: 1.3.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "2.0.3"
+appVersion: "2.1.0"
 
 # dependencies:
 # - name: mariadb
@@ -67,15 +67,48 @@ dependencies:
 - name: ita-by-ansible-legacy-role-vars-listup
   version: ^1.x
   condition: ita-by-ansible-legacy-role-vars-listup.enabled
+- name: ita-by-ansible-legacy-vars-listup
+  version: ^1.x
+  condition: ita-by-ansible-legacy-vars-listup.enabled
+- name: ita-by-ansible-pioneer-vars-listup
+  version: ^1.x
+  condition: ita-by-ansible-pioneer-vars-listup.enabled
 - name: ita-by-ansible-towermaster-sync
   version: ^1.x
   condition: ita-by-ansible-towermaster-sync.enabled
+- name: ita-by-cicd-for-iac
+  version: ^1.x
+  condition: ita-by-cicd-for-iac.enabled
+- name: ita-by-collector
+  version: ^1.x
+  condition: ita-by-collector.enabled
 - name: ita-by-conductor-synchronize
   version: ^1.x
   condition: ita-by-conductor-synchronize.enabled
+- name: ita-by-excel-export-import
+  version: ^1.x
+  condition: ita-by-excel-export-import.enabled
+- name: ita-by-hostgroup-split
+  version: ^1.x
+  condition: ita-by-hostgroup-split.enabled
 - name: ita-by-menu-create
   version: ^1.x
   condition: ita-by-menu-create.enabled
+- name: ita-by-menu-export-import
+  version: ^1.x
+  condition: ita-by-menu-export-import.enabled
+- name: ita-by-terraform-cli-execute
+  version: ^1.x
+  condition: ita-by-terraform-cli-execute.enabled
+- name: ita-by-terraform-cli-vars-listup
+  version: ^1.x
+  condition: ita-by-terraform-cli-vars-listup.enabled
+- name: ita-by-terraform-cloud-ep-execute
+  version: ^1.x
+  condition: ita-by-terraform-cloud-ep-execute.enabled
+- name: ita-by-terraform-cloud-ep-vars-listup
+  version: ^1.x
+  condition: ita-by-terraform-cloud-ep-vars-listup.enabled
 - name: ita-setup
   version: ^1.x
   condition: ita-setup.enabled

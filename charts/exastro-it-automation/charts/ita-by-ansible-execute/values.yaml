@@ -55,6 +55,8 @@ extraEnv:
   EXECUTE_INTERVAL: "10"
   ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
   ANSIBLE_AGENT_IMAGE_TAG: "latest"
+  PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
+  PLATFORM_API_PORT: "8000"
 
 replicaCount: 1
 
