@@ -21,7 +21,7 @@ target-branch: main
 chart-dirs:
   - charts
 charts: "charts/exastro"
-helm-extra-args: "--timeout 600s"
+helm-extra-args: "--timeout 1200s"
 validate-chart-schema: false
 validate-maintainers: false
 validate-yaml: true
