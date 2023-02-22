@@ -23,3 +23,4 @@ helm repo add exastro https://exastro-suite.github.io/exastro-helm/
 |    **0.11.0**    |    1.3.0-beta1    |   2.0.3-beta1   |
 |    **0.12.4**    |    1.4.0-beta1    |   2.0.3-beta1   |
 |    **1.0.0**    |    1.4.0    |   2.0.3   |
+|    **1.0.3**    |    1.4.0    |   2.0.4   |
