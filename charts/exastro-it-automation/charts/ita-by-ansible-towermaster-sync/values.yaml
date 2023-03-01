@@ -53,6 +53,8 @@ global:
 
 extraEnv:
   EXECUTE_INTERVAL: "10"
+  PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
+  PLATFORM_API_PORT: "8000"
 
 replicaCount: 1
 

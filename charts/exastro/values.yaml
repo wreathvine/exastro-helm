@@ -170,6 +170,8 @@ exastro-it-automation:
       EXECUTE_INTERVAL: "10"
       ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
       ANSIBLE_AGENT_IMAGE_TAG: ""
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     serviceAccount:
       create: false
       name: "ita-by-ansible-execute-sa"
@@ -178,36 +180,165 @@ exastro-it-automation:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
       tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-ansible-legacy-vars-listup:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-ansible-legacy-vars-listup"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-ansible-pioneer-vars-listup:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-ansible-pioneer-vars-listup"
+      tag: "2.0.3"
       pullPolicy: IfNotPresent
 
   ita-by-ansible-towermaster-sync:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
       tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-cicd-for-iac:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-cicd-for-iac"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-collector:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-collector"
+      tag: "2.0.3"
       pullPolicy: IfNotPresent
 
   ita-by-conductor-synchronize:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-conductor-synchronize"
       tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-excel-export-import:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-excel-export-import"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-hostgroup-split:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-hostgroup-split"
+      tag: "2.0.3"
       pullPolicy: IfNotPresent
 
   ita-by-menu-create:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-menu-create"
       tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-menu-export-import:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-menu-export-import"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-terraform-cli-execute:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-terraform-cli-execute"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-terraform-cli-vars-listup:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-terraform-cli-vars-listup"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-terraform-cloud-ep-execute:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-execute"
+      tag: "2.0.3"
+      pullPolicy: IfNotPresent
+
+  ita-by-terraform-cloud-ep-vars-listup:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-vars-listup"
+      tag: "2.0.3"
       pullPolicy: IfNotPresent
 
   ita-database-setup-job:
