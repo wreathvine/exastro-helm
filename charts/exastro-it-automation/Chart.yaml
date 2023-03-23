@@ -82,12 +82,21 @@ dependencies:
 - name: ita-by-collector
   version: ^1.x
   condition: ita-by-collector.enabled
+- name: ita-by-conductor-regularly
+  version: ^1.x
+  condition: ita-by-conductor-regularly.enabled
 - name: ita-by-conductor-synchronize
   version: ^1.x
   condition: ita-by-conductor-synchronize.enabled
 - name: ita-by-excel-export-import
   version: ^1.x
   condition: ita-by-excel-export-import.enabled
+- name: ita-by-execinstance-dataautoclean
+  version: ^1.x
+  condition: ita-by-execinstance-dataautoclean.enabled
+- name: ita-by-file-autoclean
+  version: ^1.x
+  condition: ita-by-file-autoclean.enabled
 - name: ita-by-hostgroup-split
   version: ^1.x
   condition: ita-by-hostgroup-split.enabled
