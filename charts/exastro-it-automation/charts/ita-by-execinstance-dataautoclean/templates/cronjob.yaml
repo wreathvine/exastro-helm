@@ -17,10 +17,10 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ template "ita-by-file-autoclean.name" . }}
+  name: {{ template "ita-by-execinstance-dataautoclean.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "ita-by-file-autoclean.labels" . | nindent 4 }}
+    {{- include "ita-by-execinstance-dataautoclean.labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.schedule }}"
   successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
@@ -35,13 +35,14 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           labels:
-            {{- include "ita-by-file-autoclean.selectorLabels" . | nindent 12 }}
+            {{- include "ita-by-execinstance-dataautoclean.selectorLabels" . | nindent 12 }}
         spec:
+          restartPolicy: OnFailure
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          serviceAccountName: {{ include "ita-by-file-autoclean.serviceAccountName" . }}
+          serviceAccountName: {{ include "ita-by-execinstance-dataautoclean.serviceAccountName" . }}
           securityContext:
             {{- toYaml .Values.podSecurityContext | nindent 12 }}
           initContainers:
@@ -76,10 +77,10 @@ spec:
                 {{-   end }}
                 {{- end }}
           containers:
-            - name: {{ template "ita-by-file-autoclean.name" . }}
+            - name: {{ template "ita-by-execinstance-dataautoclean.name" . }}
               securityContext:
                 {{- toYaml .Values.securityContext | nindent 16 }}
-              image: "{{ template "ita-by-file-autoclean.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              image: "{{ template "ita-by-execinstance-dataautoclean.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               env:
                 {{- range $define := .Values.global -}}
@@ -106,15 +107,15 @@ spec:
                 - name: {{ $config }}
                   valueFrom:
                     configMapKeyRef:
-                      name: params-{{ template "ita-by-file-autoclean.name" $ }}
+                      name: params-{{ template "ita-by-execinstance-dataautoclean.name" $ }}
                       key: {{ $config }}
                 {{- end }}
               volumeMounts:
-                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-storage
+                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-storage
                   mountPath: {{ .Values.persistence.mountPath.storage }}
-                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-homedir
+                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-homedir
                   mountPath: {{ .Values.persistence.mountPath.homeDir }}
-                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-tmp
+                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-tmp
                   mountPath: {{ .Values.persistence.mountPath.tmp }}
               # livenessProbe:
               #   tcpSocket:
@@ -135,20 +136,20 @@ spec:
               resources:
                 {{- toYaml .Values.resources | nindent 16 }}
           volumes:
-            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-storage
+            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-storage
               {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
               persistentVolumeClaim:
                 claimName: pvc-{{ .Values.global.itaGlobalDefinition.name }}
               {{- else }}
               emptyDir: {}
               {{- end }}
-            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-homedir
+            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-homedir
               emptyDir: {}
-            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-pid
+            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-pid
               emptyDir: {}
-            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-socket
+            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-socket
               emptyDir: {}
-            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-tmp
+            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-tmp
               emptyDir: {}
           {{- with .Values.nodeSelector }}
           nodeSelector:

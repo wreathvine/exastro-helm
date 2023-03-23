@@ -17,10 +17,10 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ template "ita-by-execinstance-dataautoclean.name" . }}
+  name: {{ template "ita-by-file-autoclean.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "ita-by-execinstance-dataautoclean.labels" . | nindent 4 }}
+    {{- include "ita-by-file-autoclean.labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.schedule }}"
   successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
@@ -32,28 +32,29 @@ spec:
         metadata:
           {{- with .Values.podAnnotations }}
           annotations:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           labels:
-            {{- include "ita-by-execinstance-dataautoclean.selectorLabels" . | nindent 8 }}
+            {{- include "ita-by-file-autoclean.selectorLabels" . | nindent 12 }}
         spec:
+          restartPolicy: OnFailure
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          serviceAccountName: {{ include "ita-by-execinstance-dataautoclean.serviceAccountName" . }}
+          serviceAccountName: {{ include "ita-by-file-autoclean.serviceAccountName" . }}
           securityContext:
-            {{- toYaml .Values.podSecurityContext | nindent 8 }}
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
           initContainers:
             - name: database-alive-check
               securityContext:
-                {{- toYaml .Values.database.securityContext | nindent 12 }}
+                {{- toYaml .Values.database.securityContext | nindent 16 }}
               image: "{{ .Values.database.initContainerImage.repository }}:{{ .Values.database.initContainerImage.tag | default "latest" }}"
               imagePullPolicy: {{ .Values.database.initContainerImage.pullPolicy }}
               command: ["sh", "-c"]
               args:
                 - |
-                  {{- .Values.database.databaseCheck | nindent 14 }}
+                  {{- .Values.database.databaseCheck | nindent 18 }}
               env:
                 {{- range $define := .Values.global -}}
                 {{-   range $config, $value := $define.config }}
@@ -76,10 +77,10 @@ spec:
                 {{-   end }}
                 {{- end }}
           containers:
-            - name: {{ template "ita-by-execinstance-dataautoclean.name" . }}
+            - name: {{ template "ita-by-file-autoclean.name" . }}
               securityContext:
-                {{- toYaml .Values.securityContext | nindent 12 }}
-              image: "{{ template "ita-by-execinstance-dataautoclean.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: "{{ template "ita-by-file-autoclean.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               env:
                 {{- range $define := .Values.global -}}
@@ -106,15 +107,15 @@ spec:
                 - name: {{ $config }}
                   valueFrom:
                     configMapKeyRef:
-                      name: params-{{ template "ita-by-execinstance-dataautoclean.name" $ }}
+                      name: params-{{ template "ita-by-file-autoclean.name" $ }}
                       key: {{ $config }}
                 {{- end }}
               volumeMounts:
-                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-storage
+                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-storage
                   mountPath: {{ .Values.persistence.mountPath.storage }}
-                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-homedir
+                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-homedir
                   mountPath: {{ .Values.persistence.mountPath.homeDir }}
-                - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-tmp
+                - name: volume-{{ template "ita-by-file-autoclean.name" . }}-tmp
                   mountPath: {{ .Values.persistence.mountPath.tmp }}
               # livenessProbe:
               #   tcpSocket:
@@ -133,32 +134,32 @@ spec:
               #   initialDelaySeconds: 5
               #   periodSeconds: 10
               resources:
-                {{- toYaml .Values.resources | nindent 12 }}
+                {{- toYaml .Values.resources | nindent 16 }}
           volumes:
-            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-storage
+            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-storage
               {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
               persistentVolumeClaim:
                 claimName: pvc-{{ .Values.global.itaGlobalDefinition.name }}
               {{- else }}
               emptyDir: {}
               {{- end }}
-            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-homedir
+            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-homedir
               emptyDir: {}
-            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-pid
+            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-pid
               emptyDir: {}
-            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-socket
+            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-socket
               emptyDir: {}
-            - name: volume-{{ template "ita-by-execinstance-dataautoclean.name" . }}-tmp
+            - name: volume-{{ template "ita-by-file-autoclean.name" . }}-tmp
               emptyDir: {}
           {{- with .Values.nodeSelector }}
           nodeSelector:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.affinity }}
           affinity:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.tolerations }}
           tolerations:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
