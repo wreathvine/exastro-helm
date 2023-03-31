@@ -275,25 +275,25 @@ exastro-it-automation:
       tag: ""
       pullPolicy: IfNotPresent
 
-  ita-by-excel-export-import:
+  ita-by-execinstance-dataautoclean:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-excel-export-import"
+      repository: "exastro/exastro-it-automation-by-execinstance-dataautoclean"
       tag: ""
       pullPolicy: IfNotPresent
 
-  ita-by-excel-export-import:
+  ita-by-file-autoclean:
     replicaCount: 1
     extraEnv:
       EXECUTE_INTERVAL: "10"
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-excel-export-import"
+      repository: "exastro/exastro-it-automation-by-file-autoclean"
       tag: ""
       pullPolicy: IfNotPresent
 
