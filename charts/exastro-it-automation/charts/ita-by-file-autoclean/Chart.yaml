@@ -1,4 +1,4 @@
-#   Copyright 2023 NEC Corporation
+#   Copyright 2022 NEC Corporation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 #   limitations under the License.
 
 apiVersion: v2
-name: exastro
-description: A Helm chart for Exastro. Exastro is an Open Source Framework for digitizing and centrally managing the system configuration.
+name: ita-by-file-autoclean
+description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -29,33 +29,21 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.1.1
+version: 1.1.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "2.1.1"
+appVersion: "2.1.0-beta1"
 
 keywords:
 - exastro
-- exastro-platform
 - exastro-it-automation
 home: https://exastro-suite.github.io/
 icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
-- https://github.com/exastro-suite/exastro-helm
 - https://github.com/exastro-suite/exastro-it-automation
-- https://github.com/exastro-suite/exastro-platform
-dependencies:
-  - name: exastro-it-automation
-    version: 1.3.1
-    repository: file://../exastro-it-automation
-    condition: exastro-it-automation.enabled
-  - name: exastro-platform
-    version: 1.5.2
-    repository: file://../exastro-platform
-    condition: exastro-platform.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com

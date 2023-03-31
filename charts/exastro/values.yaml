@@ -195,7 +195,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-legacy-vars-listup"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-ansible-pioneer-vars-listup:
@@ -206,7 +206,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-ansible-pioneer-vars-listup"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-ansible-towermaster-sync:
@@ -228,7 +228,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-cicd-for-iac"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-collector:
@@ -239,7 +239,18 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-collector"
-      tag: "2.0.3"
+      tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-conductor-regularly:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-conductor-regularly"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-conductor-synchronize:
@@ -261,7 +272,29 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-excel-export-import"
-      tag: "2.0.3"
+      tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-execinstance-dataautoclean:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-execinstance-dataautoclean"
+      tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-file-autoclean:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-file-autoclean"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-hostgroup-split:
@@ -272,7 +305,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-hostgroup-split"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-menu-create:
@@ -294,7 +327,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-menu-export-import"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-terraform-cli-execute:
@@ -305,7 +338,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-terraform-cli-execute"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-terraform-cli-vars-listup:
@@ -316,7 +349,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-terraform-cli-vars-listup"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-terraform-cloud-ep-execute:
@@ -327,7 +360,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-execute"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-by-terraform-cloud-ep-vars-listup:
@@ -338,7 +371,7 @@ exastro-it-automation:
       PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-vars-listup"
-      tag: "2.0.3"
+      tag: ""
       pullPolicy: IfNotPresent
 
   ita-database-setup-job:
