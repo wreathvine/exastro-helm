@@ -1,4 +1,4 @@
-# Default values for ita-setup.
+# Default values for ita-migration.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -82,9 +82,6 @@ podSecurityContext: {}
 
 volumeMounts:
   mountPath:
-    createDB: 
-      path: /createdb.sql
-      subPath: createdb.sql
     conf: 
       path: /etc/mysql/conf.d
 
@@ -122,9 +119,6 @@ database:
     echo `date`": Completely connect to Database."
     exit 0
 
-  initializeDatabase: |-
-    mysql --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} < /createdb.sql
-
   databaseConfig:
     name: mysqld-conf
     customCnf: |-
@@ -142,3 +136,6 @@ database:
     runAsGroup: 1000
     runAsNonRoot: true
 
+command:
+  migrationMain: |-
+    python3 /exastro/migration_main.py
