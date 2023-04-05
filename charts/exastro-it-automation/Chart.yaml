@@ -118,9 +118,9 @@ dependencies:
 - name: ita-by-terraform-cloud-ep-vars-listup
   version: ^1.x
   condition: ita-by-terraform-cloud-ep-vars-listup.enabled
-- name: ita-setup
+- name: ita-migration
   version: ^1.x
-  condition: ita-setup.enabled
+  condition: ita-migration.enabled
 - name: ita-web-server
   version: ^1.x
   condition: ita-web-server.enabled
