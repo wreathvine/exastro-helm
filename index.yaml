@@ -2,6 +2,39 @@ apiVersion: v1
 entries:
   exastro:
   - apiVersion: v2
+    appVersion: 2.1.3
+    created: "2023-04-12T08:42:35.006252925Z"
+    dependencies:
+    - condition: exastro-it-automation.enabled
+      name: exastro-it-automation
+      repository: file://../exastro-it-automation
+      version: 1.2.4
+    - condition: exastro-platform.enabled
+      name: exastro-platform
+      repository: file://../exastro-platform
+      version: 1.5.1
+    description: A Helm chart for Exastro. Exastro is an Open Source Framework for
+      digitizing and centrally managing the system configuration.
+    digest: 6be378df085bb8c320e2b249c824c00f0313d0a29617179143f077f43d981c6c
+    home: https://exastro-suite.github.io/
+    icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro
+    sources:
+    - https://github.com/exastro-suite/exastro-helm
+    - https://github.com/exastro-suite/exastro-it-automation
+    - https://github.com/exastro-suite/exastro-platform
+    type: application
+    urls:
+    - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-1.0.5/exastro-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
     appVersion: 2.1.2
     created: "2023-03-29T08:41:42.470419111Z"
     dependencies:
@@ -233,6 +266,68 @@ entries:
     - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-0.11.0/exastro-0.11.0.tgz
     version: 0.11.0
   exastro-it-automation:
+  - apiVersion: v2
+    appVersion: 2.0.6
+    created: "2023-04-12T08:42:35.178909364Z"
+    dependencies:
+    - condition: common.enabled
+      name: common
+      repository: ""
+      version: ^1.x
+    - condition: ita-api-admin.enabled
+      name: ita-api-admin
+      repository: ""
+      version: ^1.x
+    - condition: ita-api-organization.enabled
+      name: ita-api-organization
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-execute.enabled
+      name: ita-by-ansible-execute
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-legacy-role-vars-listup.enabled
+      name: ita-by-ansible-legacy-role-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-towermaster-sync.enabled
+      name: ita-by-ansible-towermaster-sync
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-conductor-synchronize.enabled
+      name: ita-by-conductor-synchronize
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-menu-create.enabled
+      name: ita-by-menu-create
+      repository: ""
+      version: ^1.x
+    - condition: ita-setup.enabled
+      name: ita-setup
+      repository: ""
+      version: ^1.x
+    - condition: ita-web-server.enabled
+      name: ita-web-server
+      repository: ""
+      version: ^1.x
+    description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
+      an Open Source Framework for digitizing and centrally managing the system configuration.
+    digest: 51ef240d3048986551b811ef54f7630d2dce487fda3cd3423250d1baf6407cbd
+    home: https://exastro-suite.github.io/
+    icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-it-automation
+    sources:
+    - https://github.com/exastro-suite/exastro-it-automation
+    type: library
+    urls:
+    - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-it-automation-1.2.4/exastro-it-automation-1.2.4.tgz
+    version: 1.2.4
   - apiVersion: v2
     appVersion: 2.0.5
     created: "2023-03-29T08:41:42.663945685Z"
@@ -736,4 +831,4 @@ entries:
     urls:
     - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-platform-1.3.0/exastro-platform-1.3.0.tgz
     version: 1.3.0
-generated: "2023-03-29T08:41:42.663985386Z"
+generated: "2023-04-12T08:42:35.179084067Z"
