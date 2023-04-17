@@ -422,6 +422,9 @@ exastro-platform:
       tag: ""
 
   platform-migration:
+    extraEnv:
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
     image:
       repository: "exastro/exastro-platform-migration"
       tag: ""
