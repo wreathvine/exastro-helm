@@ -69,10 +69,42 @@ spec:
               key: {{ $config }}
         {{- end }}
     - name: platform-alive-check
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      image: "{{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}"
+      imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
       command: ["sh", "-c"]
       args:
         - |
           {{- .Values.platform.livenessCheck | nindent 10 }}
+      env:
+        {{- range $define := .Values.global -}}
+        {{-   range $config, $value := $define.config }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: ita-params-{{ $define.name }}
+              key: {{ $config }}
+        {{-     end -}}
+        {{-   end -}}
+        {{-   range $secret, $value := $define.secret }}
+        {{-     if or (eq $define.name "ita-database") }}
+        - name: {{ $secret }}
+          valueFrom:
+            secretKeyRef:
+              name: ita-secret-{{ $define.name }}
+              key: {{ $secret }}
+        {{-     end }}
+        {{-   end }}
+        {{- end -}}
+        {{ range $config, $value := .Values.extraEnv }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: params-{{ template "ita-migration.name" $ }}
+              key: {{ $config }}
+        {{- end }}
   containers:
     - name: {{ template "ita-migration.name" . }}
       securityContext:
