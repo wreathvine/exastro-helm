@@ -387,6 +387,15 @@ exastro-it-automation:
       tag: ""
       pullPolicy: IfNotPresent
 
+  ita-migration:
+    extraEnv:
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-migration"
+      tag: ""
+      pullPolicy: IfNotPresent
+
 exastro-platform:
   platform-api:
     image:
