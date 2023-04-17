@@ -1,4 +1,4 @@
-# Default values for ita-setup.
+# Default values for ita-migration.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -52,8 +52,13 @@ global:
       DB_PASSWORD: ""
 
 extraEnv:
-  LOG_LEVEL: "INFO"
-  TIMEOUT: "10"
+  PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
+  PLATFORM_API_PORT: "8000"
+  SYSTEM_ANSIBLE_EXECUTION_LIMIT: 25
+  SYSTEM_ANSIBLE_EXECUTION_LIMIT_DESCRIPTION: "Maximum number of movement executions for whole of IT automation"
+  ORG_ANSIBLE_EXECUTION_LIMIT_DEFAULT: 25
+  ORG_ANSIBLE_EXECUTION_LIMIT_MAX: 1000
+  ORG_ANSIBLE_EXECUTION_LIMIT_DESCRIPTION: "Maximum number of movement executions for organization default"
 
 completionCount: 1
 
@@ -63,6 +68,13 @@ initContainerImage:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+image:
+  repository: ""
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -82,10 +94,7 @@ podSecurityContext: {}
 
 volumeMounts:
   mountPath:
-    createDB: 
-      path: /createdb.sql
-      subPath: createdb.sql
-    conf: 
+    conf:
       path: /etc/mysql/conf.d
 
 securityContext:
@@ -122,9 +131,6 @@ database:
     echo `date`": Completely connect to Database."
     exit 0
 
-  initializeDatabase: |-
-    mysql --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} < /createdb.sql
-
   databaseConfig:
     name: mysqld-conf
     customCnf: |-
@@ -142,3 +148,20 @@ database:
     runAsGroup: 1000
     runAsNonRoot: true
 
+command:
+  migrationMain: |-
+    python3 /exastro/migration_main.py
+
+platform:
+  livenessCheck: |-
+    #!/bin/bash
+    i=1
+    echo "PLATFORM_API_HOST: ${PLATFORM_API_HOST}"
+    echo "PLATFORM_API_PORT: ${PLATFORM_API_PORT}"
+    until curl -sv http://${PLATFORM_API_HOST}:${PLATFORM_API_PORT}/internal-api/platform/settings/common -X GET -H 'User-Id: ""'; do
+      echo `date`": Can not connect to Platform."
+      sleep $i
+      i=$(( i * 2 ))
+    done
+    echo `date`": Completely connect to Platform."
+    exit 0
