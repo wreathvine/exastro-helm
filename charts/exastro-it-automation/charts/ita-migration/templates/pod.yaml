@@ -68,6 +68,11 @@ spec:
               name: params-{{ template "ita-migration.name" $ }}
               key: {{ $config }}
         {{- end }}
+    - name: platform-alive-check
+      command: ["sh", "-c"]
+      args:
+        - |
+          {{- .Values.platform.livenessCheck | nindent 10 }}
   containers:
     - name: {{ template "ita-migration.name" . }}
       securityContext:
