@@ -77,10 +77,7 @@ spec:
     - name: {{ template "ita-migration.name" . }}
       securityContext:
         {{- toYaml .Values.database.securityContext | nindent 8 }}
-      {{- /* TODO: どちらが良いか mariadb固定でも良い気がする
       image: "{{ template "ita-migration.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-      */}}
-      image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag | default "latest" }}"
       imagePullPolicy: {{ .Values.database.image.pullPolicy }}
       command: ["sh", "-c"]
       args:
