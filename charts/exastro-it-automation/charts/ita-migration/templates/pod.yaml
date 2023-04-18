@@ -146,6 +146,10 @@ spec:
       volumeMounts:
         - name: mysql-server-conf
           mountPath: {{ .Values.volumeMounts.mountPath.conf.path }}
+        - name: volume-{{ template "ita-migration.name" . }}-storage
+          mountPath: {{ .Values.persistence.mountPath.storage }}
+        - name: volume-{{ template "ita-migration.name" . }}-tmp
+          mountPath: {{ .Values.persistence.mountPath.tmp }}
   volumes:
     - name: volume-{{ template "ita-migration.name" . }}-storage
       {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
@@ -157,3 +161,5 @@ spec:
     - name: mysql-server-conf
       configMap:
         name: ita-mysqld-conf
+    - name: volume-{{ template "ita-migration.name" . }}-tmp
+      emptyDir: {}
