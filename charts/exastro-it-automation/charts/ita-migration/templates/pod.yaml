@@ -148,6 +148,7 @@ spec:
           mountPath: {{ .Values.volumeMounts.mountPath.storage }}
         - name: volume-{{ template "ita-migration.name" . }}-tmp
           mountPath: {{ .Values.volumeMounts.mountPath.tmp }}
+  restartPolicy: OnFailure
   volumes:
     - name: volume-{{ template "ita-migration.name" . }}-storage
       {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
