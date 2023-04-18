@@ -144,8 +144,6 @@ spec:
               key: {{ $config }}
         {{- end }}
       volumeMounts:
-        - name: mysql-server-conf
-          mountPath: {{ .Values.volumeMounts.mountPath.conf.path }}
         - name: volume-{{ template "ita-migration.name" . }}-storage
           mountPath: {{ .Values.volumeMounts.mountPath.storage }}
         - name: volume-{{ template "ita-migration.name" . }}-tmp
@@ -158,8 +156,5 @@ spec:
       {{- else }}
       emptyDir: {}
       {{- end }}
-    - name: mysql-server-conf
-      configMap:
-        name: ita-mysqld-conf
     - name: volume-{{ template "ita-migration.name" . }}-tmp
       emptyDir: {}

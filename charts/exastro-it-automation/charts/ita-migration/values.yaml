@@ -133,16 +133,6 @@ database:
     echo `date`": Completely connect to Database."
     exit 0
 
-  databaseConfig:
-    name: mysqld-conf
-    customCnf: |-
-      [mysqld]
-      character-set-server=utf8mb4
-      collation-server=utf8mb4_bin
-      secure_file_priv=/tmp
-      [client]
-      default-character-set=utf8mb4
-
   securityContext:
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
