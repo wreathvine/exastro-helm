@@ -147,9 +147,9 @@ spec:
         - name: mysql-server-conf
           mountPath: {{ .Values.volumeMounts.mountPath.conf.path }}
         - name: volume-{{ template "ita-migration.name" . }}-storage
-          mountPath: {{ .Values.persistence.mountPath.storage }}
+          mountPath: {{ .Values.volumeMounts.mountPath.storage }}
         - name: volume-{{ template "ita-migration.name" . }}-tmp
-          mountPath: {{ .Values.persistence.mountPath.tmp }}
+          mountPath: {{ .Values.volumeMounts.mountPath.tmp }}
   volumes:
     - name: volume-{{ template "ita-migration.name" . }}-storage
       {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
