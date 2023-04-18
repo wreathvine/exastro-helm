@@ -19,7 +19,7 @@ global:
       ENCRYPT_KEY: ""
     persistence:
       enabled: true
-      reinstall: true
+      reinstall: false
       accessMode: ReadWriteMany
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
