@@ -94,8 +94,6 @@ podSecurityContext: {}
 
 volumeMounts:
   mountPath:
-    conf:
-      path: /etc/mysql/conf.d
     storage: /storage
     tmp: /tmp
 
