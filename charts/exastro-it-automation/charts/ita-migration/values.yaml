@@ -63,7 +63,7 @@ extraEnv:
 completionCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: registry.access.redhat.com/ubi8/ubi-init
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
