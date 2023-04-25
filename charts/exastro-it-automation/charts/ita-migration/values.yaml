@@ -148,7 +148,7 @@ platform:
     i=1
     echo "PLATFORM_API_HOST: ${PLATFORM_API_HOST}"
     echo "PLATFORM_API_PORT: ${PLATFORM_API_PORT}"
-    until curl -sv http://${PLATFORM_API_HOST}:${PLATFORM_API_PORT}/internal-api/platform/settings/common -X GET -H 'User-Id: ""'; do
+    until curl -svf http://${PLATFORM_API_HOST}:${PLATFORM_API_PORT}/internal-api/platform/settings/common -X GET -H 'User-Id: ""'; do
       echo `date`": Can not connect to Platform."
       sleep $i
       i=$(( i * 2 ))
