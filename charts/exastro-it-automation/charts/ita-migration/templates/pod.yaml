@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ template "ita-migration.name" . }}
+  name: {{ template "ita-migration.name" . }}-{{ .Chart.Version }}-{{ randAlphaNum 4 | lower | nospace }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "ita-migration.labels" . | nindent 4 }}
