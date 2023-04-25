@@ -47,8 +47,3 @@ global:
       MARIADB_ROOT_PASSWORD: "root_password"
     persistence:
       enabled: false
-exastro-it-automation:
-  ita-migration:
-    extraEnv:
-      PLATFORM_API_HOST: "platform-api"
-      PLATFORM_API_PORT: "8000"
