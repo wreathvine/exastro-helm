@@ -90,7 +90,7 @@ livenessCheck: |-
   #!/bin/bash
   i=10
   echo "HOST: ${DB_HOST}"
-  until mysqladmin ping --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} ${DB_DATABASE} --silent; do
+  until mysqlcheck --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} ${DB_DATABASE} --silent; do
     echo `date`": Can not connect to Database."
     sleep $i
   done
