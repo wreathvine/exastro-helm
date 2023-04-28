@@ -29,7 +29,7 @@ type: library
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.3.0
+version: 1.3.6
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -82,12 +82,21 @@ dependencies:
 - name: ita-by-collector
   version: ^1.x
   condition: ita-by-collector.enabled
+- name: ita-by-conductor-regularly
+  version: ^1.x
+  condition: ita-by-conductor-regularly.enabled
 - name: ita-by-conductor-synchronize
   version: ^1.x
   condition: ita-by-conductor-synchronize.enabled
 - name: ita-by-excel-export-import
   version: ^1.x
   condition: ita-by-excel-export-import.enabled
+- name: ita-by-execinstance-dataautoclean
+  version: ^1.x
+  condition: ita-by-execinstance-dataautoclean.enabled
+- name: ita-by-file-autoclean
+  version: ^1.x
+  condition: ita-by-file-autoclean.enabled
 - name: ita-by-hostgroup-split
   version: ^1.x
   condition: ita-by-hostgroup-split.enabled
@@ -109,9 +118,9 @@ dependencies:
 - name: ita-by-terraform-cloud-ep-vars-listup
   version: ^1.x
   condition: ita-by-terraform-cloud-ep-vars-listup.enabled
-- name: ita-setup
+- name: ita-migration
   version: ^1.x
-  condition: ita-setup.enabled
+  condition: ita-migration.enabled
 - name: ita-web-server
   version: ^1.x
   condition: ita-web-server.enabled
