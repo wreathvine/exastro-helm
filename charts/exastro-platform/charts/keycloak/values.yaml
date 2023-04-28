@@ -88,12 +88,11 @@ initContainerImage:
 
 livenessCheck: |-
   #!/bin/bash
-  i=1
+  i=10
   echo "HOST: ${DB_HOST}"
-  until mysqladmin ping --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} --silent; do
+  until mysqladmin ping --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} ${DB_DATABASE} --silent; do
     echo `date`": Can not connect to Database."
     sleep $i
-    i=$(( i * 2 ))
   done
   echo `date`": Completely connect to Database."
   exit 0

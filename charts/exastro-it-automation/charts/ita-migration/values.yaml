@@ -121,12 +121,11 @@ database:
 
   livenessCheck: |-
     #!/bin/bash
-    i=1
+    i=10
     echo "HOST: ${DB_HOST}"
     until mysqladmin ping --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} --silent; do
       echo `date`": Can not connect to Database."
       sleep $i
-      i=$(( i * 2 ))
     done
     echo `date`": Completely connect to Database."
     exit 0
@@ -145,13 +144,12 @@ command:
 platform:
   livenessCheck: |-
     #!/bin/bash
-    i=1
+    i=10
     echo "PLATFORM_API_HOST: ${PLATFORM_API_HOST}"
     echo "PLATFORM_API_PORT: ${PLATFORM_API_PORT}"
     until curl -svf http://${PLATFORM_API_HOST}:${PLATFORM_API_PORT}/internal-api/platform/settings/common -X GET -H 'User-Id: ""'; do
       echo `date`": Can not connect to Platform."
       sleep $i
-      i=$(( i * 2 ))
     done
     echo `date`": Completely connect to Platform."
     exit 0
