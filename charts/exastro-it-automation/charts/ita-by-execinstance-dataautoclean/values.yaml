@@ -1,4 +1,4 @@
-# Default values for ita-setup.
+# Default values for ita-by-execinstance-dataautoclean.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
@@ -19,12 +19,12 @@ global:
       ENCRYPT_KEY: ""
     persistence:
       enabled: true
-      reinstall: true
+      reinstall: false
       accessMode: ReadWriteMany
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -52,17 +52,25 @@ global:
       DB_PASSWORD: ""
 
 extraEnv:
-  LOG_LEVEL: "INFO"
-  TIMEOUT: "10"
+  EXECUTE_INTERVAL: "10"
+  PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
+  PLATFORM_API_PORT: "8000"
 
-completionCount: 1
+replicaCount: 1
 
 initContainerImage:
   repository: busybox
-  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  pullPolicy: IfNotPresent
 
+image:
+  repository: ""
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -75,18 +83,22 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+persistence:
+  mountPath:
+    storage: /storage
+    homeDir: /home/app_user
+    pid:
+      path: /var/run_app_user/httpd/pid
+      subPath: httpd-pid
+    socket:
+      path: /var/run_app_user/httpd/socket
+      subPath: httpd-socket
+    tmp: /tmp
+
 podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
-
-volumeMounts:
-  mountPath:
-    createDB: 
-      path: /createdb.sql
-      subPath: createdb.sql
-    conf: 
-      path: /etc/mysql/conf.d
 
 securityContext:
   allowPrivilegeEscalation: false
@@ -95,45 +107,64 @@ securityContext:
   runAsGroup: 1000
   runAsNonRoot: true
 
+service: {}
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+ #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # requests:
+  #   memory: "64Mi"
+  #   cpu: "250m"
+  # limits:
+  #   memory: "64Mi"
+  #   cpu: "250m"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
 database:
   initContainerImage:
     repository: mariadb
     tag: "10.9"
     pullPolicy: IfNotPresent
 
-  image:
-    repository: mariadb
-    tag: "10.9"
-    pullPolicy: IfNotPresent
-
   imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
 
-  livenessCheck: |-
+  databaseCheck: |-
     #!/bin/bash
     i=1
     echo "HOST: ${DB_HOST}"
-    until mysqladmin ping --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} --silent; do
+    until mysqladmin ping --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} --silent; do
       echo `date`": Can not connect to Database."
       sleep $i
       i=$(( i * 2 ))
     done
     echo `date`": Completely connect to Database."
     exit 0
-
-  initializeDatabase: |-
-    mysql --host=${DB_HOST} --user=${DB_ADMIN_USER} --password=${DB_ADMIN_PASSWORD} < /createdb.sql
-
-  databaseConfig:
-    name: mysqld-conf
-    customCnf: |-
-      [mysqld]
-      character-set-server=utf8mb4
-      collation-server=utf8mb4_bin
-      secure_file_priv=/tmp
-      [client]
-      default-character-set=utf8mb4
 
   securityContext:
     allowPrivilegeEscalation: false
@@ -142,3 +173,7 @@ database:
     runAsGroup: 1000
     runAsNonRoot: true
 
+schedule: "02 00 * * *"
+successfulJobsHistoryLimit: 30
+failedJobsHistoryLimit: 30
+backoffLimit: 0
