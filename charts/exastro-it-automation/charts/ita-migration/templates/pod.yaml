@@ -108,9 +108,9 @@ spec:
   containers:
     - name: {{ template "ita-migration.name" . }}
       securityContext:
-        {{- toYaml .Values.database.securityContext | nindent 8 }}
+        {{- toYaml .Values.securityContext | nindent 8 }}
       image: "{{ template "ita-migration.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-      imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
       command: ["sh", "-c"]
       args:
         - |
