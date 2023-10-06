@@ -119,6 +119,8 @@ spec:
         - name: volume-{{ template "platform-migration.name" . }}-socket
           mountPath: {{ .Values.persistence.mountPath.socket.path }}
           subPath: {{ .Values.persistence.mountPath.socket.subPath }}
+        - name: volume-{{ template "platform-migration.name" . }}-tmp
+          mountPath: {{ .Values.persistence.mountPath.tmp }}
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   restartPolicy: OnFailure
@@ -126,6 +128,8 @@ spec:
     - name: volume-{{ template "platform-migration.name" . }}-pid
       emptyDir: {}
     - name: volume-{{ template "platform-migration.name" . }}-socket
+      emptyDir: {}
+    - name: volume-{{ template "platform-migration.name" . }}-tmp
       emptyDir: {}
   {{- with .Values.nodeSelector }}
   nodeSelector:

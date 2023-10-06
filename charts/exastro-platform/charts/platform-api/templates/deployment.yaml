@@ -85,6 +85,8 @@ spec:
             - name: volume-{{ template "platform-api.name" . }}-socket
               mountPath: {{ .Values.persistence.mountPath.socket.path }}
               subPath: {{ .Values.persistence.mountPath.socket.subPath }}
+            - name: volume-{{ template "platform-api.name" . }}-tmp
+              mountPath: {{ .Values.persistence.mountPath.tmp }}
           ports:
             - name: port-http
               containerPort: {{ .Values.extraEnv.LISTEN_PORT }}
@@ -111,6 +113,8 @@ spec:
         - name: volume-{{ template "platform-api.name" . }}-pid
           emptyDir: {}
         - name: volume-{{ template "platform-api.name" . }}-socket
+          emptyDir: {}
+        - name: volume-{{ template "platform-api.name" . }}-tmp
           emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
