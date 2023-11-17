@@ -138,6 +138,35 @@ global:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
+  mongodbDefinition:
+    name: mongodb
+    enabled: true
+    secret:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+    persistence:
+      enabled: true
+      reinstall: false
+      accessMode: ReadWriteOnce
+      size: 20Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels:
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
+  itaMongodbDefinition:
+    name: ita-mongodb
+    enabled: true
+    config:
+      MONGO_VENDOR: "mongodb"
+      MONGO_HOST: "mongodb"
+      MONGO_PORT: "27017"
+    secret:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+      MONGO_ADMIN_USER: ""
+      MONGO_ADMIN_PASSWORD: ""
 
 exastro-it-automation:
   ita-api-admin:
@@ -396,6 +425,28 @@ exastro-it-automation:
       tag: ""
       pullPolicy: IfNotPresent
 
+  ita-api-oase-receiver:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-oase-receiver"
+      tag: ""
+      pullPolicy: IfNotPresent
+
+  ita-by-oase-conclusion:
+    replicaCount: 1
+    extraEnv:
+      EXECUTE_INTERVAL: "10"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+    image:
+      repository: "exastro/exastro-it-automation-by-oase-conclusion"
+      tag: ""
+      pullPolicy: IfNotPresent
+
 exastro-platform:
   platform-api:
     image:
@@ -445,6 +496,20 @@ exastro-platform:
     image:
       repository: "mariadb"
       tag: "10.9"
+      pullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "1m"
+      limits:
+        memory: "2Gi"
+        cpu: "4"
+
+  mongodb:
+    enabled: true
+    image:
+      repository: "mongodb"
+      tag: "6.0.7"
       pullPolicy: IfNotPresent
     resources:
       requests:

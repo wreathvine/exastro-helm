@@ -65,17 +65,10 @@ global:
 
 extraEnv:
   EXECUTE_INTERVAL: "10"
-  ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
-  ANSIBLE_AGENT_IMAGE_TAG: ""
   PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
   PLATFORM_API_PORT: "8000"
 
 replicaCount: 1
-
-role:
-  apiGroups: ["*"]
-  resources: ["services","pods"]
-  verbs: ["get", "create", "update", "patch", "delete"]
 
 initContainerImage:
   repository: busybox
@@ -100,7 +93,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: "ita-by-ansible-execute-sa"
+  name: ""
 
 persistence:
   mountPath:
@@ -113,12 +106,6 @@ persistence:
       path: /var/run_app_user/httpd/socket
       subPath: httpd-socket
     tmp: /tmp
-
-volumeMounts:
-  mountPath:
-    createAgent:
-      path: /exastro/templates/k8s_pod.yml
-      subPath: k8s_pod.yml
 
 podAnnotations: {}
 
@@ -184,6 +171,32 @@ database:
     i=10
     echo "HOST: ${DB_HOST}"
     until mysqlcheck --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} ${DB_DATABASE} --silent; do
+      echo `date`": Can not connect to Database."
+      sleep $i
+    done
+    echo `date`": Completely connect to Database."
+    exit 0
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+
+mongodb:
+  initContainerImage:
+    repository: mongo
+    tag: "6.0.7"
+    pullPolicy: IfNotPresent
+
+  imagePullSecrets: []
+
+  databaseCheck: |-
+    #!/bin/bash
+    i=10
+    echo "HOST: ${MONGO_HOST}"
+    until echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_HOST}:${MONGO_PORT}/test ; do
       echo `date`": Can not connect to Database."
       sleep $i
     done

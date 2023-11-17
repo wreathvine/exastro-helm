@@ -75,3 +75,16 @@ global:
       DB_ADMIN_PASSWORD: ""
       DB_USER: ""
       DB_PASSWORD: ""
+  pfmongodbDefinition:
+    name: pf-mongodb
+    enabled: true
+    config:
+      MONGO_VENDOR: "mongo"
+      MONGO_HOST: "mongo.exastro-platform.svc"
+      MONGO_PORT: "27017"
+      MONGO_DATABASE: "platform"
+    secret:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+      MONGO_ADMIN_USER: ""
+      MONGO_ADMIN_PASSWORD: ""
