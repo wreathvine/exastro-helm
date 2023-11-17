@@ -1,0 +1,123 @@
+# Default values for mongodb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  mongodbDefinition:
+    name: mongodb
+    enabled: true
+    secret:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+    persistence:
+      enabled: true
+      reinstall: false
+      accessMode: ReadWriteOnce
+      size: 20Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels: 
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
+
+enabled: true
+
+replicaCount: 1
+
+completionCount: 1
+
+initContainerImage:
+  repository: busybox
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+image:
+  repository: mongo
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "6.0.7"
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+dbSetup:
+  dbConfInfo:
+    name: mongodb-server-conf-config
+    mongodCnf: |-
+
+persistence:
+  mountPath:
+    dataDir: /data/db
+    confDir: /etc/mongo/mongod.conf
+
+volumeMounts:
+  mountPath:
+    createDB: 
+      path: /docker-entrypoint-initdb.d/createdb.sql
+      subPath: createdb.sql
+    conf: 
+     path: /etc/mongo/mongod.conf
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities: {}
+  privileged: false
+  readOnlyRootFilesystem: false
+  seLinuxOptions: {}
+
+service:
+  name: mongodb
+  type: ClusterIP
+  port: 27017
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # requests:
+  #   memory: "256Mi"
+  #   cpu: "1m"
+  # limits:
+  #   memory: "2Gi"
+  #   cpu: "4"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
