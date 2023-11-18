@@ -22,35 +22,8 @@ global:
       PLATFORM_WEB_PORT: "8000"
     secret:
       ENCRYPT_KEY: ""
-    persistence:
-      enabled: true
-      accessMode: ReadWriteMany
-      size: 10Gi
-      volumeType: hostPath # e.g.) hostPath or AKS
-      storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels:
-      #   release: "stable"
-      # matchExpressions:
-      #   - {key: environment, operator: In, values: [dev]}
-  keycloakDefinition:
-    name: keycloak
-    enabled: true
-    config:
-      API_KEYCLOAK_PROTOCOL: "http"
-      API_KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
-      API_KEYCLOAK_PORT: "8080"
-      KEYCLOAK_PROTOCOL: "http"
-      KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
-      KEYCLOAK_PORT: "8080"
-      KEYCLOAK_MASTER_REALM: "master"
-      KEYCLOAK_DB_DATABASE: "keycloak"
-    secret:
-      KEYCLOAK_USER: ""
-      KEYCLOAK_PASSWORD: ""
-      KEYCLOAK_DB_USER: ""
-      KEYCLOAK_DB_PASSWORD: ""
-  itaDefinition:
-    name: ita
+  pfItaDefinition:
+    name: pf-ita
     enabled: true
     config:
       ITA_WEB_PROTOCOL: "http"
@@ -62,6 +35,9 @@ global:
       ITA_API_ADMIN_PROTOCOL: "http"
       ITA_API_ADMIN_HOST: "ita-api-admin.exastro-it-automation.svc"
       ITA_API_ADMIN_PORT: "8080"
+      ITA_API_OASE_RECEIVER_PROTOCOL: "http"
+      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver.exastro-it-automation.svc"
+      ITA_API_OASE_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true
@@ -71,20 +47,26 @@ global:
       DB_PORT: "3306"
       DB_DATABASE: "platform"
     secret:
-      DB_ADMIN_USER: ""
-      DB_ADMIN_PASSWORD: ""
-      DB_USER: ""
-      DB_PASSWORD: ""
-  pfmongodbDefinition:
-    name: pf-mongodb
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
+      DB_USER: "pf-user"
+      DB_PASSWORD: "Ch@ngeMePFDB"
+  pfKeycloakDefinition:
+    name: pf-keycloak
     enabled: true
     config:
-      MONGO_VENDOR: "mongo"
-      MONGO_HOST: "mongo.exastro-platform.svc"
-      MONGO_PORT: "27017"
-      MONGO_DATABASE: "platform"
+      API_KEYCLOAK_PROTOCOL: "http"
+      API_KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
+      API_KEYCLOAK_PORT: "8080"
+      KEYCLOAK_PROTOCOL: "http"
+      KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
+      KEYCLOAK_PORT: "8080"
+      KEYCLOAK_MASTER_REALM: "master"
+      KEYCLOAK_DB_DATABASE: "keycloak"
     secret:
-      MONGO_INITDB_ROOT_USERNAME: ""
-      MONGO_INITDB_ROOT_PASSWORD: ""
-      MONGO_ADMIN_USER: ""
-      MONGO_ADMIN_PASSWORD: ""
+      SYSTEM_ADMIN: "admin"
+      SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
+      KEYCLOAK_DB_USER: "keycloak"
+      KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
+
+name: common

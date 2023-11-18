@@ -16,8 +16,8 @@
 
 {{/* Custom Exastro Platform config templates */}}
 {{- define "platform-common.configmap.tpl" -}}
-{{- $top := index . 0 -}}
-{{- $define := index . 1 -}}
+{{-   $top := index . 0 -}}
+{{-   $define := index . 1 -}}
 
 ---
 apiVersion: v1
@@ -33,7 +33,7 @@ data: {{- toYaml $define.config | nindent 2 -}}
 {{- $top := . -}}
 {{- range $name, $define := .Values.global -}}
 {{-   if and $define.enabled $define.config -}}
-{{-     if or (eq $name "pfGlobalDefinition") (eq $name "keycloakDefinition") (eq $name "itaDefinition") (eq $name "pfDatabaseDefinition") (eq $name "databaseDefinition") -}}
+{{-     if or (eq $name "pfGlobalDefinition") (eq $name "pfKeycloakDefinition") (eq $name "pfItaDefinition") (eq $name "pfDatabaseDefinition") -}}
 {{-       include "platform-common.configmap.tpl" (list $top $define) | nindent 0 -}}
 {{-     end -}}
 {{-   end -}}
