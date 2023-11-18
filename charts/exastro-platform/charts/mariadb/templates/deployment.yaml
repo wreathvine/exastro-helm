@@ -54,7 +54,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              {{- if .Values.global.databaseDefinition.persistence.reinstall }}
+              {{- if .Values.persistence.reinstall }}
               echo "Removing data for database..."
               rm -rf {{ .Values.persistence.mountPath.dataDir }}/*
               {{- else }}
@@ -78,8 +78,8 @@ spec:
           - name: MARIADB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: platform-secret-mariadb
-                key: MARIADB_ROOT_PASSWORD
+                name: platform-secret-pf-database
+                key: DB_ADMIN_PASSWORD
           volumeMounts:
             - name: volume-{{ template "mariadb.name" . }}-storage
               mountPath: {{ .Values.persistence.mountPath.dataDir }}
@@ -109,9 +109,9 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: volume-{{ template "mariadb.name" . }}-storage
-          {{- if and .Values.global.databaseDefinition.persistence.enabled }}
+          {{- if and .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: pvc-{{ .Values.global.databaseDefinition.name }}
+            claimName: pvc-{{ .Values.name }}
           {{- else }}
           emptyDir: {}
           {{- end }}
