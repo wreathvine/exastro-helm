@@ -67,21 +67,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Image name
-*/}}
-{{- define "keycloak.repository" -}}
-{{- $registry := .Values.global.pfGlobalDefinition.image.registry -}}
-{{- $organization := .Values.global.pfGlobalDefinition.image.organization -}}
-{{- $package := .Values.global.pfGlobalDefinition.image.package -}}
-{{- $tool := replace "platform-" "" .Chart.Name -}}
-{{- if .Values.global.pfGlobalDefinition.image.registry -}}
-{{ .Values.image.repository | default (printf "%s/%s/%s-%s" $registry $organization $package $tool) }}
-{{- else -}}
-{{ .Values.image.repository | default (printf "%s/%s-%s" $organization $package $tool) }}
-{{- end }}
-{{- end }}
-
-{{/*
 Create the name of the service account to use
 */}}
 {{- define "keycloak.serviceAccountName" -}}
