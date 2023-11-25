@@ -1,0 +1,193 @@
+# Default values for platform-job.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+global:
+  pfGlobalDefinition:
+    name: pf-global
+    enabled: true
+    image:
+      registry: "docker.io"
+      organization: exastro
+      package: exastro-platform
+    config:
+      DEFAULT_LANGUAGE: "ja"
+      LANGUAGE: "en"
+      TZ: "Asia/Tokyo"
+      PYTHONIOENCODING: utf-8
+      PLATFORM_API_PROTOCOL: "http"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+      PLATFORM_WEB_PROTOCOL: "http"
+      PLATFORM_WEB_HOST: "platform-web"
+      PLATFORM_WEB_PORT: "8000"
+    secret:
+      ENCRYPT_KEY: ""
+  pfItaDefinition:
+    name: pf-ita
+    enabled: true
+    config:
+      ITA_WEB_PROTOCOL: "http"
+      ITA_WEB_HOST: "ita-web-server.exastro.svc"
+      ITA_WEB_PORT: "8000"
+      ITA_API_PROTOCOL: "http"
+      ITA_API_HOST: "ita-api-organization.exastro.svc"
+      ITA_API_PORT: "8080"
+      ITA_API_ADMIN_PROTOCOL: "http"
+      ITA_API_ADMIN_HOST: "ita-api-admin.exastro.svc"
+      ITA_API_ADMIN_PORT: "8080"
+      ITA_API_OASE_RECEIVER_PROTOCOL: "http"
+      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver.exastro.svc"
+      ITA_API_OASE_RECEIVER_PORT: "8000"
+  pfDatabaseDefinition:
+    name: pf-database
+    enabled: true
+    config:
+      DB_VENDOR: "mariadb"
+      DB_HOST: "mariadb.exastro.svc"
+      DB_PORT: "3306"
+      DB_DATABASE: "platform"
+    secret:
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
+      DB_USER: "pf-user"
+      DB_PASSWORD: "Ch@ngeMePFDB"
+  pfKeycloakDefinition:
+    name: pf-keycloak
+    enabled: true
+    config:
+      API_KEYCLOAK_PROTOCOL: "http"
+      API_KEYCLOAK_HOST: "keycloak.exastro.svc"
+      API_KEYCLOAK_PORT: "8080"
+      KEYCLOAK_PROTOCOL: "http" 
+      KEYCLOAK_HOST: "keycloak.exastro.svc"
+      KEYCLOAK_PORT: "8080"
+      KEYCLOAK_MASTER_REALM: "master"
+      KEYCLOAK_DB_DATABASE: "keycloak"
+    secret:
+      SYSTEM_ADMIN: "admin"
+      SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
+      KEYCLOAK_DB_USER: "keycloak"
+      KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
+  pfGitlabDefinition:
+    name: pf-gitlab
+    enabled: true
+    config:
+      GITLAB_PROTOCOL: "http" 
+      GITLAB_HOST: "gitlab.exastro.svc"
+      GITLAB_PORT: "8080"
+    secret:
+      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
+      GITLAB_ROOT_TOKEN: "change-this-token"
+  pfMongoDefinition:
+    name: pf-mongo
+    enabled: true
+    config:
+      MONGO_PROTOCOL: "http"
+      MONGO_HOST: "mongo.exastro.svc"
+      MONGO_PORT: "27017"
+      MONGO_MASTER_REALM: "master"
+      MONGO_DB_DATABASE: "keycloak"
+    secret:
+      MONGO_ROOT_USERNAME: "admin"
+      MONGO_ROOT_PASSWORD: "Ch@ngeMeMGAdm"
+
+extraEnv:
+  SUB_PROCESS_MAX_CANCEL_TIMEOUT: "10"
+  SUB_PROCESS_MAX_JOBS: "10"
+  JOB_NOTIFICATION_MAX_JOB_PER_PROCESS: "10"
+  JOB_NOTIFICATION_TEAMS_WEBHOOK_TIMEOUT: "5.0"
+  JOB_NOTIFICATION_TIMEOUT_SECONDS: "20"
+  JOB__FORCE_UPDATE_STATUS_TIMEOUT_SECONDS: "60"
+  FORCE_UPDATE_STATUS_INTERVAL_SECONDS: "60"
+  FORCE_UPDATE_STATUS_PROGRASS_SECONDS: "600"
+  JOB_CANCEL_TIMEOUT_SECONDS: "5.0"
+  JOB_STATUS_WATCH_INTERVAL_SECONDS: "1.0"
+  LOG_LEVEL: "INFO"
+  SUB_PROCESS_ACCEPTABLE: "2"
+  SUB_PROCESS_DB_HEALTH_CHECK_INTERVAL_SECONDS: "5"
+  SUB_PROCESS_DB_RECONNECT_INTERVAL_SECONDS: "60"
+  SUB_PROCESS_TERMINATE_REQUEST_SECONDS: "10800"
+  SUB_PROCESS_WATCH_INTERVAL_SECONDS: "1.0"
+
+replicaCount: 1
+
+initContainerImage:
+  repository: busybox
+  tag: ""
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+persistence: {}
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  runAsNonRoot: true
+
+service:
+  name: http
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # requests:
+  #   memory: "64Mi"
+  #   cpu: "250m"
+  # limits:
+  #   memory: "64Mi"
+  #   cpu: "250m"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
