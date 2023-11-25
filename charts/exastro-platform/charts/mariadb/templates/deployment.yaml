@@ -87,22 +87,22 @@ spec:
               mountPath: {{ .Values.persistence.mountPath.confDir }}
           ports:
             - name: port-mysql
-              containerPort: 3306
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             tcpSocket:
-              port: 3306
+              port: {{ .Values.service.port }}
             # httpGet:
             #   path: /
-            #   port: 3306
+            #   port: {{ .Values.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
-              port: 3306
+              port: {{ .Values.service.port }}
             # httpGet:
             #   path: /
-            #   port: 3306
+            #   port: {{ .Values.service.port }}
             initialDelaySeconds: 5
             periodSeconds: 10
           resources:
@@ -111,7 +111,7 @@ spec:
         - name: volume-{{ template "mariadb.name" . }}-storage
           {{- if and .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: pvc-{{ .Values.name }}
+            claimName: pvc-{{ template "mariadb.name" . }}
           {{- else }}
           emptyDir: {}
           {{- end }}

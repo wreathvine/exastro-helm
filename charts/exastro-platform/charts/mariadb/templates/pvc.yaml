@@ -21,7 +21,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-{{ .Values.name }}
+  name: pvc-{{ template "mariadb.name" . }}
   namespace: {{ $.Release.Namespace }}
   labels: {{ include "mariadb.labels" . | nindent 4 }}
 spec:
@@ -40,7 +40,7 @@ spec:
   storageClassName: "{{ .Values.persistence.storageClass }}"
 {{-       end -}}
 {{-     end }}
-{{-     if and .Values.persistence.matchLabels .Values.persistence.matchExpressions }}
+{{-     if or .Values.persistence.matchLabels .Values.persistence.matchExpressions }}
   selector:
 {{-       if .Values.persistence.matchLabels }}
     matchLabels: {{ toYaml .Values.persistence.matchLabels | nindent 6 }}

@@ -1,8 +1,6 @@
 # Default values for mariadb.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-name: mariadb
-
 enabled: true
 
 replicaCount: 1
@@ -35,14 +33,15 @@ serviceAccount:
 
 persistence:
   enabled: true
+  volumeName: pv-database
   reinstall: false
   accessMode: ReadWriteOnce
   size: 20Gi
   storageClass: "-" # e.g.) azurefile or - (None)
-  # matchLabels: 
-  #   release: "stable"
-  # matchExpressions:
-  #   - {key: environment, operator: In, values: [dev]}
+  matchLabels:
+    name: pv-database
+  matchExpressions:
+    # - {key: name, operator: In, values: [pv-database]}
   mountPath:
     dataDir: /var/lib/mysql
     confDir: /etc/mysql/conf.d
