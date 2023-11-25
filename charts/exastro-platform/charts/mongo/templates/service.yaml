@@ -15,13 +15,20 @@
 */}}
 
 {{- if .Values.enabled -}}
----
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: mongodb-server-conf-config
+  name: {{ include "mongo.name" . }}
   namespace: {{ .Release.Namespace }}
-data:
-  mongod.conf: |
-{{ .Values.dbSetup.dbConfInfo.mongodCnf | indent 4 }}
+  labels:
+    {{- include "mongo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: {{ .Values.service.name }}
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: port-mongo
+  selector:
+    {{- include "mongo.selectorLabels" . | nindent 4 }}
 {{- end -}}
