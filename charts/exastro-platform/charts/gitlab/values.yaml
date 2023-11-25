@@ -1,0 +1,132 @@
+# Default values for mariadb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+enabled: false
+
+extraEnv:
+  GITLAB_OMNIBUS_CONFIG: |
+    postgresql['shared_buffers'] = "2048MB"
+    postgresql['work_mem'] = "128MB"
+    postgresql['maintenance_work_mem'] = "128MB"
+    postgresql['effective_cache_size'] = "128MB"
+    postgresql['checkpoint_segments'] = 16
+    postgresql['checkpoint_timeout'] = "10min"
+    external_url 'http://gitlab.exastro.svc:40080'
+    nginx['listen_port'] = 40080
+    gitlab_rails['initial_root_password'] = "${GITLAB_ROOT_PASSWORD:-}"
+    gitlab_rails['registry_enabled'] = false;
+    gitlab_rails['db_prepared_statements'] = false;
+    gitlab_rails['monitoring_whitelist'] = ['0.0.0.0/0']
+    # gitlab_rails['env'] = {'MALLOC_CONF' => 'dirty_decay_ms:1000,muzzy_decay_ms:1000'}
+    # puma['worker_processes'] = 0
+    prometheus_monitoring['enable'] = false
+    # sidekiq['max_concurrency'] = 10
+    # gitaly['env'] = {'MALLOC_CONF' => 'dirty_decay_ms:1000,muzzy_decay_ms:1000', 'GITALY_COMMAND_SPAWN_MAX_PARALLEL' => '2'}
+  GITLAB_POST_RECONFIGURE_SCRIPT: |
+    while ! curl -sfI -o /dev/null http://localhost:40080/-/readiness;
+    do
+    echo "GitLab service is not ready."
+    sleep 1
+    done
+    echo "GitLab service started normally"
+    curl -Ssf -H "PRIVATE-TOKEN: ${GITLAB_ROOT_TOKEN:-}" "http://localhost:40080/api/v4/version" || (
+      gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: [:api, :write_repository, :sudo], name: 'exastro system token'); token.set_token('${GITLAB_ROOT_TOKEN:-}'); token.save!"
+    )
+    echo "GitLab post reconfigure script ended."
+
+replicaCount: 1
+
+completionCount: 1
+
+initContainerImage:
+  repository: busybox
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+image:
+  repository: gitlab/gitlab-ce
+  tag: "15.11.13-ce.0"
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+persistence:
+  enabled: false
+  volumeName: pv-gitlab
+  reinstall: false
+  accessMode: ReadWriteOnce
+  size: 20Gi
+  storageClass: "-" # e.g.) azurefile or - (None)
+  matchLabels:
+    name: pv-gitlab
+  matchExpressions:
+    # - {key: name, operator: In, values: [pv-gitlab]}
+  mountPath:
+    logDir: /var/log/gitlab
+    dataDir: /var/opt/gitlab
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities: {}
+  privileged: false
+  readOnlyRootFilesystem: false
+  seLinuxOptions: {}
+
+service:
+  name: gitlab
+  type: ClusterIP
+  port: 40080
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # requests:
+  #   memory: "256Mi"
+  #   cpu: "1m"
+  # limits:
+  #   memory: "2Gi"
+  #   cpu: "4"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
