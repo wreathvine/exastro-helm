@@ -17,7 +17,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ template "platform-migration.name" . }}-{{ .Chart.Version }}-{{ randAlphaNum 4 | lower | nospace }}
+  name: {{ template "platform-migration.podname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   {{- with .Values.imagePullSecrets }}
@@ -40,7 +40,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "pf-keycloak") (eq $define.name "pf-database") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -49,7 +49,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-keycloak") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -65,13 +65,6 @@ spec:
               name: params-{{ template "platform-migration.name" $ }}
               key: {{ $config }}
         {{- end }}
-      volumeMounts:
-        - name: volume-{{ template "platform-migration.name" . }}-pid
-          mountPath: {{ .Values.persistence.mountPath.pid.path }}
-          subPath: {{ .Values.persistence.mountPath.pid.subPath }}
-        - name: volume-{{ template "platform-migration.name" . }}-socket
-          mountPath: {{ .Values.persistence.mountPath.socket.path }}
-          subPath: {{ .Values.persistence.mountPath.socket.subPath }}
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   containers:
@@ -87,7 +80,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "pf-keycloak") (eq $define.name "pf-database") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -96,7 +89,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-keycloak") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -112,25 +105,9 @@ spec:
               name: params-{{ template "platform-migration.name" $ }}
               key: {{ $config }}
         {{- end }}
-      volumeMounts:
-        - name: volume-{{ template "platform-migration.name" . }}-pid
-          mountPath: {{ .Values.persistence.mountPath.pid.path }}
-          subPath: {{ .Values.persistence.mountPath.pid.subPath }}
-        - name: volume-{{ template "platform-migration.name" . }}-socket
-          mountPath: {{ .Values.persistence.mountPath.socket.path }}
-          subPath: {{ .Values.persistence.mountPath.socket.subPath }}
-        - name: volume-{{ template "platform-migration.name" . }}-tmp
-          mountPath: {{ .Values.persistence.mountPath.tmp }}
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   restartPolicy: OnFailure
-  volumes:
-    - name: volume-{{ template "platform-migration.name" . }}-pid
-      emptyDir: {}
-    - name: volume-{{ template "platform-migration.name" . }}-socket
-      emptyDir: {}
-    - name: volume-{{ template "platform-migration.name" . }}-tmp
-      emptyDir: {}
   {{- with .Values.nodeSelector }}
   nodeSelector:
     {{- toYaml . | nindent 4 }}
