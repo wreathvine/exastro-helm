@@ -27,23 +27,23 @@ global:
     enabled: true
     config:
       ITA_WEB_PROTOCOL: "http"
-      ITA_WEB_HOST: "ita-web-server.exastro-it-automation.svc"
+      ITA_WEB_HOST: "ita-web-server.exastro.svc"
       ITA_WEB_PORT: "8000"
       ITA_API_PROTOCOL: "http"
-      ITA_API_HOST: "ita-api-organization.exastro-it-automation.svc"
+      ITA_API_HOST: "ita-api-organization.exastro.svc"
       ITA_API_PORT: "8080"
       ITA_API_ADMIN_PROTOCOL: "http"
-      ITA_API_ADMIN_HOST: "ita-api-admin.exastro-it-automation.svc"
+      ITA_API_ADMIN_HOST: "ita-api-admin.exastro.svc"
       ITA_API_ADMIN_PORT: "8080"
       ITA_API_OASE_RECEIVER_PROTOCOL: "http"
-      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver.exastro-it-automation.svc"
+      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver.exastro.svc"
       ITA_API_OASE_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true
     config:
       DB_VENDOR: "mariadb"
-      DB_HOST: "mariadb.exastro-platform.svc"
+      DB_HOST: "mariadb.exastro.svc"
       DB_PORT: "3306"
       DB_DATABASE: "platform"
     secret:
@@ -56,10 +56,10 @@ global:
     enabled: true
     config:
       API_KEYCLOAK_PROTOCOL: "http"
-      API_KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
+      API_KEYCLOAK_HOST: "keycloak.exastro.svc"
       API_KEYCLOAK_PORT: "8080"
-      KEYCLOAK_PROTOCOL: "http"
-      KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
+      KEYCLOAK_PROTOCOL: "http" 
+      KEYCLOAK_HOST: "keycloak.exastro.svc"
       KEYCLOAK_PORT: "8080"
       KEYCLOAK_MASTER_REALM: "master"
       KEYCLOAK_DB_DATABASE: "keycloak"
@@ -68,5 +68,25 @@ global:
       SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
       KEYCLOAK_DB_USER: "keycloak"
       KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
-
-name: common
+  pfGitlabDefinition:
+    name: pf-gitlab
+    enabled: true
+    config:
+      GITLAB_PROTOCOL: "http" 
+      GITLAB_HOST: "gitlab.exastro.svc"
+      GITLAB_PORT: "8080"
+    secret:
+      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
+      GITLAB_ROOT_TOKEN: "change-this-token"
+  pfMongoDefinition:
+    name: pf-mongo
+    enabled: true
+    config:
+      MONGO_PROTOCOL: "http"
+      MONGO_HOST: "mongo.exastro.svc"
+      MONGO_PORT: "27017"
+      MONGO_MASTER_REALM: "master"
+      MONGO_DB_DATABASE: "keycloak"
+    secret:
+      MONGO_ROOT_USERNAME: "admin"
+      MONGO_ROOT_PASSWORD: "Ch@ngeMeMGAdm"
