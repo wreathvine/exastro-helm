@@ -28,37 +28,38 @@ global:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
-  gitlabDefinition:
-    name: gitlab
-    enabled: true
-    config:
-      GITLAB_PROTOCOL: "http"
-      GITLAB_HOST: "gitlab.exastro-platform.svc"
-      GITLAB_PORT: "80"
-    secret:
-      GITLAB_ROOT_TOKEN: ""
   itaDatabaseDefinition:
     name: ita-database
     enabled: true
     config:
       DB_VENDOR: "mariadb"
-      DB_HOST: "mariadb.exastro-platform.svc"
+      DB_HOST: "mariadb"
       DB_PORT: "3306"
       DB_DATABASE: "ITA_DB"
     secret:
-      DB_ADMIN_USER: ""
-      DB_ADMIN_PASSWORD: ""
-      DB_USER: ""
-      DB_PASSWORD: ""
-  itaMongodbDefinition:
-    name: ita-mongodb
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
+      DB_USER: "ITA_USER"
+      DB_PASSWORD: "Ch@ngeMeITADB"
+  gitlabDefinition:
+    name: gitlab
     enabled: true
     config:
-      MONGO_VENDOR: "mongodb"
-      MONGO_HOST: "mongodb.exastro-platform.svc"
-      MONGO_PORT: "27017"
+      GITLAB_PROTOCOL: "http" 
+      GITLAB_HOST: "gitlab"
+      GITLAB_PORT: "8080"
     secret:
-      MONGO_ADMIN_USER: ""
-      MONGO_ADMIN_PASSWORD: ""
-      MONGO_INITDB_ROOT_USERNAME: ""
-      MONGO_INITDB_ROOT_PASSWORD: ""
+      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
+      GITLAB_ROOT_TOKEN: "change-this-token"
+  mongoDefinition:
+    name: mongo
+    enabled: true
+    config:
+      MONGO_PROTOCOL: "http"
+      MONGO_HOST: "mongo"
+      MONGO_PORT: "27017"
+      MONGO_MASTER_REALM: "master"
+      MONGO_DB_DATABASE: "keycloak"
+    secret:
+      MONGO_ADMIN_USERNAME: "admin"
+      MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
