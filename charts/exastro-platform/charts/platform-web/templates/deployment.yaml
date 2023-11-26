@@ -53,7 +53,7 @@ spec:
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config -}}
-            {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "pf-keycloak") (eq $define.name "pf-database") }}
+            {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:

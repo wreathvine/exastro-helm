@@ -51,8 +51,8 @@ global:
       DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
       DB_USER: "pf-user"
       DB_PASSWORD: "Ch@ngeMePFDB"
-  pfKeycloakDefinition:
-    name: pf-keycloak
+  keycloakDefinition:
+    name: keycloak
     enabled: true
     config:
       API_KEYCLOAK_PROTOCOL: "http"
@@ -68,8 +68,8 @@ global:
       SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
       KEYCLOAK_DB_USER: "keycloak"
       KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
-  pfGitlabDefinition:
-    name: pf-gitlab
+  gitlabDefinition:
+    name: gitlab
     enabled: true
     config:
       GITLAB_PROTOCOL: "http" 
@@ -78,8 +78,8 @@ global:
     secret:
       GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
       GITLAB_ROOT_TOKEN: "change-this-token"
-  pfMongoDefinition:
-    name: pf-mongo
+  mongoDefinition:
+    name: mongo
     enabled: true
     config:
       MONGO_PROTOCOL: "http"

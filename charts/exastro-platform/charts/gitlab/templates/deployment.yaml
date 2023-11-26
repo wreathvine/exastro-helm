@@ -78,27 +78,27 @@ spec:
           - name: GITLAB_PROTOCOL
             valueFrom:
               configMapKeyRef:
-                name: platform-params-pf-gitlab
+                name: platform-params-gitlab
                 key: GITLAB_PROTOCOL
           - name: GITLAB_HOST
             valueFrom:
               configMapKeyRef:
-                name: platform-params-pf-gitlab
+                name: platform-params-gitlab
                 key: GITLAB_HOST
           - name: GITLAB_PORT
             valueFrom:
               configMapKeyRef:
-                name: platform-params-pf-gitlab
+                name: platform-params-gitlab
                 key: GITLAB_PORT
           - name: GITLAB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-gitlab
+                name: platform-secret-gitlab
                 key: GITLAB_ROOT_PASSWORD
           - name: GITLAB_ROOT_TOKEN
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-gitlab
+                name: platform-secret-gitlab
                 key: GITLAB_ROOT_TOKEN
           {{- range $config, $value := .Values.extraEnv }}
           - name: {{ $config }}

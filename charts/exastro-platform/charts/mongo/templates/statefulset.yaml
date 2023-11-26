@@ -80,12 +80,12 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: platform-secret-pf-mongo
+              name: platform-secret-mongo
               key: MONGO_ROOT_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: platform-secret-pf-mongo
+              name: platform-secret-mongo
               key: MONGO_ROOT_PASSWORD
         volumeMounts:
           - name: volume-{{ template "mongo.name" . }}-storage

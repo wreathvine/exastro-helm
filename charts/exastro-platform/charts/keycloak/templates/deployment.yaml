@@ -64,17 +64,17 @@ spec:
             - name: DB_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: platform-params-pf-keycloak
+                  name: platform-params-keycloak
                   key: KEYCLOAK_DB_DATABASE
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: platform-secret-pf-keycloak
+                  name: platform-secret-keycloak
                   key: KEYCLOAK_DB_USER
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: platform-secret-pf-keycloak
+                  name: platform-secret-keycloak
                   key: KEYCLOAK_DB_PASSWORD
       containers:
         - name: {{ template "keycloak.name" . }}
@@ -92,12 +92,12 @@ spec:
           - name: KEYCLOAK_ADMIN
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-keycloak
+                name: platform-secret-keycloak
                 key: SYSTEM_ADMIN
           - name: KEYCLOAK_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-keycloak
+                name: platform-secret-keycloak
                 key: SYSTEM_ADMIN_PASSWORD
           - name: KC_DB
             valueFrom:
@@ -112,17 +112,17 @@ spec:
           - name: KC_DB_URL_DATABASE
             valueFrom:
               configMapKeyRef:
-                name: platform-params-pf-keycloak
+                name: platform-params-keycloak
                 key: KEYCLOAK_DB_DATABASE
           - name: KC_DB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-keycloak
+                name: platform-secret-keycloak
                 key: KEYCLOAK_DB_USER
           - name: KC_DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: platform-secret-pf-keycloak
+                name: platform-secret-keycloak
                 key: KEYCLOAK_DB_PASSWORD
           - name: KC_PROXY
             value: "passthrough"

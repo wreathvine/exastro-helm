@@ -40,7 +40,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "pf-keycloak") (eq $define.name "pf-database") }}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -49,7 +49,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -80,7 +80,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "pf-keycloak") (eq $define.name "pf-database") }}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-ita") (eq $define.name "keycloak") (eq $define.name "pf-database") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -89,7 +89,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
