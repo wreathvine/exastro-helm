@@ -73,12 +73,12 @@ global:
 
 exastro-it-automation:
   ita-ag-oase:
-    image:
-      repository: "exastro/exastro-it-automation-ag-oase"
-      tag: ""
-      pullPolicy: IfNotPresent
     agents:
-      - extraEnv:
+      - image:
+          repository: "exastro/exastro-it-automation-ag-oase"
+          tag: ""
+          pullPolicy: IfNotPresent
+        extraEnv:
           TZ: Asia/Tokyo
           DEFAULT_LANGUAGE: ja
           ITERATION: 500
@@ -455,7 +455,7 @@ exastro-platform:
       pullPolicy: IfNotPresent
     imagePullSecrets: []
     persistence:
-      enabled: true
+      enabled: false
       reinstall: false
       accessMode: ReadWriteOnce
       size: 20Gi
@@ -562,7 +562,7 @@ exastro-platform:
       # Overrides the image tag whose default is the chart appVersion.
       tag: "6.0"
     persistence:
-      enabled: true
+      enabled: false
       reinstall: false
       accessMode: ReadWriteOnce
       size: 20Gi
