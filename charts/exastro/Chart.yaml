@@ -41,8 +41,8 @@ keywords:
 - exastro
 - exastro-platform
 - exastro-it-automation
-home: https://exastro-suite.github.io/
-icon: https://exastro-suite.github.io/docs/asset/logo/exastro/Exastro-logomark2-rgb.svg
+home: https://www.exastro.org/
+icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
 - https://github.com/exastro-suite/exastro-helm
 - https://github.com/exastro-suite/exastro-it-automation

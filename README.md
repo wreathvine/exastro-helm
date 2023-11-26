@@ -8,7 +8,7 @@ exastro helm is a collection of charts maintained by the exastro community.
 The charts can be added using following command:
 
 ```
-helm repo add exastro https://exastro-suite.github.io/exastro-helm/
+helm repo add exastro https://www.exastro.org/exastro-helm/
 ```
 
 ## Requirement
@@ -30,3 +30,4 @@ helm repo add exastro https://exastro-suite.github.io/exastro-helm/
 |    **1.1.10**   |    1.5.1    |   2.1.1   |
 |    **1.1.11**   |    1.5.1    |   2.1.2   |
 |    **1.2.0**    |    1.6.0    |   2.2.0   |
+|    **1.3.0**    |    1.7.0    |   2.3.0   |
