@@ -17,7 +17,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "oase-receiver.name" -}}
+{{- define "ita-api-oase-receiver.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -26,7 +26,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "oase-receiver.fullname" -}}
+{{- define "ita-api-oase-receiver.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -42,16 +42,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "oase-receiver.chart" -}}
+{{- define "ita-api-oase-receiver.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "oase-receiver.labels" -}}
-helm.sh/chart: {{ include "oase-receiver.chart" . }}
-{{ include "oase-receiver.selectorLabels" . }}
+{{- define "ita-api-oase-receiver.labels" -}}
+helm.sh/chart: {{ include "ita-api-oase-receiver.chart" . }}
+{{ include "ita-api-oase-receiver.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -61,15 +61,15 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "oase-receiver.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "oase-receiver.name" . }}
+{{- define "ita-api-oase-receiver.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "ita-api-oase-receiver.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Image name
 */}}
-{{- define "oase-receiver.repository" -}}
+{{- define "ita-api-oase-receiver.repository" -}}
 {{- $registry := .Values.global.itaGlobalDefinition.image.registry -}}
 {{- $organization := .Values.global.itaGlobalDefinition.image.organization -}}
 {{- $package := .Values.global.itaGlobalDefinition.image.package -}}
@@ -84,9 +84,9 @@ Image name
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "oase-receiver.serviceAccountName" -}}
+{{- define "ita-api-oase-receiver.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "oase-receiver.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "ita-api-oase-receiver.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

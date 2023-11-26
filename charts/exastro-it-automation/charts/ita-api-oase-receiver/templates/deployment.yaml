@@ -17,17 +17,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "oase-receiver.name" . }}
+  name: {{ template "ita-api-oase-receiver.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "oase-receiver.labels" . | nindent 4 }}
+    {{- include "ita-api-oase-receiver.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "oase-receiver.selectorLabels" . | nindent 6 }}
+      {{- include "ita-api-oase-receiver.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -35,25 +35,25 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "oase-receiver.selectorLabels" . | nindent 8 }}
+        {{- include "ita-api-oase-receiver.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "oase-receiver.serviceAccountName" . }}
+      serviceAccountName: {{ include "ita-api-oase-receiver.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: database-alive-check
           securityContext:
-            {{- toYaml .Values.database.securityContext | nindent 12 }}
-          image: "{{ .Values.database.initContainerImage.repository }}:{{ .Values.database.initContainerImage.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.database.initContainerImage.pullPolicy }}
+            {{- toYaml .Values.initContainers.database.securityContext | nindent 12 }}
+          image: "{{ .Values.initContainers.database.image.repository }}:{{ .Values.initContainers.database.image.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.initContainers.database.image.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |
-              {{- .Values.database.databaseCheck | nindent 14 }}
+              {{- .Values.initContainers.database.databaseCheck | nindent 14 }}
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
@@ -75,20 +75,19 @@ spec:
             {{-     end }}
             {{-   end }}
             {{- end }}
-
-        - name: mongodb-alive-check
+        - name: mongo-alive-check
           securityContext:
-            {{- toYaml .Values.mongodb.securityContext | nindent 12 }}
-          image: "{{ .Values.mongodb.initContainerImage.repository }}:{{ .Values.mongodb.initContainerImage.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.mongodb.initContainerImage.pullPolicy }}
+            {{- toYaml .Values.initContainers.mongo.securityContext | nindent 12 }}
+          image: "{{ .Values.initContainers.mongo.initContainerImage.repository }}:{{ .Values.initContainers.mongo.initContainerImage.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.initContainers.mongo.initContainerImage.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |
-              {{- .Values.mongodb.databaseCheck | nindent 14 }}
+              {{- .Values.initContainers.mongo.databaseCheck | nindent 14 }}
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-mongodb") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-mongo") }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
@@ -97,7 +96,7 @@ spec:
             {{-     end -}}
             {{-   end -}}
             {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-mongodb")}}
+            {{-     if or (eq $define.name "ita-mongo")}}
             - name: {{ $secret }}
               valueFrom:
                 secretKeyRef:
@@ -106,17 +105,16 @@ spec:
             {{-     end }}
             {{-   end }}
             {{- end }}
-
       containers:
-        - name: {{ template "oase-receiver.name" . }}
+        - name: {{ template "ita-api-oase-receiver.name" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ template "oase-receiver.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ template "ita-api-oase-receiver.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database")  (eq $define.name "ita-mongodb")}}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database")  (eq $define.name "ita-mongo")}}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
@@ -125,7 +123,7 @@ spec:
             {{-     end -}}
             {{-   end -}}
             {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongodb")}}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongo")}}
             - name: {{ $secret }}
               valueFrom:
                 secretKeyRef:
@@ -138,7 +136,7 @@ spec:
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
-                  name: params-{{ template "oase-receiver.name" $ }}
+                  name: params-{{ template "ita-api-oase-receiver.name" $ }}
                   key: {{ $config }}
             {{- end }}
           volumeMounts:
@@ -148,22 +146,26 @@ spec:
               mountPath: {{ .Values.persistence.mountPath.homeDir }}
             - name: volume-{{ template "oase-receiver.name" . }}-tmp
               mountPath: {{ .Values.persistence.mountPath.tmp }}
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 8080
-          #   # httpGet:
-          #   #   path: /
-          #   #   port: 8080
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 8080
-          #   # httpGet:
-          #   #   path: /
-          #   #   port: 8080
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
+          ports:
+            - name: port-http
+              containerPort: {{ .Values.extraEnv.LISTEN_PORT }}
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.extraEnv.LISTEN_PORT }}
+            # httpGet:
+            #   path: /
+            #   port: {{ .Values.extraEnv.LISTEN_PORT }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.extraEnv.LISTEN_PORT }}
+            # httpGet:
+            #   path: /
+            #   port: {{ .Values.extraEnv.LISTEN_PORT }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
