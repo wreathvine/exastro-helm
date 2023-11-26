@@ -11,7 +11,7 @@ extraEnv:
     postgresql['effective_cache_size'] = "128MB"
     postgresql['checkpoint_segments'] = 16
     postgresql['checkpoint_timeout'] = "10min"
-    external_url 'http://gitlab.exastro.svc:40080'
+    external_url 'http://gitlab:40080'
     nginx['listen_port'] = 40080
     gitlab_rails['initial_root_password'] = "${GITLAB_ROOT_PASSWORD:-}"
     gitlab_rails['registry_enabled'] = false;
