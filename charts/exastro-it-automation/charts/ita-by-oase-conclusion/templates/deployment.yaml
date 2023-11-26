@@ -75,20 +75,19 @@ spec:
             {{-     end }}
             {{-   end }}
             {{- end }}
-
-        - name: mongodb-alive-check
+        - name: mongo-alive-check
           securityContext:
-            {{- toYaml .Values.mongodb.securityContext | nindent 12 }}
-          image: "{{ .Values.mongodb.initContainerImage.repository }}:{{ .Values.mongodb.initContainerImage.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.mongodb.initContainerImage.pullPolicy }}
+            {{- toYaml .Values.mongo.securityContext | nindent 12 }}
+          image: "{{ .Values.mongo.initContainerImage.repository }}:{{ .Values.mongo.initContainerImage.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.mongo.initContainerImage.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |
-              {{- .Values.mongodb.databaseCheck | nindent 14 }}
+              {{- .Values.mongo.databaseCheck | nindent 14 }}
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-mongodb") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-mongo") }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
@@ -97,7 +96,7 @@ spec:
             {{-     end -}}
             {{-   end -}}
             {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-mongodb")}}
+            {{-     if or (eq $define.name "ita-mongo")}}
             - name: {{ $secret }}
               valueFrom:
                 secretKeyRef:
@@ -106,7 +105,6 @@ spec:
             {{-     end }}
             {{-   end }}
             {{- end }}
-
       containers:
         - name: {{ template "oase-conclusion.name" . }}
           securityContext:
@@ -116,7 +114,7 @@ spec:
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongodb") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongo") }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
@@ -125,7 +123,7 @@ spec:
             {{-     end -}}
             {{-   end -}}
             {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongodb") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "ita-mongo") }}
             - name: {{ $secret }}
               valueFrom:
                 secretKeyRef:
