@@ -22,59 +22,72 @@ global:
       PLATFORM_WEB_PORT: "8000"
     secret:
       ENCRYPT_KEY: ""
-    persistence:
-      enabled: true
-      accessMode: ReadWriteMany
-      size: 10Gi
-      volumeType: hostPath # e.g.) hostPath or AKS
-      storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
-      #   release: "stable"
-      # matchExpressions:
-      #   - {key: environment, operator: In, values: [dev]}
-  keycloakDefinition:
-    name: keycloak
-    enabled: true
-    config:
-      API_KEYCLOAK_PROTOCOL: "http"
-      API_KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
-      API_KEYCLOAK_PORT: "8080"
-      KEYCLOAK_PROTOCOL: "http"
-      KEYCLOAK_HOST: "keycloak.exastro-platform.svc"
-      KEYCLOAK_PORT: "8080"
-      KEYCLOAK_MASTER_REALM: "master"
-      KEYCLOAK_DB_DATABASE: "keycloak"
-    secret:
-      KEYCLOAK_USER: ""
-      KEYCLOAK_PASSWORD: ""
-      KEYCLOAK_DB_USER: ""
-      KEYCLOAK_DB_PASSWORD: ""
-  itaDefinition:
-    name: ita
+  pfItaDefinition:
+    name: pf-ita
     enabled: true
     config:
       ITA_WEB_PROTOCOL: "http"
-      ITA_WEB_HOST: "ita-web-server.exastro-it-automation.svc"
+      ITA_WEB_HOST: "ita-web-server"
       ITA_WEB_PORT: "8000"
       ITA_API_PROTOCOL: "http"
-      ITA_API_HOST: "ita-api-organization.exastro-it-automation.svc"
+      ITA_API_HOST: "ita-api-organization"
       ITA_API_PORT: "8080"
       ITA_API_ADMIN_PROTOCOL: "http"
-      ITA_API_ADMIN_HOST: "ita-api-admin.exastro-it-automation.svc"
+      ITA_API_ADMIN_HOST: "ita-api-admin"
       ITA_API_ADMIN_PORT: "8080"
+      ITA_API_OASE_RECEIVER_PROTOCOL: "http"
+      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver"
+      ITA_API_OASE_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true
     config:
       DB_VENDOR: "mariadb"
-      DB_HOST: "mariadb.exastro-platform.svc"
+      DB_HOST: "mariadb"
       DB_PORT: "3306"
       DB_DATABASE: "platform"
     secret:
-      DB_ADMIN_USER: ""
-      DB_ADMIN_PASSWORD: ""
-      DB_USER: ""
-      DB_PASSWORD: ""
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
+      DB_USER: "pf-user"
+      DB_PASSWORD: "Ch@ngeMePFDB"
+  keycloakDefinition:
+    name: keycloak
+    enabled: true
+    config:
+      API_KEYCLOAK_PROTOCOL: "http"
+      API_KEYCLOAK_HOST: "keycloak"
+      API_KEYCLOAK_PORT: "8080"
+      KEYCLOAK_PROTOCOL: "http" 
+      KEYCLOAK_HOST: "keycloak"
+      KEYCLOAK_PORT: "8080"
+      KEYCLOAK_MASTER_REALM: "master"
+      KEYCLOAK_DB_DATABASE: "keycloak"
+    secret:
+      SYSTEM_ADMIN: "admin"
+      SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
+      KEYCLOAK_DB_USER: "keycloak"
+      KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
+  gitlabDefinition:
+    name: gitlab
+    enabled: true
+    config:
+      GITLAB_PROTOCOL: "http" 
+      GITLAB_HOST: "gitlab"
+      GITLAB_PORT: "8080"
+    secret:
+      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
+      GITLAB_ROOT_TOKEN: "change-this-token"
+  mongoDefinition:
+    name: mongo
+    enabled: true
+    config:
+      MONGO_PROTOCOL: "http"
+      MONGO_HOST: "mongo"
+      MONGO_PORT: "27017"
+    secret:
+      MONGO_ADMIN_USERNAME: "admin"
+      MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 extraEnv:
   LISTEN_PORT: "8000"

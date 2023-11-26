@@ -21,6 +21,7 @@ kind: ConfigMap
 metadata:
   name: mysql-server-conf-config
   namespace: {{ .Release.Namespace }}
+  labels: {{ include "mariadb.labels" . | nindent 4 }}
 data:
   custom.cnf: |
 {{ .Values.dbSetup.dbConfInfo.customCnf | indent 4 }}
