@@ -81,12 +81,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: platform-secret-mongo
-              key: MONGO_ROOT_USERNAME
+              key: MONGO_ADMIN_USERNAME
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: platform-secret-mongo
-              key: MONGO_ROOT_PASSWORD
+              key: MONGO_ADMIN_PASSWORD
         volumeMounts:
           - name: volume-{{ template "mongo.name" . }}-storage
             mountPath: {{ .Values.persistence.mountPath.dataDir }}

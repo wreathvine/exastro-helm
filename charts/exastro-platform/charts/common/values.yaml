@@ -88,5 +88,5 @@ global:
       MONGO_MASTER_REALM: "master"
       MONGO_DB_DATABASE: "keycloak"
     secret:
-      MONGO_ROOT_USERNAME: "admin"
-      MONGO_ROOT_PASSWORD: "Ch@ngeMeMGAdm"
+      MONGO_ADMIN_USERNAME: "admin"
+      MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
