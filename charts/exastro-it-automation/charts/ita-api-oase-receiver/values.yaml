@@ -148,7 +148,7 @@ serviceAccount:
 
 persistence:
   mountPath:
-    storage: /storage
+    # storage: /storage
     homeDir: /home/app_user
     pid:
       path: /var/run_app_user/httpd/pid

@@ -71,20 +71,20 @@ agents:
     extraEnv:
       TZ: Asia/Tokyo
       DEFAULT_LANGUAGE: ja
-      ITERATION: 500
-      EXECUTE_INTERVAL: 10
+      ITERATION: "500"
+      EXECUTE_INTERVAL: "10"
       LOG_LEVEL: INFO
       AGENT_NAME: "oase-agent"
       URL: "http://platform-auth:8000"
       ORGANIZATION_ID: "org001"
       WORKSPACE_ID: "ws01"
-      ROLES: "_ws_admin"
+      # ROLES: "_ws_admin"
       EVENT_COLLECTION_SETTINGS_IDS: "id0001"
     secret:
-      ENCRYPT_KEY: ${ENCRYPT_KEY}
+      ENCRYPT_KEY: "dummy"
       USERNAME: "admin"
       PASSWORD: "sample-password"
-      USER_ID: "user01"
+      # USER_ID: "user01"
     resources: {}
       # requests:
       #   memory: "64Mi"
