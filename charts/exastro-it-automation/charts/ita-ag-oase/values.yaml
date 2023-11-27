@@ -79,7 +79,7 @@ agents:
       ORGANIZATION_ID: "org001"
       WORKSPACE_ID: "ws01"
       # ROLES: "_ws_admin"
-      EVENT_COLLECTION_SETTINGS_IDS: "id0001"
+      EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
     secret:
       ENCRYPT_KEY: "dummy"
       USERNAME: "admin"

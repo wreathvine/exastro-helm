@@ -49,11 +49,11 @@ sources:
 - https://github.com/exastro-suite/exastro-platform
 dependencies:
   - name: exastro-it-automation
-    version: 1.4.4
+    version: 1.4.5
     repository: file://../exastro-it-automation
     condition: exastro-it-automation.enabled
   - name: exastro-platform
-    version: 1.7.0
+    version: 1.7.1
     repository: file://../exastro-platform
     condition: exastro-platform.enabled
 maintainers:
