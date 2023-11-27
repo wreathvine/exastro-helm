@@ -80,14 +80,16 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Image name
 */}}
 {{- define "ita-ag-oase.repository" -}}
-{{- $registry := .Values.global.itaGlobalDefinition.image.registry -}}
-{{- $organization := .Values.global.itaGlobalDefinition.image.organization -}}
-{{- $package := .Values.global.itaGlobalDefinition.image.package -}}
-{{- $tool := replace "ita-" "" .Chart.Name -}}
-{{- if .Values.global.itaGlobalDefinition.image.registry -}}
-{{ .Values.image.repository | default (printf "%s/%s/%s-%s" $registry $organization $package $tool) }}
+{{- $top := index . 0 -}}
+{{- $agent := index . 1 -}}
+{{- $registry := $top.Values.global.itaGlobalDefinition.image.registry -}}
+{{- $organization := $top.Values.global.itaGlobalDefinition.image.organization -}}
+{{- $package := $top.Values.global.itaGlobalDefinition.image.package -}}
+{{- $tool := replace "ita-" "" $top.Chart.Name -}}
+{{- if $top.Values.global.itaGlobalDefinition.image.registry -}}
+{{ $agent.image.repository | default (printf "%s/%s/%s-%s" $registry $organization $package $tool) }}
 {{- else -}}
-{{ .Values.image.repository | default (printf "%s/%s-%s" $organization $package $tool) }}
+{{ $agent.image.repository | default (printf "%s/%s-%s" $organization $package $tool) }}
 {{- end }}
 {{- end }}
 

@@ -51,8 +51,8 @@ spec:
         - name: {{ template "ita-ag-oase.agentname" (list $top $agent) }}
           securityContext:
             {{- toYaml $top.Values.securityContext | nindent 12 }}
-          image: "{{ template "ita-ag-oase.repository" $top }}:{{ .image.tag | default $top.Chart.AppVersion }}"
-          imagePullPolicy: {{ .image.pullPolicy }}
+          image: "{{ template "ita-ag-oase.repository" (list $top $agent) }}:{{ $agent.image.tag | default $top.Chart.AppVersion }}"
+          imagePullPolicy: {{ $agent.image.pullPolicy }}
           env:
             {{- range $define := $top.Values.global -}}
             {{-   range $config, $value := $define.config }}

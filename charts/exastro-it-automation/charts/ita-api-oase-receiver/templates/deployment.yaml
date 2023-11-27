@@ -78,8 +78,8 @@ spec:
         - name: mongo-alive-check
           securityContext:
             {{- toYaml .Values.initContainers.mongo.securityContext | nindent 12 }}
-          image: "{{ .Values.initContainers.mongo.initContainerImage.repository }}:{{ .Values.initContainers.mongo.initContainerImage.tag | default "latest" }}"
-          imagePullPolicy: {{ .Values.initContainers.mongo.initContainerImage.pullPolicy }}
+          image: "{{ .Values.initContainers.mongo.image.repository }}:{{ .Values.initContainers.mongo.image.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.initContainers.mongo.image.pullPolicy }}
           command: ["sh", "-c"]
           args:
             - |
@@ -140,11 +140,11 @@ spec:
                   key: {{ $config }}
             {{- end }}
           volumeMounts:
-            - name: volume-{{ template "oase-receiver.name" . }}-storage
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-storage
               mountPath: {{ .Values.persistence.mountPath.storage }}
-            - name: volume-{{ template "oase-receiver.name" . }}-homedir
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-homedir
               mountPath: {{ .Values.persistence.mountPath.homeDir }}
-            - name: volume-{{ template "oase-receiver.name" . }}-tmp
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-tmp
               mountPath: {{ .Values.persistence.mountPath.tmp }}
           ports:
             - name: port-http
@@ -169,20 +169,20 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: volume-{{ template "oase-receiver.name" . }}-storage
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-storage
           {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
           persistentVolumeClaim:
             claimName: pvc-{{ .Values.global.itaGlobalDefinition.name }}
           {{- else }}
           emptyDir: {}
           {{- end }}
-        - name: volume-{{ template "oase-receiver.name" . }}-homedir
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-homedir
           emptyDir: {}
-        - name: volume-{{ template "oase-receiver.name" . }}-pid
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-pid
           emptyDir: {}
-        - name: volume-{{ template "oase-receiver.name" . }}-socket
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-socket
           emptyDir: {}
-        - name: volume-{{ template "oase-receiver.name" . }}-tmp
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-tmp
           emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:

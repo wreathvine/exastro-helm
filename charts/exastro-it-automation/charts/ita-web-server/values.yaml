@@ -2,8 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
-  pfGlobalDefinition:
-    name: pf-global
+  itaGlobalDefinition:
+    name: ita-global
     enabled: true
     image:
       registry: "docker.io"
@@ -12,62 +12,35 @@ global:
     config:
       DEFAULT_LANGUAGE: "ja"
       LANGUAGE: "en"
+      CONTAINER_BASE: "kubernetes"
       TZ: "Asia/Tokyo"
-      PYTHONIOENCODING: utf-8
-      PLATFORM_API_PROTOCOL: "http"
-      PLATFORM_API_HOST: "platform-api"
-      PLATFORM_API_PORT: "8000"
-      PLATFORM_WEB_PROTOCOL: "http"
-      PLATFORM_WEB_HOST: "platform-web"
-      PLATFORM_WEB_PORT: "8000"
+      STORAGEPATH: "/storage/"
     secret:
       ENCRYPT_KEY: ""
-  pfItaDefinition:
-    name: pf-ita
-    enabled: true
-    config:
-      ITA_WEB_PROTOCOL: "http"
-      ITA_WEB_HOST: "ita-web-server"
-      ITA_WEB_PORT: "8000"
-      ITA_API_PROTOCOL: "http"
-      ITA_API_HOST: "ita-api-organization"
-      ITA_API_PORT: "8080"
-      ITA_API_ADMIN_PROTOCOL: "http"
-      ITA_API_ADMIN_HOST: "ita-api-admin"
-      ITA_API_ADMIN_PORT: "8080"
-      ITA_API_OASE_RECEIVER_PROTOCOL: "http"
-      ITA_API_OASE_RECEIVER_HOST: "ita-api-event-relay-receiver"
-      ITA_API_OASE_RECEIVER_PORT: "8000"
-  pfDatabaseDefinition:
-    name: pf-database
+    persistence:
+      enabled: true
+      reinstall: false
+      accessMode: ReadWriteMany
+      size: 10Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels: 
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
+  itaDatabaseDefinition:
+    name: ita-database
     enabled: true
     config:
       DB_VENDOR: "mariadb"
       DB_HOST: "mariadb"
       DB_PORT: "3306"
-      DB_DATABASE: "platform"
+      DB_DATABASE: "ITA_DB"
     secret:
       DB_ADMIN_USER: "root"
       DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
-      DB_USER: "pf-user"
-      DB_PASSWORD: "Ch@ngeMePFDB"
-  keycloakDefinition:
-    name: keycloak
-    enabled: true
-    config:
-      API_KEYCLOAK_PROTOCOL: "http"
-      API_KEYCLOAK_HOST: "keycloak"
-      API_KEYCLOAK_PORT: "8080"
-      KEYCLOAK_PROTOCOL: "http" 
-      KEYCLOAK_HOST: "keycloak"
-      KEYCLOAK_PORT: "8080"
-      KEYCLOAK_MASTER_REALM: "master"
-      KEYCLOAK_DB_DATABASE: "keycloak"
-    secret:
-      SYSTEM_ADMIN: "admin"
-      SYSTEM_ADMIN_PASSWORD: "Ch@ngeMeKCAdm"
-      KEYCLOAK_DB_USER: "keycloak"
-      KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
+      DB_USER: "ITA_USER"
+      DB_PASSWORD: "Ch@ngeMeITADB"
   gitlabDefinition:
     name: gitlab
     enabled: true
