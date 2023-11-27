@@ -81,8 +81,8 @@ exastro-it-automation:
         extraEnv:
           TZ: Asia/Tokyo
           DEFAULT_LANGUAGE: ja
-          ITERATION: 500
-          EXECUTE_INTERVAL: 10
+          ITERATION: "500"
+          EXECUTE_INTERVAL: "10"
           LOG_LEVEL: INFO
           AGENT_NAME: "oase-agent"
           URL: "http://platform-auth:8000"
