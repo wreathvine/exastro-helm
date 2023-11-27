@@ -95,12 +95,6 @@ agents:
 
 replicaCount: 1
 
-image:
-  repository: ""
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-  pullPolicy: IfNotPresent
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
