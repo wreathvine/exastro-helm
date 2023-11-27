@@ -4,6 +4,6 @@ dependencies:
   version: 1.4.0
 - name: exastro-platform
   repository: file://../exastro-platform
-  version: 1.6.0
-digest: sha256:e9347bb271ed1352bf96ffdfe7c505605785b99ffe1eca3321d77f1d5bde3878
-generated: "2023-09-22T11:55:43.191170192+09:00"
+  version: 1.7.0
+digest: sha256:d3bdd67e9c2b4c55357a3e4e38e4c2bfc69dad49e42f8ab5254617e5512ff116
+generated: "2023-11-27T10:25:02.24023268+09:00"
