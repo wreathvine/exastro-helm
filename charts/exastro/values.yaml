@@ -15,7 +15,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -56,7 +56,7 @@ global:
       KEYCLOAK_DB_PASSWORD: "Ch@ngeMeKCADB"
   gitlabDefinition:
     config:
-      GITLAB_PROTOCOL: "http" 
+      GITLAB_PROTOCOL: "http"
       GITLAB_HOST: "None" # "gitlab" if use container.
       GITLAB_PORT: "8080"
     secret:
@@ -567,7 +567,7 @@ exastro-platform:
       accessMode: ReadWriteOnce
       size: 20Gi
       storageClass: "-" # e.g.) azurefile, local-path or - (None)
-      matchLabels: 
+      matchLabels:
         # release: "pv-mongo"
       matchExpressions:
         # - {key: name, operator: In, values: [pv-mongo]}
