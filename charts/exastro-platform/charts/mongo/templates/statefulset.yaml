@@ -62,15 +62,30 @@ spec:
         volumeMounts:
           - name: volume-{{ template "mongo.name" . }}-storage
             mountPath: {{ .Values.persistence.mountPath.dataDir }}
+      # - name: mongo-initialize-replicaset
+      #   securityContext:
+      #     {{- toYaml .Values.securityContext | nindent 12 }}
+      #   image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      #   imagePullPolicy: {{ .Values.image.pullPolicy }}
+      #   command:
+      #     - sh
+      #     - "-c"
+      #     - >
+      #       {{ .Values.initContainers.mongo.initilize }}
+      #   volumeMounts:
+      #     - name: volume-{{ template "mongo.name" . }}-storage
+      #       mountPath: {{ .Values.persistence.mountPath.dataDir }}
+      #     - name: mongo-server-conf
+      #       mountPath: {{ .Values.persistence.mountPath.confDir }}
       containers:
       - name: {{ template "mongo.name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command:
-          - mongod
-          - "--bind_ip_all"
-          - "--replSet"
-          - "rs0"
+        # command:
+        #   - mongod
+        #   - "--bind_ip_all"
+        #   - "--replSet"
+        #   - "rs0"
         env:
         - name: TZ
           valueFrom:
