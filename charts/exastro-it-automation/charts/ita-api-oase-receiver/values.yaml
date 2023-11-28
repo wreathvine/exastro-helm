@@ -157,6 +157,7 @@ persistence:
       path: /var/run_app_user/httpd/socket
       subPath: httpd-socket
     tmp: /tmp
+    mongo: /data/db
 
 podAnnotations: {}
 
