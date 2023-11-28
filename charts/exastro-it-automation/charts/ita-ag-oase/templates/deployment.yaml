@@ -54,26 +54,6 @@ spec:
           image: "{{ template "ita-ag-oase.repository" (list $top $agent) }}:{{ $agent.image.tag | default $top.Chart.AppVersion }}"
           imagePullPolicy: {{ $agent.image.pullPolicy }}
           env:
-            {{- range $define := $top.Values.global -}}
-            {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") }}
-            - name: {{ $config }}
-              valueFrom:
-                configMapKeyRef:
-                  name: ita-params-{{ template "ita-ag-oase.name" $top }}
-                  key: {{ $config }}
-            {{-     end -}}
-            {{-   end -}}
-            {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-global") }}
-            - name: {{ $secret }}
-              valueFrom:
-                secretKeyRef:
-                  name: ita-secret-{{ template "ita-ag-oase.name" $top }}
-                  key: {{ $secret }}
-            {{-     end }}
-            {{-   end }}
-            {{- end -}}
             {{ range $config, $value := .extraEnv }}
             - name: {{ $config }}
               valueFrom:

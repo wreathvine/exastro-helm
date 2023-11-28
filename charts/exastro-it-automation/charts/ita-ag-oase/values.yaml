@@ -71,6 +71,7 @@ agents:
     extraEnv:
       TZ: Asia/Tokyo
       DEFAULT_LANGUAGE: ja
+      LANGUAGE: "en"
       ITERATION: "500"
       EXECUTE_INTERVAL: "10"
       LOG_LEVEL: INFO

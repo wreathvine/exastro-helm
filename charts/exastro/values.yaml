@@ -81,6 +81,7 @@ exastro-it-automation:
         extraEnv:
           TZ: Asia/Tokyo
           DEFAULT_LANGUAGE: ja
+          LANGUAGE: ja
           ITERATION: "500"
           EXECUTE_INTERVAL: "10"
           LOG_LEVEL: INFO
