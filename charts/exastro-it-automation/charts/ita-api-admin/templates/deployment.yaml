@@ -47,7 +47,7 @@ spec:
       initContainers:
         # temporary response to organization_create_controller.py  organization_create, os.makedirs(organization_dir)
         - name: setup-storage
-          command: ["sh", "-c", "chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/*"]
+          command: ["sh", "-c", "chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/* || true"]
           image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
           imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
           volumeMounts:
