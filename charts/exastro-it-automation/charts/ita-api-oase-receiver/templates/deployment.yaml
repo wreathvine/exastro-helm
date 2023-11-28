@@ -105,6 +105,9 @@ spec:
             {{-     end }}
             {{-   end }}
             {{- end }}
+          volumeMounts:
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-mongo
+              mountPath: {{ .Values.persistence.mountPath.mongo }}
       containers:
         - name: {{ template "ita-api-oase-receiver.name" . }}
           securityContext:
@@ -144,6 +147,8 @@ spec:
               mountPath: {{ .Values.persistence.mountPath.homeDir }}
             - name: volume-{{ template "ita-api-oase-receiver.name" . }}-tmp
               mountPath: {{ .Values.persistence.mountPath.tmp }}
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-mongo
+              mountPath: {{ .Values.persistence.mountPath.mongo }}
           ports:
             - name: port-http
               containerPort: {{ .Values.extraEnv.LISTEN_PORT }}
@@ -174,6 +179,8 @@ spec:
         - name: volume-{{ template "ita-api-oase-receiver.name" . }}-socket
           emptyDir: {}
         - name: volume-{{ template "ita-api-oase-receiver.name" . }}-tmp
+          emptyDir: {}
+        - name: volume-{{ template "ita-api-oase-receiver.name" . }}-mongo
           emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
