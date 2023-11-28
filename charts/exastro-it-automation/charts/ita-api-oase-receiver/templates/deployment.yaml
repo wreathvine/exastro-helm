@@ -145,6 +145,12 @@ spec:
           volumeMounts:
             - name: volume-{{ template "ita-api-oase-receiver.name" . }}-homedir
               mountPath: {{ .Values.persistence.mountPath.homeDir }}
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-pid
+              mountPath: {{ .Values.persistence.mountPath.pid.path }}
+              subPath: {{ .Values.persistence.mountPath.pid.subPath }}
+            - name: volume-{{ template "ita-api-oase-receiver.name" . }}-socket
+              mountPath: {{ .Values.persistence.mountPath.socket.path }}
+              subPath: {{ .Values.persistence.mountPath.socket.subPath }}
             - name: volume-{{ template "ita-api-oase-receiver.name" . }}-tmp
               mountPath: {{ .Values.persistence.mountPath.tmp }}
             - name: volume-{{ template "ita-api-oase-receiver.name" . }}-mongo

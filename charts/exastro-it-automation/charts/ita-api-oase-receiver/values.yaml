@@ -108,7 +108,7 @@ initContainers:
       #!/bin/bash
       i=10
       echo "HOST: ${MONGO_HOST}"
-      until echo 'db.runCommand("ping").ok' | mongosh mongo://${MONGO_HOST}:${MONGO_PORT}/test ; do
+      until echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_HOST}:${MONGO_PORT}/test ; do
         echo `date`": Can not connect to Database."
         sleep $i
       done
