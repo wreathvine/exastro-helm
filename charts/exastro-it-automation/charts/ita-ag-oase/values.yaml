@@ -82,7 +82,7 @@ agents:
       # ROLES: "_ws_admin"
       EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
     secret:
-      ENCRYPT_KEY: "dGhpc2lzZHVtbXkwMTIzNDU2Nzg5MDEyMzQ1Njc4OQ=="
+      ENCRYPT_KEY: "dGhpc2lzZHVtbXkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="
       USERNAME: "admin"
       PASSWORD: "sample-password"
       # USER_ID: "user01"
