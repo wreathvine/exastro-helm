@@ -23,7 +23,7 @@ livenessCheck: |-
   exit 0
 
 image:
-  repository: "exastro-suite/keycloak"
+  repository: "exastro/keycloak"
   tag: ""
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
