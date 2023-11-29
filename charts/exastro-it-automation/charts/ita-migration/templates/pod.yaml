@@ -33,7 +33,7 @@ spec:
           mountPath: {{ .Values.global.itaGlobalDefinition.config.STORAGEPATH }}
     - name: setup-storage
       command: ["sh", "-c"]
-            args:
+      args:
         - |
           chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.storage }}/ || true"
           chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.storage }}/* || true"

@@ -105,7 +105,6 @@ exastro-it-automation:
           # ROLES: "_ws_admin"
           EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
         secret:
-          ENCRYPT_KEY: "dummy"
           USERNAME: "admin"
           PASSWORD: "sample-password"
           # USER_ID: "user01"
@@ -500,7 +499,7 @@ exastro-platform:
   keycloak:
     enabled: true
     image:
-      repository: "exastro-suite/keycloak"
+      repository: "exastro/keycloak"
       tag: ""
       pullPolicy: IfNotPresent
     resources: {}
