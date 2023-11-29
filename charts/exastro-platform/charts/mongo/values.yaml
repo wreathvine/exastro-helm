@@ -5,6 +5,26 @@ enabled: true
 
 replicaCount: 3
 
+initContainers:
+  remove-data:
+    image:
+      repository: busybox
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+    imagePullSecrets: []
+
+  mongo:
+    image:
+      repository: mongo
+      tag: "6.0.7"
+      pullPolicy: IfNotPresent
+
+    imagePullSecrets: []
+
+    initilize: |-
+      rs.initiate({_id: 'rs0', version: 1, members: [ {_id: 0, host: 'mongo-0', priority: 1 }]})
+
 completionCount: 1
 
 initContainerImage:

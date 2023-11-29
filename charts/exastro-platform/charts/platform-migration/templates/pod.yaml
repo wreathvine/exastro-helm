@@ -115,6 +115,16 @@ spec:
               name: params-{{ template "platform-migration.name" $ }}
               key: {{ $config }}
         {{- end }}
+        - name: KEYCLOAK_USER
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: SYSTEM_ADMIN
+        - name: KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: SYSTEM_ADMIN_PASSWORD
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   restartPolicy: OnFailure
