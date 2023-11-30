@@ -31,6 +31,17 @@ spec:
       volumeMounts:
         - name: volume-{{ template "ita-migration.name" . }}-storage
           mountPath: {{ .Values.global.itaGlobalDefinition.config.STORAGEPATH }}
+    - name: setup-storage
+      command: ["sh", "-c"]
+      args:
+        - |
+          chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.storage }}/ || true"
+          chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.storage }}/* || true"
+      image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
+      imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
+      volumeMounts:
+        - name: volume-{{ template "ita-migration.name" . }}-storage
+          mountPath: {{ .Values.volumeMounts.mountPath.storage }}
     - name: database-alive-check
       securityContext:
         {{- toYaml .Values.database.securityContext | nindent 8 }}

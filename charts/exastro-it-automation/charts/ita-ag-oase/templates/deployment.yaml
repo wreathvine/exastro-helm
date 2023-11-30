@@ -54,14 +54,14 @@ spec:
           image: "{{ template "ita-ag-oase.repository" (list $top $agent) }}:{{ $agent.image.tag | default $top.Chart.AppVersion }}"
           imagePullPolicy: {{ $agent.image.pullPolicy }}
           env:
-            {{ range $config, $value := .extraEnv }}
+            {{- range $config, $value := $agent.extraEnv }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
                   name: params-{{ template "ita-ag-oase.agentname" (list $top $agent) }}
                   key: {{ $config }}
             {{- end }}
-            {{- range $config, $value := .secret }}
+            {{- range $config, $value := $agent.secret }}
             - name: {{ $config }}
               valueFrom:
                 secretKeyRef:
@@ -71,7 +71,7 @@ spec:
           volumeMounts:
             - name: volume-{{ template "ita-ag-oase.name" $top }}-storage
               mountPath: {{ $top.Values.persistence.mountPath.storage }}
-              subPath: {{ .extraEnv.AGEMT_NAME }}
+              subPath: {{ $agent.extraEnv.AGENT_NAME }}
             - name: volume-{{ template "ita-ag-oase.name" $top }}-homedir
               mountPath: {{ $top.Values.persistence.mountPath.homeDir }}
             - name: volume-{{ template "ita-ag-oase.name" $top }}-tmp
