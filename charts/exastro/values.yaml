@@ -68,7 +68,7 @@ global:
       MONGO_HOST: "mongo" # "mongo" if use container.
       MONGO_PORT: "27017"
     secret:
-      MONGO_ADMIN_USERNAME: "admin"
+      MONGO_ADMIN_USER: "admin"
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 exastro-it-automation:
@@ -92,6 +92,7 @@ exastro-it-automation:
           # ROLES: "_ws_admin"
           EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
         secret:
+          ENCRYPT_KEY: "dGhpc2lzZHVtbXkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="
           USERNAME: "admin"
           PASSWORD: "sample-password"
           # USER_ID: "user01"
