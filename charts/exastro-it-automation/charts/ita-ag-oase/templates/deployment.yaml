@@ -70,7 +70,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: volume-{{ template "ita-ag-oase.name" $top }}-storage
-              mountPath: {{ $top.Values.persistence.mountPath.storage }}
+              mountPath: "{{ $top.Values.persistence.mountPath.storage }}/{{ $agent.extraEnv.AGENT_NAME }}"
               subPath: {{ $agent.extraEnv.AGENT_NAME }}
             - name: volume-{{ template "ita-ag-oase.name" $top }}-homedir
               mountPath: {{ $top.Values.persistence.mountPath.homeDir }}
