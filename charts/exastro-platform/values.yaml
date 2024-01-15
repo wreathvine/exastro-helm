@@ -1,1 +1,16 @@
 # Value is set in charts/exastro
+global:
+  itaGlobalDefinition:
+    name: ita-global
+  itaDatabaseDefinition:
+    name: ita-database
+  pfGlobalDefinition:
+    name: pf-global
+  pfDatabaseDefinition:
+    name: pf-database
+  keycloakDefinition:
+    name: keycloak
+  gitlabDefinition:
+    name: gitlab
+  mongoDefinition:
+    name: mongo
