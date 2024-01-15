@@ -72,37 +72,6 @@ global:
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 exastro-it-automation:
-  ita-ag-oase:
-    agents:
-      - image:
-          repository: "exastro/exastro-it-automation-ag-oase"
-          tag: ""
-          pullPolicy: IfNotPresent
-        extraEnv:
-          TZ: Asia/Tokyo
-          DEFAULT_LANGUAGE: ja
-          LANGUAGE: ja
-          ITERATION: "500"
-          EXECUTE_INTERVAL: "10"
-          LOG_LEVEL: INFO
-          AGENT_NAME: "oase-agent"
-          URL: "http://platform-auth:8000"
-          ORGANIZATION_ID: "org001"
-          WORKSPACE_ID: "ws01"
-          # ROLES: "_ws_admin"
-          EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
-        secret:
-          ENCRYPT_KEY: "dGhpc2lzZHVtbXkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="
-          USERNAME: "admin"
-          PASSWORD: "sample-password"
-          # USER_ID: "user01"
-        resources: {}
-          # requests:
-          #   memory: "64Mi"
-          #   cpu: "250m"
-          # limits:
-          #   memory: "64Mi"
-          #   cpu: "250m"
 
   ita-api-admin:
     replicaCount: 1
