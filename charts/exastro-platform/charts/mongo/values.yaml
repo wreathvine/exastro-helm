@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 enabled: true
 
-replicaCount: 3
+replicaCount: 1
 
 initContainers:
   remove-data:
@@ -57,7 +57,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 20Gi
   storageClass: "-" # e.g.) azurefile, local-path or - (None)
-  matchLabels: 
+  matchLabels:
     # release: "pv-mongo"
   matchExpressions:
     # - {key: name, operator: In, values: [pv-mongo]}
