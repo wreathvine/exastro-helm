@@ -1,4 +1,4 @@
-#   Copyright 2023 NEC Corporation
+#   Copyright 2022 NEC Corporation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 #   limitations under the License.
 
 apiVersion: v2
-name: exastro
-description: A Helm chart for Exastro. Exastro is an Open Source Framework for digitizing and centrally managing the system configuration.
+name: exastro-agent
+description: A Helm chart for Exastro IT Automation. Exastro IT Automation is an Open Source Framework for digitizing and centrally managing the system configuration.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -24,12 +24,12 @@ description: A Helm chart for Exastro. Exastro is an Open Source Framework for d
 # Library charts provide useful utilities or functions for the chart developer. They're included as
 # a dependency of application charts to inject those utilities and functions into the rendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
+type: library
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.3.21
+version: 1.0.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -37,30 +37,24 @@ version: 1.3.21
 # It is recommended to use it with quotes.
 appVersion: "2.3.0"
 
+# dependencies:
+# - name: mariadb
+#   condition: global.mariadb.enabled
+# - name: ingress
+#   condition: global.ingress.enabled
+# - name: ita-api-admin
+
 keywords:
 - exastro
-- exastro-platform
-- exastro-it-automation
 - exastro-agent
 home: https://www.exastro.org/
 icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
-- https://github.com/exastro-suite/exastro-helm
 - https://github.com/exastro-suite/exastro-it-automation
-- https://github.com/exastro-suite/exastro-platform
 dependencies:
-  - name: exastro-it-automation
-    version: 1.4.21
-    repository: file://../exastro-it-automation
-    condition: exastro-it-automation.enabled
-  - name: exastro-platform
-    version: 1.7.10
-    repository: file://../exastro-platform
-    condition: exastro-platform.enabled
-  - name: exastro-agent
-    version: 1.0.0
-    repository: file://../exastro-agent
-    condition: exastro-agent.enabled
+- name: ita-ag-oase
+  version: ^1.x
+  condition: common.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com
