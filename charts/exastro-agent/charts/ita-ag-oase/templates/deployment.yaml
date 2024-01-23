@@ -22,9 +22,6 @@ metadata:
   labels:
     {{- include "ita-ag-oase.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "ita-ag-oase.selectorLabels" . | nindent 6 }}
@@ -81,9 +78,9 @@ spec:
         {{- end }}
       volumes:
         - name: volume-{{ template "ita-ag-oase.name" . }}-storage
-          {{- if and .Values.global.itaGlobalDefinition.persistence.enabled }}
+          {{- if and .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: pvc-{{ .Values.global.itaGlobalDefinition.name }}
+            claimName: pvc-{{ include "ita-ag-oase.name" . }}
           {{- else }}
           emptyDir: {}
           {{- end }}

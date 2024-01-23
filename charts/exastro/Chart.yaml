@@ -29,7 +29,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.3.21
+version: 1.3.20
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -41,7 +41,6 @@ keywords:
 - exastro
 - exastro-platform
 - exastro-it-automation
-- exastro-agent
 home: https://www.exastro.org/
 icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
@@ -57,10 +56,6 @@ dependencies:
     version: 1.7.10
     repository: file://../exastro-platform
     condition: exastro-platform.enabled
-  - name: exastro-agent
-    version: 1.0.0
-    repository: file://../exastro-agent
-    condition: exastro-agent.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com

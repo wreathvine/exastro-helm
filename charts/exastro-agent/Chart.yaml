@@ -24,7 +24,7 @@ description: A Helm chart for Exastro IT Automation. Exastro IT Automation is an
 # Library charts provide useful utilities or functions for the chart developer. They're included as
 # a dependency of application charts to inject those utilities and functions into the rendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: library
+type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
@@ -37,16 +37,9 @@ version: 1.0.0
 # It is recommended to use it with quotes.
 appVersion: "2.3.0"
 
-# dependencies:
-# - name: mariadb
-#   condition: global.mariadb.enabled
-# - name: ingress
-#   condition: global.ingress.enabled
-# - name: ita-api-admin
-
 keywords:
 - exastro
-- exastro-agent
+- exastro-it-automation
 home: https://www.exastro.org/
 icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
 sources:

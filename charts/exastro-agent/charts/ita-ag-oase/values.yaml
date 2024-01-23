@@ -2,65 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
-  itaGlobalDefinition:
-    name: ita-global
+  agentGlobalDefinition:
+    name: agent-global
     enabled: true
     image:
       registry: "docker.io"
       organization: exastro
       package: exastro-it-automation
-    config:
-      DEFAULT_LANGUAGE: "ja"
-      LANGUAGE: "en"
-      CONTAINER_BASE: "kubernetes"
-      TZ: "Asia/Tokyo"
-      STORAGEPATH: "/storage/"
-    secret:
-      ENCRYPT_KEY: ""
-    persistence:
-      enabled: true
-      reinstall: false
-      accessMode: ReadWriteMany
-      size: 10Gi
-      volumeType: hostPath # e.g.) hostPath or AKS
-      storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels:
-      #   release: "stable"
-      # matchExpressions:
-      #   - {key: environment, operator: In, values: [dev]}
-  itaDatabaseDefinition:
-    name: ita-database
-    enabled: true
-    config:
-      DB_VENDOR: "mariadb"
-      DB_HOST: "mariadb"
-      DB_PORT: "3306"
-      DB_DATABASE: "ITA_DB"
-    secret:
-      DB_ADMIN_USER: "root"
-      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
-      DB_USER: "ITA_USER"
-      DB_PASSWORD: "Ch@ngeMeITADB"
-  gitlabDefinition:
-    name: gitlab
-    enabled: true
-    config:
-      GITLAB_PROTOCOL: "http"
-      GITLAB_HOST: "gitlab"
-      GITLAB_PORT: "8080"
-    secret:
-      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
-      GITLAB_ROOT_TOKEN: "change-this-token"
-  mongoDefinition:
-    name: mongo
-    enabled: true
-    config:
-      MONGO_PROTOCOL: "http"
-      MONGO_HOST: "mongo"
-      MONGO_PORT: "27017"
-    secret:
-      MONGO_ADMIN_USERNAME: "admin"
-      MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 agents:
   - image:
@@ -76,15 +24,14 @@ agents:
       EXECUTE_INTERVAL: "10"
       LOG_LEVEL: INFO
       AGENT_NAME: "oase-agent"
-      URL: "http://platform-auth:8000"
-      ORGANIZATION_ID: "org001"
-      WORKSPACE_ID: "ws01"
+      EXASTRO_URL: "http://platform-auth:8000"
+      EXASTRO_ORGANIZATION_ID: "org001"
+      EXASTRO_WORKSPACE_ID: "ws01"
       # ROLES: "_ws_admin"
       EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
     secret:
-      ENCRYPT_KEY: "dGhpc2lzZHVtbXkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="
-      USERNAME: "admin"
-      PASSWORD: "sample-password"
+      EXASTRO_USERNAME: "admin"
+      EXASTRO_PASSWORD: "sample-password"
       # USER_ID: "user01"
     resources: {}
       # requests:
@@ -93,8 +40,6 @@ agents:
       # limits:
       #   memory: "64Mi"
       #   cpu: "250m"
-
-replicaCount: 1
 
 imagePullSecrets: []
 nameOverride: ""
@@ -110,6 +55,16 @@ serviceAccount:
   name: ""
 
 persistence:
+  enabled: true
+  reinstall: false
+  accessMode: ReadWriteMany
+  size: 10Gi
+  volumeType: hostPath # e.g.) hostPath or AKS
+  storageClass: "-" # e.g.) azurefile or - (None)
+  # matchLabels:
+  #   release: "stable"
+  # matchExpressions:
+  #   - {key: environment, operator: In, values: [dev]}
   mountPath:
     storage: /storage
     homeDir: /home/app_user
@@ -150,13 +105,6 @@ ingress:
  #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
