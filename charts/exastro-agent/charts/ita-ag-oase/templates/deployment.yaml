@@ -41,6 +41,18 @@ spec:
       serviceAccountName: {{ include "ita-ag-oase.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: setup-storage
+          command: ["sh", "-c"]
+          args:
+            - |
+              chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/ || true"
+              chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/* || true"
+          image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
+          imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
+          volumeMounts:
+            - name: volume-{{ template "ita-ag-oase.name" . }}-storage
+              mountPath: {{ .Values.persistence.mountPath.storage }}
       containers:
         {{- $top := . -}}
         {{- range .Values.agents -}}
@@ -67,8 +79,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: volume-{{ template "ita-ag-oase.name" $top }}-storage
-              mountPath: "{{ $top.Values.persistence.mountPath.storage }}/{{ $agent.extraEnv.AGENT_NAME }}"
-              subPath: {{ $agent.extraEnv.AGENT_NAME }}
+              mountPath: {{ $top.Values.persistence.mountPath.storage }}
             - name: volume-{{ template "ita-ag-oase.name" $top }}-homedir
               mountPath: {{ $top.Values.persistence.mountPath.homeDir }}
             - name: volume-{{ template "ita-ag-oase.name" $top }}-tmp
