@@ -46,6 +46,12 @@ ita-ag-oase:
   nameOverride: ""
   fullnameOverride: ""
 
+  initContainerImage:
+    repository: registry.access.redhat.com/ubi8/ubi-init
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
   serviceAccount:
     # Specifies whether a service account should be created
     create: false
