@@ -46,8 +46,8 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/ || true"
-              chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/* || true"
+              chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/ || true"
+              chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}/* || true"
           image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
           imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
           volumeMounts:
