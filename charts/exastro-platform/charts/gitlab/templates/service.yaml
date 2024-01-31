@@ -29,6 +29,9 @@ spec:
       protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: port-gitlab
+      {{- if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
   selector:
     {{- include "gitlab.selectorLabels" . | nindent 4 }}
 {{- end -}}

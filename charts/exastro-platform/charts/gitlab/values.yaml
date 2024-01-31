@@ -93,6 +93,7 @@ service:
   name: gitlab
   type: ClusterIP
   port: 40080
+  # nodePort: 30082
 
 ingress:
   enabled: false

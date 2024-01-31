@@ -96,7 +96,7 @@ exastro-it-automation:
   ita-api-oase-receiver:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-api-organization"
+      repository: "exastro/exastro-it-automation-api-oase-receiver"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
@@ -524,6 +524,11 @@ exastro-platform:
       # limits:
       #   memory: "2Gi"
       #   cpu: "4"
+    service:
+      type: ClusterIP
+      name: gitlab
+      port: 40080
+      # nodePort: 30082
 
   mongo:
     enabled: true
