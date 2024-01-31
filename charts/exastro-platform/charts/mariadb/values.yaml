@@ -8,13 +8,13 @@ replicaCount: 1
 completionCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 image:
-  repository: mariadb
+  repository: "docker.io/mariadb"
   tag: "10.11"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.

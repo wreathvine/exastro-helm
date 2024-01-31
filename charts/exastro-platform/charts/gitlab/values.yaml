@@ -39,13 +39,13 @@ replicaCount: 1
 completionCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 image:
-  repository: gitlab/gitlab-ce
+  repository: "docker.io/gitlab/gitlab-ce"
   tag: "15.11.13-ce.0"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.

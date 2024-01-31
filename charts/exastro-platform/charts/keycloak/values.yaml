@@ -6,7 +6,7 @@ enabled: true
 replicaCount: 1
 
 initContainerImage:
-  repository: mariadb
+  repository: "docker.io/mariadb"
   tag: "10.11"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
@@ -23,7 +23,7 @@ livenessCheck: |-
   exit 0
 
 image:
-  repository: "exastro/keycloak"
+  repository: "docker.io/exastro/keycloak"
   tag: ""
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.

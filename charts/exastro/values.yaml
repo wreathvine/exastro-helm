@@ -76,7 +76,7 @@ exastro-it-automation:
   ita-api-admin:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-api-admin"
+      repository: "docker.io/exastro/exastro-it-automation-api-admin"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
@@ -86,7 +86,7 @@ exastro-it-automation:
   ita-api-organization:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-api-organization"
+      repository: "docker.io/exastro/exastro-it-automation-api-organization"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
@@ -96,7 +96,7 @@ exastro-it-automation:
   ita-api-oase-receiver:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-api-oase-receiver"
+      repository: "docker.io/exastro/exastro-it-automation-api-oase-receiver"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
@@ -107,12 +107,12 @@ exastro-it-automation:
   ita-by-ansible-execute:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-by-ansible-execute"
+      repository: "docker.io/exastro/exastro-it-automation-by-ansible-execute"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
       EXECUTE_INTERVAL: "10"
-      ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
+      ANSIBLE_AGENT_IMAGE: "docker.io/exastro/exastro-it-automation-by-ansible-agent"
       ANSIBLE_AGENT_IMAGE_TAG: ""
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
@@ -127,7 +127,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
+      repository: "docker.io/exastro/exastro-it-automation-by-ansible-legacy-role-vars-listup"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -138,7 +138,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-ansible-legacy-vars-listup"
+      repository: "docker.io/exastro/exastro-it-automation-by-ansible-legacy-vars-listup"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -149,7 +149,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-ansible-pioneer-vars-listup"
+      repository: "docker.io/exastro/exastro-it-automation-by-ansible-pioneer-vars-listup"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -160,7 +160,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-ansible-towermaster-sync"
+      repository: "docker.io/exastro/exastro-it-automation-by-ansible-towermaster-sync"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -171,7 +171,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-cicd-for-iac"
+      repository: "docker.io/exastro/exastro-it-automation-by-cicd-for-iac"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -182,7 +182,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-collector"
+      repository: "docker.io/exastro/exastro-it-automation-by-collector"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -193,7 +193,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-conductor-regularly"
+      repository: "docker.io/exastro/exastro-it-automation-by-conductor-regularly"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -204,7 +204,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-conductor-synchronize"
+      repository: "docker.io/exastro/exastro-it-automation-by-conductor-synchronize"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -215,7 +215,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-excel-export-import"
+      repository: "docker.io/exastro/exastro-it-automation-by-excel-export-import"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -226,7 +226,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-execinstance-dataautoclean"
+      repository: "docker.io/exastro/exastro-it-automation-by-execinstance-dataautoclean"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -237,7 +237,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-file-autoclean"
+      repository: "docker.io/exastro/exastro-it-automation-by-file-autoclean"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -248,7 +248,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-hostgroup-split"
+      repository: "docker.io/exastro/exastro-it-automation-by-hostgroup-split"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -259,7 +259,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-menu-create"
+      repository: "docker.io/exastro/exastro-it-automation-by-menu-create"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -270,7 +270,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-menu-export-import"
+      repository: "docker.io/exastro/exastro-it-automation-by-menu-export-import"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -281,7 +281,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-oase-conclusion"
+      repository: "docker.io/exastro/exastro-it-automation-by-oase-conclusion"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -292,7 +292,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-terraform-cli-execute"
+      repository: "docker.io/exastro/exastro-it-automation-by-terraform-cli-execute"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -303,7 +303,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-terraform-cli-vars-listup"
+      repository: "docker.io/exastro/exastro-it-automation-by-terraform-cli-vars-listup"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -314,7 +314,7 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-execute"
+      repository: "docker.io/exastro/exastro-it-automation-by-terraform-cloud-ep-execute"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -325,20 +325,14 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-by-terraform-cloud-ep-vars-listup"
-      tag: ""
-      pullPolicy: IfNotPresent
-
-  ita-database-setup-job:
-    image:
-      repository: ""
+      repository: "docker.io/exastro/exastro-it-automation-by-terraform-cloud-ep-vars-listup"
       tag: ""
       pullPolicy: IfNotPresent
 
   ita-web-server:
     replicaCount: 1
     image:
-      repository: "exastro/exastro-it-automation-web-server"
+      repository: "docker.io/exastro/exastro-it-automation-web-server"
       tag: ""
       pullPolicy: IfNotPresent
 
@@ -347,14 +341,14 @@ exastro-it-automation:
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
-      repository: "exastro/exastro-it-automation-migration"
+      repository: "docker.io/exastro/exastro-it-automation-migration"
       tag: ""
       pullPolicy: IfNotPresent
 
 exastro-platform:
   platform-api:
     image:
-      repository: "exastro/exastro-platform-api"
+      repository: "docker.io/exastro/exastro-platform-api"
       tag: ""
 
   platform-auth:
@@ -382,7 +376,7 @@ exastro-platform:
       # httpMng:
       #   nodePort: 30081
     image:
-      repository: "exastro/exastro-platform-auth"
+      repository: "docker.io/exastro/exastro-platform-auth"
       tag: ""
 
   platform-job:
@@ -406,23 +400,23 @@ exastro-platform:
       # JOB_FORCE_UPDATE_STATUS_INTERVAL_SECONDS: "180"
       # JOB_FORCE_UPDATE_STATUS_PROGRASS_SECONDS: "600"
     image:
-      repository: "exastro/exastro-platform-job"
+      repository: "docker.io/exastro/exastro-platform-job"
       tag: ""
 
   platform-migration:
     image:
-      repository: "exastro/exastro-platform-migration"
+      repository: "docker.io/exastro/exastro-platform-migration"
       tag: ""
 
   platform-web:
     image:
-      repository: "exastro/exastro-platform-web"
+      repository: "docker.io/exastro/exastro-platform-web"
       tag: ""
 
   mariadb:
     enabled: true
     image:
-      repository: mariadb
+      repository: "docker.io/mariadb"
       tag: "10.11"
       pullPolicy: IfNotPresent
     imagePullSecrets: []
@@ -458,7 +452,7 @@ exastro-platform:
   keycloak:
     enabled: true
     image:
-      repository: "exastro/keycloak"
+      repository: "docker.io/exastro/keycloak"
       tag: ""
       pullPolicy: IfNotPresent
     resources: {}
@@ -502,7 +496,7 @@ exastro-platform:
         )
         echo "GitLab post reconfigure script ended."
     image:
-      repository: gitlab/gitlab-ce
+      repository: "docker.io/gitlab/gitlab-ce"
       tag: "15.11.13-ce.0"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
@@ -534,7 +528,7 @@ exastro-platform:
     enabled: true
     replicaCount: 1
     image:
-      repository: mongo
+      repository: "docker.io/mongo"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: "6.0"

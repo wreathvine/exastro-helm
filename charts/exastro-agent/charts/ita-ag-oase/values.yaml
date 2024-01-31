@@ -42,7 +42,7 @@ agents:
       #   cpu: "250m"
 
 initContainerImage:
-  repository: registry.access.redhat.com/ubi8/ubi-init
+  repository: "registry.access.redhat.com/ubi8/ubi-init"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""

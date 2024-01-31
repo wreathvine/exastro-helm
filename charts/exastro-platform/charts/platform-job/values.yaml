@@ -112,7 +112,7 @@ extraEnv:
 replicaCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   tag: ""
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
