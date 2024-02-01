@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -45,7 +45,7 @@ global:
     name: gitlab
     enabled: true
     config:
-      GITLAB_PROTOCOL: "http" 
+      GITLAB_PROTOCOL: "http"
       GITLAB_HOST: "gitlab"
       GITLAB_PORT: "8080"
     secret:
@@ -64,7 +64,7 @@ global:
 
 extraEnv:
   EXECUTE_INTERVAL: "10"
-  ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
+  ANSIBLE_AGENT_IMAGE: "docker.io/exastro/exastro-it-automation-by-ansible-agent"
   ANSIBLE_AGENT_IMAGE_TAG: ""
   PLATFORM_API_HOST: "platform-api"
   PLATFORM_API_PORT: "8000"
@@ -77,7 +77,7 @@ role:
   verbs: ["get", "create", "update", "patch", "delete"]
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   pullPolicy: IfNotPresent
@@ -172,7 +172,7 @@ affinity: {}
 
 database:
   initContainerImage:
-    repository: mariadb
+    repository: "docker.io/mariadb"
     tag: "10.9"
     pullPolicy: IfNotPresent
 

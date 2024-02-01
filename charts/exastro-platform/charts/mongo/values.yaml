@@ -8,7 +8,7 @@ replicaCount: 1
 initContainers:
   remove-data:
     image:
-      repository: busybox
+      repository: "docker.io/busybox"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: ""
@@ -16,7 +16,7 @@ initContainers:
 
   mongo:
     image:
-      repository: mongo
+      repository: "docker.io/mongo"
       tag: "6.0.7"
       pullPolicy: IfNotPresent
 
@@ -28,13 +28,13 @@ initContainers:
 completionCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 image:
-  repository: mongo
+  repository: "docker.io/mongo"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "6.0"

@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -45,7 +45,7 @@ global:
     name: gitlab
     enabled: true
     config:
-      GITLAB_PROTOCOL: "http" 
+      GITLAB_PROTOCOL: "http"
       GITLAB_HOST: "gitlab"
       GITLAB_PORT: "8080"
     secret:
@@ -72,7 +72,7 @@ replicaCount: 1
 initContainers:
   database:
     image:
-      repository: mariadb
+      repository: "docker.io/mariadb"
       tag: "10.9"
       pullPolicy: IfNotPresent
 
@@ -98,7 +98,7 @@ initContainers:
 
   mongo:
     image:
-      repository: mongo
+      repository: "docker.io/mongo"
       tag: "6.0.7"
       pullPolicy: IfNotPresent
 
@@ -122,7 +122,7 @@ initContainers:
       runAsGroup: 1000
       runAsNonRoot: true
 
-  repository: busybox
+  repository: "docker.io/busybox"
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   pullPolicy: IfNotPresent

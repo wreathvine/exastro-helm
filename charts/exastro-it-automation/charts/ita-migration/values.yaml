@@ -24,7 +24,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -45,7 +45,7 @@ global:
     name: gitlab
     enabled: true
     config:
-      GITLAB_PROTOCOL: "http" 
+      GITLAB_PROTOCOL: "http"
       GITLAB_HOST: "gitlab"
       GITLAB_PORT: "8080"
     secret:
@@ -74,7 +74,7 @@ extraEnv:
 completionCount: 1
 
 initContainerImage:
-  repository: registry.access.redhat.com/ubi8/ubi-init
+  repository: "registry.access.redhat.com/ubi8/ubi-init"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -117,12 +117,12 @@ securityContext:
 
 database:
   initContainerImage:
-    repository: mariadb
+    repository: "docker.io/mariadb"
     tag: "10.9"
     pullPolicy: IfNotPresent
 
   image:
-    repository: mariadb
+    repository: "docker.io/mariadb"
     tag: "10.9"
     pullPolicy: IfNotPresent
 
