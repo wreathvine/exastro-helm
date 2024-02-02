@@ -504,7 +504,7 @@ exastro-platform:
       enabled: false
       volumeName: pv-gitlab
       reinstall: false
-      accessMode: ReadWriteOnce
+      accessMode: ReadWriteMany
       size: 20Gi
       storageClass: "-" # e.g.) azurefile or - (None)
       matchLabels:
