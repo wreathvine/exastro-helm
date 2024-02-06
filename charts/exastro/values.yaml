@@ -10,7 +10,7 @@ global:
     secret:
       ENCRYPT_KEY: ""
     persistence:
-      reinstall: false
+      enabled: true
       accessMode: ReadWriteMany
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
@@ -57,7 +57,7 @@ global:
   gitlabDefinition:
     config:
       GITLAB_PROTOCOL: "http"
-      GITLAB_HOST: "None" # "gitlab" if use container.
+      GITLAB_HOST: "" # "gitlab" if use container.
       GITLAB_PORT: "8080"
     secret:
       GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
@@ -72,7 +72,6 @@ global:
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 exastro-it-automation:
-
   ita-api-admin:
     replicaCount: 1
     image:
@@ -421,8 +420,7 @@ exastro-platform:
       pullPolicy: IfNotPresent
     imagePullSecrets: []
     persistence:
-      enabled: false
-      reinstall: false
+      enabled: true
       accessMode: ReadWriteOnce
       size: 20Gi
       storageClass: "-" # e.g.) azurefile or - (None)
@@ -501,9 +499,8 @@ exastro-platform:
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
     persistence:
-      enabled: false
+      enabled: true
       volumeName: pv-gitlab
-      reinstall: false
       accessMode: ReadWriteMany
       size: 20Gi
       storageClass: "-" # e.g.) azurefile or - (None)
@@ -513,11 +510,11 @@ exastro-platform:
         # - {key: name, operator: In, values: [pv-gitlab]}
     resources: {}
       # requests:
-      #   memory: "256Mi"
-      #   cpu: "1m"
-      # limits:
-      #   memory: "2Gi"
+      #   memory: "4Gi"
       #   cpu: "4"
+      # limits:
+      #   memory: "8Gi"
+      #   cpu: "8"
     service:
       type: ClusterIP
       name: gitlab
@@ -526,15 +523,13 @@ exastro-platform:
 
   mongo:
     enabled: true
-    replicaCount: 1
     image:
       repository: "docker.io/mongo"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: "6.0"
     persistence:
-      enabled: false
-      reinstall: false
+      enabled: true
       accessMode: ReadWriteOnce
       size: 20Gi
       storageClass: "-" # e.g.) azurefile, local-path or - (None)
@@ -569,10 +564,10 @@ exastro-platform:
           #   authorization: enabled
     resources: {}
       # requests:
-      #   memory: "256Mi"
-      #   cpu: "1m"
+      #   memory: "4Gi"
+      #   cpu: "4"
       # limits:
-      #   memory: "2Gi"
+      #   memory: "8Gi"
       #   cpu: "4"
     affinity:
       podAntiAffinity:
