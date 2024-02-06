@@ -63,7 +63,7 @@ serviceAccount:
   name: ""
 
 persistence:
-  enabled: false
+  enabled: true
   volumeName: pv-gitlab
   reinstall: false
   accessMode: ReadWriteMany

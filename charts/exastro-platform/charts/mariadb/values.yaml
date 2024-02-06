@@ -32,7 +32,7 @@ serviceAccount:
   name: ""
 
 persistence:
-  enabled: false
+  enabled: true
   volumeName: pv-database
   reinstall: false
   accessMode: ReadWriteOnce

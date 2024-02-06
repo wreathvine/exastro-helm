@@ -52,7 +52,7 @@ serviceAccount:
   name: ""
 
 persistence:
-  enabled: false
+  enabled: true
   reinstall: false
   accessMode: ReadWriteOnce
   size: 20Gi
@@ -126,10 +126,10 @@ ingress:
 
 resources: {}
   # requests:
-  #   memory: "256Mi"
-  #   cpu: "1m"
+  #   memory: "4Gi"
+  #   cpu: "4"
   # limits:
-  #   memory: "2Gi"
+  #   memory: "8Gi"
   #   cpu: "4"
 
 autoscaling:
