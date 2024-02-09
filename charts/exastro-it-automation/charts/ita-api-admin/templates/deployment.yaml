@@ -44,15 +44,6 @@ spec:
       serviceAccountName: {{ include "ita-api-admin.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        # temporary response to organization_create_controller.py  organization_create, os.makedirs(organization_dir)
-        - name: setup-storage
-          command: ["sh", "-c", "chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.persistence.mountPath.storage }}"]
-          image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
-          imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
-          volumeMounts:
-            - name: volume-{{ template "ita-api-admin.name" . }}-storage
-              mountPath: {{ .Values.persistence.mountPath.storage }}
       containers:
         - name: {{ template "ita-api-admin.name" . }}
           securityContext:
@@ -62,7 +53,7 @@ spec:
           env:
             {{- range $define := .Values.global -}}
             {{-   range $config, $value := $define.config }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "gitlab") (eq $define.name "mongo") }}
             - name: {{ $config }}
               valueFrom:
                 configMapKeyRef:
@@ -71,7 +62,7 @@ spec:
             {{-     end -}}
             {{-   end -}}
             {{-   range $secret, $value := $define.secret }}
-            {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+            {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "gitlab") (eq $define.name "mongo") }}
             - name: {{ $secret }}
               valueFrom:
                 secretKeyRef:
