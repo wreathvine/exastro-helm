@@ -1,9 +1,9 @@
 dependencies:
 - name: exastro-it-automation
   repository: file://../exastro-it-automation
-  version: 1.4.1
+  version: 1.4.22
 - name: exastro-platform
   repository: file://../exastro-platform
-  version: 1.6.0
-digest: sha256:b0930bf1c5d008678a6a5f2719532899a3acfdf724b5dd892f75b12d07cb8457
-generated: "2023-12-20T15:06:23.101946034+09:00"
+  version: 1.7.14
+digest: sha256:74eef6e6b49a53c7b5ed4eaf019a20c27fce988104122f6a885d4cbb1b692838
+generated: "2024-02-06T12:56:51.06061793+09:00"

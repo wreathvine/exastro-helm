@@ -1,24 +1,6 @@
 # Default values for mariadb.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-global:
-  databaseDefinition:
-    name: mariadb
-    enabled: true
-    secret:
-      MARIADB_ROOT_PASSWORD: ""
-    persistence:
-      enabled: true
-      reinstall: false
-      accessMode: ReadWriteOnce
-      size: 20Gi
-      volumeType: hostPath # e.g.) hostPath or AKS
-      storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
-      #   release: "stable"
-      # matchExpressions:
-      #   - {key: environment, operator: In, values: [dev]}
-
 enabled: true
 
 replicaCount: 1
@@ -26,16 +8,16 @@ replicaCount: 1
 completionCount: 1
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
 image:
-  repository: mariadb
+  repository: "docker.io/mariadb"
+  tag: "10.11"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "10.9"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -49,6 +31,21 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+persistence:
+  enabled: true
+  volumeName: pv-database
+  reinstall: false
+  accessMode: ReadWriteOnce
+  size: 20Gi
+  storageClass: "-" # e.g.) azurefile or - (None)
+  matchLabels:
+    name: pv-database
+  matchExpressions:
+    # - {key: name, operator: In, values: [pv-database]}
+  mountPath:
+    dataDir: /var/lib/mysql
+    confDir: /etc/mysql/conf.d
+
 dbSetup:
   dbConfInfo:
     name: mysql-server-conf-config
@@ -60,19 +57,6 @@ dbSetup:
       lower_case_table_names=1
       [client]
       default-character-set=utf8mb4
-
-persistence:
-  mountPath:
-    dataDir: /var/lib/mysql
-    confDir: /etc/mysql/conf.d
-
-volumeMounts:
-  mountPath:
-    createDB: 
-      path: /docker-entrypoint-initdb.d/createdb.sql
-      subPath: createdb.sql
-    conf: 
-      path: /etc/mysql/conf.d
 
 podAnnotations: {}
 

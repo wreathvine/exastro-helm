@@ -80,7 +80,7 @@ spec:
         - name: {{ template "keycloak.name" . }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ template "keycloak.repository" . }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args: ["start-dev"]
           env:
@@ -93,12 +93,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: platform-secret-keycloak
-                key: KEYCLOAK_USER
+                key: SYSTEM_ADMIN
           - name: KEYCLOAK_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: platform-secret-keycloak
-                key: KEYCLOAK_PASSWORD
+                key: SYSTEM_ADMIN_PASSWORD
           - name: KC_DB
             valueFrom:
               configMapKeyRef:
@@ -130,22 +130,22 @@ spec:
             value: "/auth"
           ports:
             - name: port-http
-              containerPort: {{ .Values.global.keycloakDefinition.config.KEYCLOAK_PORT }}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             tcpSocket:
-              port: {{ .Values.global.keycloakDefinition.config.KEYCLOAK_PORT }}
+              port: {{ .Values.service.port }}
             # httpGet:
             #   path: /auth/realms/master
-            #   port: {{ .Values.global.keycloakDefinition.config.KEYCLOAK_PORT }}
+            #   port: {{ .Values.service.port }}
             initialDelaySeconds: 600
             periodSeconds: 30
           readinessProbe:
             tcpSocket:
-              port: {{ .Values.global.keycloakDefinition.config.KEYCLOAK_PORT }}
+              port: {{ .Values.service.port }}
             # httpGet:
             #   path: /auth/realms/master
-            #   port: {{ .Values.global.keycloakDefinition.config.KEYCLOAK_PORT }}
+            #   port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 30
           resources:

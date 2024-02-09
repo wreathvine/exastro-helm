@@ -32,7 +32,7 @@ data: {{- toYaml $define.config | nindent 2 -}}
 {{- $top := . -}}
 {{- range $name, $define := .Values.global -}}
 {{-   if and $define.enabled $define.config -}}
-{{-     if or (eq $name "itaGlobalDefinition") (eq $name "gitlabDefinition") (eq $name "itaDatabaseDefinition") -}}
+{{-     if or (eq $name "itaGlobalDefinition") (eq $name "itaDatabaseDefinition") (eq $name "gitlabDefinition") (eq $name "mongoDefinition") -}}
 {{-       include "ita-common.configmap.tpl" (list $top $define) | nindent 0 -}}
 {{-     end -}}
 {{-   end -}}

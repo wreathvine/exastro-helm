@@ -28,34 +28,45 @@ global:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
-  gitlabDefinition:
-    name: gitlab
-    enabled: true
-    config:
-      GITLAB_PROTOCOL: "http"
-      GITLAB_HOST: "gitlab.exastro-platform.svc"
-      GITLAB_PORT: "80"
-    secret:
-      GITLAB_ROOT_TOKEN: ""
   itaDatabaseDefinition:
     name: ita-database
     enabled: true
     config:
       DB_VENDOR: "mariadb"
-      DB_HOST: "mariadb.exastro-platform.svc"
+      DB_HOST: "mariadb"
       DB_PORT: "3306"
       DB_DATABASE: "ITA_DB"
     secret:
-      DB_ADMIN_USER: ""
-      DB_ADMIN_PASSWORD: ""
-      DB_USER: ""
-      DB_PASSWORD: ""
+      DB_ADMIN_USER: "root"
+      DB_ADMIN_PASSWORD: "Ch@ngeMeDBAdm"
+      DB_USER: "ITA_USER"
+      DB_PASSWORD: "Ch@ngeMeITADB"
+  gitlabDefinition:
+    name: gitlab
+    enabled: true
+    config:
+      GITLAB_PROTOCOL: "http"
+      GITLAB_HOST: "gitlab"
+      GITLAB_PORT: "8080"
+    secret:
+      GITLAB_ROOT_PASSWORD: "Ch@ngeMeGL"
+      GITLAB_ROOT_TOKEN: "change-this-token"
+  mongoDefinition:
+    name: mongo
+    enabled: true
+    config:
+      MONGO_PROTOCOL: "http"
+      MONGO_HOST: "mongo"
+      MONGO_PORT: "27017"
+    secret:
+      MONGO_ADMIN_USER: "admin"
+      MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 extraEnv:
   EXECUTE_INTERVAL: "10"
-  ANSIBLE_AGENT_IMAGE: "exastro/exastro-it-automation-by-ansible-agent"
+  ANSIBLE_AGENT_IMAGE: "docker.io/exastro/exastro-it-automation-by-ansible-agent"
   ANSIBLE_AGENT_IMAGE_TAG: ""
-  PLATFORM_API_HOST: "platform-api.exastro-platform.svc"
+  PLATFORM_API_HOST: "platform-api"
   PLATFORM_API_PORT: "8000"
 
 replicaCount: 1
@@ -66,7 +77,7 @@ role:
   verbs: ["get", "create", "update", "patch", "delete"]
 
 initContainerImage:
-  repository: busybox
+  repository: "docker.io/busybox"
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
   pullPolicy: IfNotPresent
@@ -161,7 +172,7 @@ affinity: {}
 
 database:
   initContainerImage:
-    repository: mariadb
+    repository: "docker.io/mariadb"
     tag: "10.9"
     pullPolicy: IfNotPresent
 

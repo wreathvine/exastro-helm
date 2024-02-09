@@ -15,48 +15,39 @@
 */}}
 
 {{/* Custom Exastro Platform database PVC */}}
-{{- define "mariadb.pvc.database" -}}
-{{-   $persistence := .Values.global.databaseDefinition.persistence -}}
+{{- if .Values.enabled -}}
+{{-   if .Values.persistence.enabled }}
 ---
-{{-   if $persistence.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-{{ .Values.global.databaseDefinition.name }}
+  name: pvc-{{ template "mariadb.name" . }}
   namespace: {{ $.Release.Namespace }}
   labels: {{ include "mariadb.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - {{ $persistence.accessMode | quote }}
+    - {{ .Values.persistence.accessMode | quote }}
   resources:
     requests:
-      storage: {{ $persistence.size | quote }}
-{{-     if $persistence.volumeName }}
-  volumeName: {{ $persistence.volumeName }}
+      storage: {{ .Values.persistence.size | quote }}
+{{-     if .Values.persistence.volumeName }}
+  volumeName: {{ .Values.persistence.volumeName }}
 {{-     end }}
-{{-     if $persistence.storageClass }}
-{{-       if (eq "-" $persistence.storageClass) }}
+{{-     if .Values.persistence.storageClass }}
+{{-       if (eq "-" .Values.persistence.storageClass) }}
   storageClassName: ""
 {{-       else }}
-  storageClassName: "{{ $persistence.storageClass }}"
+  storageClassName: "{{ .Values.persistence.storageClass }}"
 {{-       end -}}
 {{-     end }}
-{{-     if and $persistence.matchLabels $persistence.matchExpressions }}
+{{-     if or .Values.persistence.matchLabels .Values.persistence.matchExpressions }}
   selector:
-{{-       if $persistence.matchLabels }}
-    matchLabels: {{ toYaml $persistence.matchLabels | nindent 6 }}
+{{-       if .Values.persistence.matchLabels }}
+    matchLabels: {{ toYaml .Values.persistence.matchLabels | nindent 6 }}
 {{-       end -}}
-{{-       if $persistence.matchExpressions }}
-    matchExpressions: {{ toYaml $persistence.matchExpressions | nindent 6 }}
+{{-       if .Values.persistence.matchExpressions }}
+    matchExpressions: {{ toYaml .Values.persistence.matchExpressions | nindent 6 }}
 {{-       end -}}
 {{-     end }}
-{{-   end }}
-{{- end -}}
-
-{{/* Print Exastro Platform PVCs */}}
-{{- if .Values.enabled -}}
-{{-   $database := default dict .Values.global.databaseDefinition -}}
-{{-   if (default false $database.persistence.enabled) -}}
-{{-     include "mariadb.pvc.database" . | nindent 0 -}}
 {{-   end -}}
 {{- end -}}
