@@ -2,6 +2,39 @@ apiVersion: v1
 entries:
   exastro:
   - apiVersion: v2
+    appVersion: 2.3.0
+    created: "2024-02-24T06:15:29.647356962Z"
+    dependencies:
+    - condition: exastro-it-automation.enabled
+      name: exastro-it-automation
+      repository: file://../exastro-it-automation
+      version: 1.4.22
+    - condition: exastro-platform.enabled
+      name: exastro-platform
+      repository: file://../exastro-platform
+      version: 1.7.14
+    description: A Helm chart for Exastro. Exastro is an Open Source Framework for
+      digitizing and centrally managing the system configuration.
+    digest: 9fe64877af386a3cd1dd6bb0d76e06ffd6b3a3e382ebffa85c9c4f35efeb513c
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro
+    sources:
+    - https://github.com/exastro-suite/exastro-helm
+    - https://github.com/exastro-suite/exastro-it-automation
+    - https://github.com/exastro-suite/exastro-platform
+    type: application
+    urls:
+    - https://github.com/wreathvine/exastro-helm/releases/download/exastro-1.3.24/exastro-1.3.24.tgz
+    version: 1.3.24
+  - apiVersion: v2
     appVersion: 2.2.1
     created: "2024-01-07T05:34:21.964221765Z"
     dependencies:
@@ -463,7 +496,160 @@ entries:
     urls:
     - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-0.11.0/exastro-0.11.0.tgz
     version: 0.11.0
+  exastro-agent:
+  - apiVersion: v2
+    appVersion: 2.3.0
+    created: "2024-02-24T06:15:29.822488489Z"
+    dependencies:
+    - condition: common.enabled
+      name: ita-ag-oase
+      repository: ""
+      version: ^1.x
+    description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
+      an Open Source Framework for digitizing and centrally managing the system configuration.
+    digest: d0328a3df3f0f433a1f2ec321b57f2958f8bd2bab8cfd682b0da20f866d2bfbc
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-agent
+    sources:
+    - https://github.com/exastro-suite/exastro-it-automation
+    type: application
+    urls:
+    - https://github.com/wreathvine/exastro-helm/releases/download/exastro-agent-1.0.3/exastro-agent-1.0.3.tgz
+    version: 1.0.3
   exastro-it-automation:
+  - apiVersion: v2
+    appVersion: 2.3.0
+    created: "2024-02-24T06:15:30.034167245Z"
+    dependencies:
+    - condition: common.enabled
+      name: common
+      repository: ""
+      version: ^1.x
+    - condition: ita-api-admin.enabled
+      name: ita-api-admin
+      repository: ""
+      version: ^1.x
+    - condition: ita-api-organization.enabled
+      name: ita-api-organization
+      repository: ""
+      version: ^1.x
+    - condition: ita-api-oase-receiver.enabled
+      name: ita-api-oase-receiver
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-execute.enabled
+      name: ita-by-ansible-execute
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-legacy-role-vars-listup.enabled
+      name: ita-by-ansible-legacy-role-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-legacy-vars-listup.enabled
+      name: ita-by-ansible-legacy-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-pioneer-vars-listup.enabled
+      name: ita-by-ansible-pioneer-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-ansible-towermaster-sync.enabled
+      name: ita-by-ansible-towermaster-sync
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-cicd-for-iac.enabled
+      name: ita-by-cicd-for-iac
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-collector.enabled
+      name: ita-by-collector
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-conductor-regularly.enabled
+      name: ita-by-conductor-regularly
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-conductor-synchronize.enabled
+      name: ita-by-conductor-synchronize
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-excel-export-import.enabled
+      name: ita-by-excel-export-import
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-execinstance-dataautoclean.enabled
+      name: ita-by-execinstance-dataautoclean
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-file-autoclean.enabled
+      name: ita-by-file-autoclean
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-hostgroup-split.enabled
+      name: ita-by-hostgroup-split
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-menu-create.enabled
+      name: ita-by-menu-create
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-menu-export-import.enabled
+      name: ita-by-menu-export-import
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-oase-conclusion.enabled
+      name: ita-by-oase-conclusion
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-terraform-cli-execute.enabled
+      name: ita-by-terraform-cli-execute
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-terraform-cli-vars-listup.enabled
+      name: ita-by-terraform-cli-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-terraform-cloud-ep-execute.enabled
+      name: ita-by-terraform-cloud-ep-execute
+      repository: ""
+      version: ^1.x
+    - condition: ita-by-terraform-cloud-ep-vars-listup.enabled
+      name: ita-by-terraform-cloud-ep-vars-listup
+      repository: ""
+      version: ^1.x
+    - condition: ita-migration.enabled
+      name: ita-migration
+      repository: ""
+      version: ^1.x
+    - condition: ita-web-server.enabled
+      name: ita-web-server
+      repository: ""
+      version: ^1.x
+    description: A Helm chart for Exastro IT Automation. Exastro IT Automation is
+      an Open Source Framework for digitizing and centrally managing the system configuration.
+    digest: e39701caf3eac207f230f2d224aa7cb27a815c413dd5778f73581941e15e13d0
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-it-automation
+    sources:
+    - https://github.com/exastro-suite/exastro-it-automation
+    type: library
+    urls:
+    - https://github.com/wreathvine/exastro-helm/releases/download/exastro-it-automation-1.4.22/exastro-it-automation-1.4.22.tgz
+    version: 1.4.22
   - apiVersion: v2
     appVersion: 2.2.1
     created: "2024-01-07T05:34:22.12214143Z"
@@ -1567,6 +1753,68 @@ entries:
     version: 1.0.7
   exastro-platform:
   - apiVersion: v2
+    appVersion: 1.7.0
+    created: "2024-02-24T06:15:30.237825717Z"
+    dependencies:
+    - condition: common.enabled
+      name: common
+      repository: ""
+      version: ^1.x
+    - condition: keycloak.enabled
+      name: keycloak
+      repository: ""
+      version: ^1.x
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: ""
+      version: ^1.x
+    - condition: gitlab.enabled
+      name: gitlab
+      repository: ""
+      version: ^1.x
+    - condition: mongo.enabled
+      name: mongo
+      repository: ""
+      version: ^1.x
+    - condition: platform-api.enabled
+      name: platform-api
+      repository: ""
+      version: ^1.x
+    - condition: platform-auth.enabled
+      name: platform-auth
+      repository: ""
+      version: ^1.x
+    - condition: platform-migration.enabled
+      name: platform-migration
+      repository: ""
+      version: ^1.x
+    - condition: platform-web.enabled
+      name: platform-web
+      repository: ""
+      version: ^1.x
+    - condition: platform-job.enabled
+      name: platform-job
+      repository: ""
+      version: ^1.x
+    description: A Helm chart for Exastro Platform. Exastro Platform is common framework
+      for Exastro suite applications.
+    digest: fe5c380b550983d19f1ea8411535297aceb48b811bc6e3b43507779504765575
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-platform
+    sources:
+    - https://github.com/exastro-suite/exastro-platform
+    type: library
+    urls:
+    - https://github.com/wreathvine/exastro-helm/releases/download/exastro-platform-1.7.14/exastro-platform-1.7.14.tgz
+    version: 1.7.14
+  - apiVersion: v2
     appVersion: 1.6.0
     created: "2023-11-16T05:51:52.584951411Z"
     dependencies:
@@ -1987,4 +2235,4 @@ entries:
     urls:
     - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-platform-1.3.0/exastro-platform-1.3.0.tgz
     version: 1.3.0
-generated: "2024-01-07T05:34:22.122313152Z"
+generated: "2024-02-24T06:15:30.237980496Z"
